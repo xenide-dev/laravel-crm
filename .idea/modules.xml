@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../temp_doc/theme/html/demo1/.idea/demo1.iml" filepath="$PROJECT_DIR$/../temp_doc/theme/html/demo1/.idea/demo1.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/laravel-crm.iml" filepath="$PROJECT_DIR$/.idea/laravel-crm.iml" />
     </modules>
   </component>
