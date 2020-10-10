@@ -21,7 +21,9 @@
   <component name="ChangeListManager">
     <list default="true" id="1e925082-d8f8-4772-a0bb-7b633c448e86" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/welcome.blade.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -170,7 +172,8 @@
       <option name="presentableId" value="Default" />
       <updated>1602251486336</updated>
       <workItem from="1602251488593" duration="8263000" />
-      <workItem from="1602327589595" duration="8411000" />
+      <workItem from="1602327589595" duration="10737000" />
+      <workItem from="1602343307755" duration="3393000" />
     </task>
     <servers />
   </component>
@@ -194,5 +197,13 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="275" key="FileChooserDialogImpl/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602251534383" />
+    <state x="92" y="92" width="1736" height="856" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1602343536577">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="92" y="92" width="1736" height="856" key="com.intellij.history.integration.ui.views.FileHistoryDialog/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602343536577" />
+    <state x="92" y="92" width="1736" height="856" key="com.intellij.history.integration.ui.views.SelectionHistoryDialog" timestamp="1602343536577">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="92" y="92" width="1736" height="856" key="com.intellij.history.integration.ui.views.SelectionHistoryDialog/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602343536577" />
   </component>
 </project>
