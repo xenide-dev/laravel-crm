@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('user_type')->default("user")->comment("admin, user");
             $table->boolean('isBlacklisted')->default("0")->comment("0 - whitelisted; 1 - blacklisted");
             $table->rememberToken();
             $table->timestamps();

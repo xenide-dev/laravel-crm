@@ -132,7 +132,7 @@
 						<i class="symbol-badge bg-success"></i>
 					</div>
 					<div class="d-flex flex-column">
-						<a href="#" class="font-weight-bold font-size-h5 text-dark-75 text-hover-primary">Name N. Name</a>
+						<a href="#" class="font-weight-bold font-size-h5 text-dark-75 text-hover-primary">{{ Auth::user()->fname . " " . Auth::user()->lname }}</a>
 						<div class="text-muted mt-1">Player</div>
 						<div class="navi mt-2">
 							<a href="#" class="navi-item">
@@ -150,7 +150,7 @@
 											<!--end::Svg Icon-->
 										</span>
 									</span>
-									<span class="navi-text text-muted text-hover-primary">sample@domain.com</span>
+									<span class="navi-text text-muted text-hover-primary">{{ Auth::user()->email }}</span>
 								</span>
 							</a>
 							<a href="#" class="btn btn-sm btn-light-primary font-weight-bolder py-2 px-5" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Sign Out</a>
