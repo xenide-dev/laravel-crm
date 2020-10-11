@@ -48,6 +48,17 @@
 								<h3 class="opacity-40 font-weight-normal">Welcome to Omniscient</h3>
 								<p class="opacity-40">Enter your details to login to your account:</p>
 							</div>
+                            @if($errors->has("email"))
+                                <div class="alert alert-custom alert-light-danger fade show mb-5" role="alert">
+                                    <div class="alert-icon"><i class="flaticon-warning"></i></div>
+                                    <div class="alert-text">Username and Password is incorrect</div>
+                                    <div class="alert-close">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true"><i class="ki ki-close"></i></span>
+                                        </button>
+                                    </div>
+                                </div>
+                            @endif
 							<form class="form" id="kt_login_signin_form" action="" method="POST">
                                 @csrf
 								<div class="form-group">

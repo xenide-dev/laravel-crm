@@ -30,8 +30,8 @@
         <div id="kt_aside_menu" class="aside-menu my-4" data-menu-vertical="1" data-menu-scroll="1" data-menu-dropdown-timeout="500">
             <!--begin::Menu Nav-->
             <ul class="menu-nav">
-                <li class="menu-item menu-item-active" aria-haspopup="true">
-                    <a href="/index" class="menu-link">
+                <li class="menu-item {{ (request()->is('home*')) ? 'menu-item-active' : '' }}" aria-haspopup="true">
+                    <a href="/home" class="menu-link">
                         <span class="svg-icon menu-icon">
                             <span class="menu-icon flaticon-home"></span>
                         </span>
@@ -42,8 +42,8 @@
                     <h4 class="menu-text">Main</h4>
                     <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
                 </li>
-                <li class="menu-item" aria-haspopup="true">
-                    <a href="javascript:;" class="menu-link">
+                <li class="menu-item {{ (request()->is('directory*')) ? 'menu-item-active' : '' }}" aria-haspopup="true">
+                    <a href="/directory" class="menu-link">
                         <span class="svg-icon menu-icon">
                             <span class="menu-icon flaticon-folder"></span>
                         </span>
