@@ -11,7 +11,7 @@
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
 		<!--end::Fonts-->
 		<!--begin::Page Vendors Styles(used by this page)-->
-		<link href="assets/plugins/custom/fullcalendar/fullcalendar.bundle.css" rel="stylesheet" type="text/css" />
+		@stack("page_style_vendors")
 		<!--end::Page Vendors Styles-->
 		<!--begin::Global Theme Styles(used by all pages)-->
 		<link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
@@ -538,10 +538,10 @@
 		<script src="assets/js/scripts.bundle.js"></script>
 		<!--end::Global Theme Bundle-->
 		<!--begin::Page Vendors(used by this page)-->
-		<script src="assets/plugins/custom/fullcalendar/fullcalendar.bundle.js"></script>
+		@stack("page_vendors")
 		<!--end::Page Vendors-->
 		<!--begin::Page Scripts(used by this page)-->
-		<script src="assets/js/pages/widgets.js"></script>
+		@stack("page_scripts")
 		<!--end::Page Scripts-->
 	</body>
 	<!--end::Body-->

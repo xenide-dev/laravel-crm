@@ -47,7 +47,10 @@
                         <span class="svg-icon menu-icon">
                             <span class="menu-icon flaticon-folder"></span>
                         </span>
-                        <span class="menu-text">Directory</span>
+                        <span class="menu-text">Blacklisted</span>
+                        <span class="menu-label">
+                            <span class="label label-danger label-inline mr-2">Beware</span>
+                        </span>
                     </a>
                 </li>
                 <li class="menu-item" aria-haspopup="true">

@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
 class UserSeeder extends Seeder
@@ -20,6 +21,8 @@ class UserSeeder extends Seeder
             'phone_number' => $faker->randomNumber(5),
             'email' => "admin@admin.com",
             'password' => Hash::make('admin'),
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
     }
 }
