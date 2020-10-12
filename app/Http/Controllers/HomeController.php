@@ -20,4 +20,9 @@ class HomeController extends Controller
     {
         return view('directory');
     }
+
+    public function accounts()
+    {
+        return view('accounts');
+    }
 }
