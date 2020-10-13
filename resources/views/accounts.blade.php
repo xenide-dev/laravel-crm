@@ -32,7 +32,7 @@
                         </svg>
                         <!--end::Svg Icon-->
                     </span>
-                    New Record
+                    New Account
                 </a>
                 <!--end::Button-->
             </div>
