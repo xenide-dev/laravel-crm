@@ -13,13 +13,15 @@ class ApiController extends Controller
 
     public function list_accounts(Request $request){
         $columns = array(
-            0 =>'id',
+            0 =>'id_number',
             1 =>'fname',
-            2=> 'mname',
-            3=> 'lname',
+            2 => 'mname',
+            3 => 'lname',
+            4 => 'user_type',
+            5 => 'last_online_at',
         );
 
-        $totalData = User::count();
+        $totalData = User::where("user_type", "!=", "user")->count();
 
         $totalFiltered = $totalData;
 
@@ -30,7 +32,8 @@ class ApiController extends Controller
 
         if(empty($request->input('search.value')))
         {
-            $users = User::offset($start)
+            $users = User::where("user_type", "!=", "user")
+                ->offset($start)
                 ->limit($limit)
                 ->orderBy($order,$dir)
                 ->get();
@@ -38,16 +41,23 @@ class ApiController extends Controller
         else {
             $search = $request->input('search.value');
 
-            $users =  User::where('id','LIKE',"%{$search}%")
-                ->orWhere('fname', 'LIKE',"%{$search}%")
+            $users =  User::where("user_type", "!=", "user")
+                ->where(function ($query) use ($search) {
+                    $query->where('id_number','LIKE',"%{$search}%")
+                        ->orWhere('fname', 'LIKE',"%{$search}%")
+                        ->orWhere('mname', 'LIKE',"%{$search}%")
+                        ->orWhere('lname', 'LIKE',"%{$search}%")
+                        ->orWhere('user_type', 'LIKE',"%{$search}%");
+                })
                 ->offset($start)
                 ->limit($limit)
                 ->orderBy($order,$dir)
                 ->get();
 
-            $totalFiltered = User::where('id','LIKE',"%{$search}%")
-                ->orWhere('fname', 'LIKE',"%{$search}%")
-                ->count();
+//            $totalFiltered = User::where('id','LIKE',"%{$search}%")
+//                ->orWhere('fname', 'LIKE',"%{$search}%")
+//                ->count();
+            $totalFiltered = $users->count();
         }
 
         $data = array();
@@ -60,10 +70,12 @@ class ApiController extends Controller
                 $show =  '';
                 $edit =  '';
 
-                $nestedData['id'] = $user->id;
+                $nestedData['id_number'] = $user->id_number;
                 $nestedData['fname'] = $user->fname;
                 $nestedData['mname'] = $user->mname;
                 $nestedData['lname'] = $user->lname;
+                $nestedData['user_type'] = $user->user_type;
+                $nestedData['last_online_at'] = (auth()->user()->id == $user->id) ? "<span class='label label-pill label-inline label-info'>You</span>" : (!empty($user->lastSeen) ? $user->lastSeen->diffForHumans() : "<span class='label label-pill label-inline label-primary'>New</span>");
 //                $nestedData['body'] = substr(strip_tags($post->body),0,50)."...";
 //                $nestedData['created_at'] = date('j M Y h:i a',strtotime($post->created_at));
                 $nestedData['options'] = "&emsp;<a href='{$show}' title='SHOW' ><span class='glyphicon glyphicon-list'></span></a>

@@ -20,7 +20,7 @@
             </h3>
             <div class="card-toolbar">
                 <!--begin::Button-->
-                <a href="" class="btn btn-primary font-weight-bolder">
+                <a class="btn btn-primary font-weight-bolder" data-toggle="modal" data-target="#modal-add-account">
                     <span class="svg-icon svg-icon-md">
                         <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -39,18 +39,87 @@
         </div>
         <div class="card-body">
             <!--begin: Datatable-->
-            <table class="table table-bordered table-hover table-checkable" id="kt_datatable" style="margin-top: 13px !important">
+            <table class="table table-bordered table-hover table-checkable" id="list_acct_datatable" style="margin-top: 13px !important">
                 <thead>
                 <tr>
-                    <th>User ID</th>
+                    <th>ID Number</th>
                     <th>First Name</th>
                     <th>Middle Name</th>
                     <th>Last Name</th>
+                    <th>User Type</th>
+                    <th>Last Active</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
             </table>
             <!--end: Datatable-->
+        </div>
+    </div>
+    <!-- Modal: Add Account -->
+    <div class="modal fade" id="modal-add-account" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="modal-add-account" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add Account</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <i aria-hidden="true" class="ki ki-close"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form class="form">
+                        <div class="form-group">
+                            <label>Full Name:</label>
+                            <input type="email" class="form-control" placeholder="Enter full name"/>
+                            <span class="form-text text-muted">Please enter your full name</span>
+                        </div>
+
+                        <div class="separator separator-dashed my-5"></div>
+
+                        <div class="form-group">
+                            <label>Email address:</label>
+                            <input type="email" class="form-control" placeholder="Enter email"/>
+                            <span class="form-text text-muted">We'll never share your email with anyone else</span>
+                        </div>
+
+                        <div class="separator separator-dashed my-5"></div>
+
+                        <div class="form-group">
+                            <label>Subscription</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend"><span class="input-group-text" >$</span></div>
+                                <input type="text" class="form-control" placeholder="99.9"/>
+                            </div>
+                        </div>
+
+                        <div class="separator separator-dashed my-5"></div>
+
+                        <div class="form-group">
+                            <label>Communication:</label>
+                            <div class="checkbox-list">
+                                <label class="checkbox">
+                                    <input type="checkbox"/>
+                                    <span></span>
+                                    Email
+                                </label>
+                                <label class="checkbox">
+                                    <input type="checkbox"/>
+                                    <span></span>
+                                    SMS
+                                </label>
+                                <label class="checkbox">
+                                    <input type="checkbox"/>
+                                    <span></span>
+                                    Phone
+                                </label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary font-weight-bold">Submit</button>
+                </div>
+            </div>
         </div>
     </div>
 @endsection
@@ -60,5 +129,5 @@
 @endpush
 
 @push("page_scripts")
-    <script src="assets/js/pages/crud/datatables/data-sources/ajax-server-side.js"></script>
+    <script src="_custom_assets/_js/manage_accounts.js"></script>
 @endpush

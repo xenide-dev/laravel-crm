@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Cache;
 use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable
@@ -29,6 +30,7 @@ class User extends Authenticatable
         'password', 'remember_token', 'api_token'
     ];
 
+    protected $appends = ['lastSeen'];
     /**
      * The attributes that should be cast to native types.
      *
@@ -36,5 +38,10 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'last_online_at' => 'datetime',
     ];
+
+    public function getLastSeenAttribute(){
+        return $this->last_online_at;
+    }
 }

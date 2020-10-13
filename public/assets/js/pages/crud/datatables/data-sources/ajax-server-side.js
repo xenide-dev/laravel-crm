@@ -23,7 +23,7 @@ var KTDatatablesDataSourceAjaxServer = function() {
 				},
 			},
 			columns: [
-				{data: 'id'},
+				{data: 'id_number'},
 				{data: 'fname'},
 				{data: 'mname'},
 				{data: 'lname'},

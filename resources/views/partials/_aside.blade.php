@@ -69,18 +69,20 @@
                         <span class="menu-text">Information Request</span>
                     </a>
                 </li>
-                <li class="menu-section">
-                    <h4 class="menu-text">Accounts</h4>
-                    <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
-                </li>
-                <li class="menu-item {{ (request()->is('accounts*')) ? 'menu-item-active' : '' }}" aria-haspopup="true">
-                    <a href="/accounts" class="menu-link">
+                @if(Auth::user()->user_type == "admin")
+                    <li class="menu-section">
+                        <h4 class="menu-text">Accounts</h4>
+                        <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
+                    </li>
+                    <li class="menu-item {{ (request()->is('accounts*')) ? 'menu-item-active' : '' }}" aria-haspopup="true">
+                        <a href="/accounts" class="menu-link">
                         <span class="svg-icon menu-icon">
                             <span class="menu-icon flaticon-users"></span>
                         </span>
-                        <span class="menu-text">Manage Accounts</span>
-                    </a>
-                </li>
+                            <span class="menu-text">Manage Accounts</span>
+                        </a>
+                    </li>
+                @endif
             </ul>
             <!--end::Menu Nav-->
         </div>
