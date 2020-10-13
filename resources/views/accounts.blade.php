@@ -5,7 +5,7 @@
 @endsection
 
 @section("subheader_subtitle")
-    #accounts
+    #manage_accounts
 @endsection
 
 @push("page_style_vendors")

@@ -1,11 +1,11 @@
 @extends("layouts.app")
 
 @section("subheader_title")
-    Directory
+    Main
 @endsection
 
 @section("subheader_subtitle")
-    #directory
+    #blacklisted
 @endsection
 
 @push("page_style_vendors")
