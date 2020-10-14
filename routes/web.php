@@ -27,6 +27,7 @@ Route::group([
     'middleware' => 'is_admin'
 ], function() {
     Route::get('/accounts', 'HomeController@accounts')->name('accounts');
+    Route::post('/accounts/create', 'HomeController@accountsCreate')->name('accounts-create');
 });
 
 Route::get("/debug", function() {

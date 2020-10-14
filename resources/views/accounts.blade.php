@@ -57,7 +57,7 @@
     </div>
     <!-- Modal: Add Account -->
     <div class="modal fade" id="modal-add-account" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="modal-add-account" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Add Account</h5>
@@ -65,60 +65,94 @@
                         <i aria-hidden="true" class="ki ki-close"></i>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <form class="form">
-                        <div class="form-group">
-                            <label>Full Name:</label>
-                            <input type="email" class="form-control" placeholder="Enter full name"/>
-                            <span class="form-text text-muted">Please enter your full name</span>
-                        </div>
-
-                        <div class="separator separator-dashed my-5"></div>
-
-                        <div class="form-group">
-                            <label>Email address:</label>
-                            <input type="email" class="form-control" placeholder="Enter email"/>
-                            <span class="form-text text-muted">We'll never share your email with anyone else</span>
-                        </div>
-
-                        <div class="separator separator-dashed my-5"></div>
-
-                        <div class="form-group">
-                            <label>Subscription</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend"><span class="input-group-text" >$</span></div>
-                                <input type="text" class="form-control" placeholder="99.9"/>
+                <form class="form" action="{{ route("accounts-create") }}" id="frmCreateAccount" method="POST">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>First Name: <span class="text-danger">*</span></label>
+                                    <input type="text" name="fname" class="form-control" placeholder="Please enter the first name"/>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Middle Name:</label>
+                                    <input type="text" name="mname" class="form-control" placeholder="Please enter the middle name"/>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Last Name: <span class="text-danger">*</span></label>
+                                    <input type="text" name="lname" class="form-control" placeholder="Please enter the last name"/>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Suffix (jr, sr, etc.):</label>
+                                    <input type="text" name="suffix" class="form-control" placeholder="Optional"/>
+                                </div>
                             </div>
                         </div>
-
                         <div class="separator separator-dashed my-5"></div>
-
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>E-mail: <span class="text-danger">*</span></label>
+                                    <input type="email" class="form-control" name="email" placeholder="Please enter the email address"/>
+                                    <span class="form-text text-muted">We will send a confirmation message to this email</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>ID Number: <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="id_number" placeholder="Please enter the ID number"/>
+                                    <span class="form-text text-muted">Enter user ID number</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="separator separator-dashed my-5"></div>
                         <div class="form-group">
-                            <label>Communication:</label>
+                            <label>Phone Number: <span class="text-danger">*</span></label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <select class="form-control select2" id="pref_country" name="country">
+                                        <option value=""></option>
+                                    </select>
+                                    <span class="input-group-text" id="country_code">--</span>
+                                </div>
+                                <input type="text" class="form-control" name="phone_number"/>
+                            </div>
+                        </div>
+                        <div class="separator separator-dashed my-5"></div>
+                        <div class="form-group row">
+                            <label class="col-form-label text-right col-md-3">Mark as admin <span class="fa fa-exclamation-circle text-danger" data-toggle="tooltip" data-placement="top" data-title="Be careful when making an account as admin"></span></label>
+                            <div class="col-md-9">
+                                <input data-switch="true" type="checkbox" data-on-color="danger" data-on-text="Yes" data-off-color="success" data-off-text="No" name="mark_as_admin"/>
+                            </div>
+                        </div>
+                        <div class="separator separator-dashed my-5"></div>
+                        <div class="form-group">
+                            <label>Settings:</label>
                             <div class="checkbox-list">
                                 <label class="checkbox">
-                                    <input type="checkbox"/>
+                                    <input type="checkbox" id="send_confirmation" name="is_send_confirmation" checked/>
                                     <span></span>
-                                    Email
+                                    Send confirmation message through e-mail after creation
                                 </label>
                                 <label class="checkbox">
-                                    <input type="checkbox"/>
+                                    <input type="checkbox" id="modify_role" name="is_modify_role"/>
                                     <span></span>
-                                    SMS
-                                </label>
-                                <label class="checkbox">
-                                    <input type="checkbox"/>
-                                    <span></span>
-                                    Phone
+                                    Modify role' access after account creation <div class="text-danger">( "send confirmation message" will be disabled )</div>
                                 </label>
                             </div>
                         </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary font-weight-bold">Submit</button>
-                </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary font-weight-bold" id="btnSubmit">Submit</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -129,5 +163,6 @@
 @endpush
 
 @push("page_scripts")
+    <script src="_custom_assets/_js/_country_codes.js"></script>
     <script src="_custom_assets/_js/manage_accounts.js"></script>
 @endpush

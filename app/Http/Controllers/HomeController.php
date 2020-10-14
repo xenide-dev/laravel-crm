@@ -25,4 +25,9 @@ class HomeController extends Controller
     {
         return view('accounts');
     }
+
+    public function accountsCreate(Request $request)
+    {
+        dump($request);
+    }
 }

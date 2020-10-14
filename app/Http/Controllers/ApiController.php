@@ -75,7 +75,12 @@ class ApiController extends Controller
                 $nestedData['mname'] = $user->mname;
                 $nestedData['lname'] = $user->lname;
                 $nestedData['user_type'] = $user->user_type;
-                $nestedData['last_online_at'] = (auth()->user()->id == $user->id) ? "<span class='label label-pill label-inline label-info'>You</span>" : (!empty($user->lastSeen) ? $user->lastSeen->diffForHumans() : "<span class='label label-pill label-inline label-primary'>New</span>");
+                $nestedData['last_online_at'] = (auth()->user()->id == $user->id) ?
+                    "<span class='label label-pill label-inline label-info'>You</span>" :
+                    (!empty($user->lastSeen) ?
+                        "<span class='label label-pill label-inline label-success'>" . $user->lastSeen->diffForHumans() . "</span>" :
+                        "<span class='label label-pill label-inline label-primary'>New</span>"
+                    );
 //                $nestedData['body'] = substr(strip_tags($post->body),0,50)."...";
 //                $nestedData['created_at'] = date('j M Y h:i a',strtotime($post->created_at));
                 $nestedData['options'] = "&emsp;<a href='{$show}' title='SHOW' ><span class='glyphicon glyphicon-list'></span></a>
