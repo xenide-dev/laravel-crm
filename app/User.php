@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Str;
 use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable
@@ -13,11 +14,11 @@ class User extends Authenticatable
     use Notifiable, HasApiTokens;
 
     protected $fillable = [
-        'fname', 'mname', 'lname', 'id_number', 'phone_number', 'email'
+        'fname', 'mname', 'lname', 'suffix', 'id_number', 'phone_number', 'email', 'temp_password', 'password'
     ];
 
     protected $hidden = [
-        'password', 'remember_token', 'api_token'
+        'password', 'temp_password', 'remember_token', 'api_token'
     ];
 
     protected $appends = ['lastSeen'];
@@ -29,6 +30,20 @@ class User extends Authenticatable
 
     public function getLastSeenAttribute(){
         return $this->last_online_at;
+    }
+
+    // mutators
+    public function setFNameAttribute($value) {
+        $this->attributes["fname"] = Str::ucfirst($value);
+    }
+    public function setMNameAttribute($value) {
+        $this->attributes["mname"] = Str::ucfirst($value);
+    }
+    public function setLNameAttribute($value) {
+        $this->attributes["lname"] = Str::ucfirst($value);
+    }
+    public function setSuffixAttribute($value) {
+        $this->attributes["suffix"] = Str::ucfirst($value);
     }
 
     public function contactInfo(){

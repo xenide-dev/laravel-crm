@@ -13,6 +13,11 @@
 @endpush
 
 @section("content")
+    @if (session('status'))
+        <div class="alert alert-success">
+            Success! The account has been created {{ (session('notified') ? " and notified" : '') }}
+        </div>
+    @endif
     <div class="card card-custom">
         <div class="card-header">
             <h3 class="card-title">
