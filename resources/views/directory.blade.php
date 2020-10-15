@@ -26,10 +26,6 @@
             </h3>
         </div>
         <div class="card-body">
-            <div class="alert alert-custom alert-light-warning fade show mb-5" role="alert">
-                <div class="alert-icon"><i class="flaticon-warning"></i></div>
-                <div class="alert-text">Hello! We disabled the account of the following users due to the increased number of reports. If you have the contact from the list kindly remove it, ASAP. Thank you!</div>
-            </div>
             <!--begin: Datatable-->
             <table class="table table-bordered table-hover table-checkable" id="blacklist" style="margin-top: 13px !important">
                 <thead>
