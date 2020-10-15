@@ -19,6 +19,12 @@
             <div class="alert-text">Error! {{ $message }}</div>
         </div>
     @enderror
+    @error("id_number")
+        <div class="alert alert-custom alert-danger">
+            <div class="alert-icon"><i class="flaticon-warning"></i></div>
+            <div class="alert-text">Error! {{ $message }}</div>
+        </div>
+    @enderror
 
     @if (session('status'))
         <div class="alert alert-success">

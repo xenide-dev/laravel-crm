@@ -26,7 +26,7 @@ class AccountController extends Controller
             'mname' => ['required', 'string', 'max:255'],
             'lname' => ['required', 'string', 'max:255'],
             'suffix' => ['required', 'string', 'max:255'],
-            'id_number' => ['required', 'string', 'max:255'],
+            'id_number' => ['required', 'string', 'max:255', 'unique:users'],
             'phone_number' => ['required', 'string', 'max:255'],
             'country' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
