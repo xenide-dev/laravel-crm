@@ -26,8 +26,10 @@ Route::get('/directory', 'HomeController@directory')->name('directory');
 Route::group([
     'middleware' => 'is_admin'
 ], function() {
+    // for accounts
     Route::get('/accounts', 'AccountController@index')->name('accounts');
     Route::post('/accounts/create', 'AccountController@accountsCreate')->name('accounts-create');
+    Route::get('/accounts/{user}/privilege', 'AccountController@accountsRole')->name('accounts-create-roles');
 });
 
 Route::get("/debug", function() {

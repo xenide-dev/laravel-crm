@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Str;
 
 class AccountController extends Controller
@@ -59,7 +61,8 @@ class AccountController extends Controller
 
         if(isset($request->is_modify_role)){
             // redirect to modify role page
-
+            return redirect()->temporarySignedRoute('accounts-create-roles', now()->addMinutes(1), [$user]);
+//            return redirect()->route("accounts-create-roles", [$user]);
         }else{
             // redirect to account page
             return redirect()->route("accounts")->with([
@@ -68,5 +71,16 @@ class AccountController extends Controller
                 "notified" => $notified
             ]);
         }
+    }
+
+    public function accountsRole(User $user, Request $request){
+        if(!$request->hasValidSignature()){
+            // invalid signature
+            // TODO: Log::alert
+            // TODO: redirect to error page
+        }else{
+            return view("accounts-role", compact("user"));
+        }
+
     }
 }
