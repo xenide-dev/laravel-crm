@@ -156,7 +156,7 @@
                                 <label class="checkbox">
                                     <input type="checkbox" id="send_confirmation" name="is_send_confirmation" checked/>
                                     <span></span>
-                                    Send confirmation message through e-mail after creation
+                                    Send confirmation message through e-mail after creation &nbsp;<div class="fa fa-exclamation-circle text-primary" data-toggle="tooltip" data-placement="top" data-title="We will send the system generated password together with the confirmation message through e-mail"></div>
                                 </label>
                                 <label class="checkbox">
                                     <input type="checkbox" id="modify_role" name="is_modify_role"/>

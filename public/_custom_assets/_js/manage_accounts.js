@@ -134,7 +134,7 @@ var ListAccountDataTable = function() {
     }
 
     var initValidation = function () {
-        FormValidation.formValidation(
+        var frmValidation = FormValidation.formValidation(
             document.getElementById('frmCreateAccount'),
             {
                 fields: {
@@ -193,25 +193,41 @@ var ListAccountDataTable = function() {
             }
         );
         $("#btnSubmit").on("click", function() {
-            Swal.fire({
-                title: "Are you sure?",
-                text: "This account will be created",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonText: "Yes, create it now!",
-                cancelButtonText: "No, cancel!",
-                reverseButtons: true,
-                customClass: {
-                    confirmButton: "btn btn-success",
-                    cancelButton: "btn btn-default"
-                }
-            }).then(function(result) {
-                if (result.value) {
-                    $("#frmCreateAccount").submit();
-                } else if (result.dismiss === "cancel") {
+            if(frmValidation){
+                frmValidation.validate().then(function(status) {
+                    if(status == "Valid"){
+                        Swal.fire({
+                            title: "Are you sure?",
+                            text: "This account will be created",
+                            icon: "warning",
+                            showCancelButton: true,
+                            confirmButtonText: "Yes, create it now!",
+                            cancelButtonText: "No, cancel!",
+                            reverseButtons: true,
+                            customClass: {
+                                confirmButton: "btn btn-success",
+                                cancelButton: "btn btn-default"
+                            }
+                        }).then(function(result) {
+                            if (result.value) {
+                                $("#frmCreateAccount").submit();
+                            } else if (result.dismiss === "cancel") {
 
-                }
-            });
+                            }
+                        });
+                    }else{
+                        Swal.fire({
+                            text: "Sorry, looks like there are some errors detected, please try again.",
+                            icon: "error",
+                            buttonsStyling: false,
+                            confirmButtonText: "Ok, got it!",
+                            customClass: {
+                                confirmButton: "btn font-weight-bold btn-light"
+                            }
+                        });
+                    }
+                });
+            }
         });
     }
     return {
