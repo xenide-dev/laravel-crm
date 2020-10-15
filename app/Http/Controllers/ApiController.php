@@ -21,7 +21,7 @@ class ApiController extends Controller
             5 => 'last_online_at',
         );
 
-        $totalData = User::where("user_type", "!=", "user")->count();
+        $totalData = User::count();
 
         $totalFiltered = $totalData;
 
@@ -32,8 +32,7 @@ class ApiController extends Controller
 
         if(empty($request->input('search.value')))
         {
-            $users = User::where("user_type", "!=", "user")
-                ->offset($start)
+            $users = User::offset($start)
                 ->limit($limit)
                 ->orderBy($order,$dir)
                 ->get();
@@ -41,14 +40,11 @@ class ApiController extends Controller
         else {
             $search = $request->input('search.value');
 
-            $users =  User::where("user_type", "!=", "user")
-                ->where(function ($query) use ($search) {
-                    $query->where('id_number','LIKE',"%{$search}%")
-                        ->orWhere('fname', 'LIKE',"%{$search}%")
-                        ->orWhere('mname', 'LIKE',"%{$search}%")
-                        ->orWhere('lname', 'LIKE',"%{$search}%")
-                        ->orWhere('user_type', 'LIKE',"%{$search}%");
-                })
+            $users =  User::where('id_number','LIKE',"%{$search}%")
+                ->orWhere('fname', 'LIKE',"%{$search}%")
+                ->orWhere('mname', 'LIKE',"%{$search}%")
+                ->orWhere('lname', 'LIKE',"%{$search}%")
+                ->orWhere('user_type', 'LIKE',"%{$search}%")
                 ->offset($start)
                 ->limit($limit)
                 ->orderBy($order,$dir)
