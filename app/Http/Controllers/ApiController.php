@@ -75,6 +75,7 @@ class ApiController extends Controller
                 $nestedData['mname'] = $user->mname;
                 $nestedData['lname'] = $user->lname;
                 $nestedData['user_type'] = $user->user_type;
+                $nestedData['iM'] = auth()->user()->id == $user->id;
                 $nestedData['last_online_at'] = (auth()->user()->id == $user->id) ?
                     "<span class='label label-pill label-inline label-info'>You</span>" :
                     (!empty($user->lastSeen) ?

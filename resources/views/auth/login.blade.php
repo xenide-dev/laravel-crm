@@ -62,7 +62,7 @@
 							<form class="form" id="kt_login_signin_form" action="" method="POST">
                                 @csrf
 								<div class="form-group">
-									<input class="form-control h-auto text-white bg-white-o-5 rounded-pill border-0 py-4 px-8" type="email" placeholder="Email" name="email" autocomplete="off" autofocus {{ old('email') }} />
+									<input class="form-control h-auto text-white bg-white-o-5 rounded-pill border-0 py-4 px-8" type="email" placeholder="Email" name="email" autocomplete="off" autofocus value="{{ old('email') }}" />
                                 </div>
 								<div class="form-group">
 									<input class="form-control h-auto text-white bg-white-o-5 rounded-pill border-0 py-4 px-8" type="password" placeholder="Password" name="password" />

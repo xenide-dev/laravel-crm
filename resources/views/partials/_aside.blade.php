@@ -69,7 +69,7 @@
                         <span class="menu-text">Information Request</span>
                     </a>
                 </li>
-                @if(Auth::user()->user_type == "admin")
+                @if(Auth::user()->user_type == "admin" || Auth::user()->user_type == "super-admin")
                     <li class="menu-section">
                         <h4 class="menu-text">Accounts</h4>
                         <i class="menu-icon ki ki-bold-more-hor icon-md"></i>

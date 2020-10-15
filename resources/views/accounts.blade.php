@@ -13,6 +13,13 @@
 @endpush
 
 @section("content")
+    @error("email")
+        <div class="alert alert-custom alert-danger">
+            <div class="alert-icon"><i class="flaticon-warning"></i></div>
+            <div class="alert-text">Error! {{ $message }}</div>
+        </div>
+    @enderror
+
     @if (session('status'))
         <div class="alert alert-success">
             Success! The account has been created {{ (session('notified') ? " and notified" : '') }}
@@ -77,25 +84,25 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label>First Name: <span class="text-danger">*</span></label>
-                                    <input type="text" name="fname" class="form-control" placeholder="Please enter the first name"/>
+                                    <input type="text" name="fname" class="form-control" placeholder="Please enter the first name" value="{{ old("fname") }}"/>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label>Middle Name:</label>
-                                    <input type="text" name="mname" class="form-control" placeholder="Please enter the middle name"/>
+                                    <input type="text" name="mname" class="form-control" placeholder="Please enter the middle name" value="{{ old("mname") }}"/>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label>Last Name: <span class="text-danger">*</span></label>
-                                    <input type="text" name="lname" class="form-control" placeholder="Please enter the last name"/>
+                                    <input type="text" name="lname" class="form-control" placeholder="Please enter the last name" value="{{ old("lname") }}"/>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label>Suffix (jr, sr, etc.):</label>
-                                    <input type="text" name="suffix" class="form-control" placeholder="Optional"/>
+                                    <input type="text" name="suffix" class="form-control" placeholder="Optional" value="{{ old("suffix") }}"/>
                                 </div>
                             </div>
                         </div>
@@ -111,7 +118,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>ID Number: <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="id_number" placeholder="Please enter the ID number"/>
+                                    <input type="text" class="form-control" name="id_number" placeholder="Please enter the ID number" value="{{ old("id_number") }}"/>
                                     <span class="form-text text-muted">Enter user ID number</span>
                                 </div>
                             </div>
@@ -131,8 +138,8 @@
                         </div>
                         <div class="separator separator-dashed my-5"></div>
                         <div class="form-group row">
-                            <label class="col-form-label text-right col-md-3">Mark as admin <span class="fa fa-exclamation-circle text-danger" data-toggle="tooltip" data-placement="top" data-title="Be careful when making an account as admin"></span></label>
-                            <div class="col-md-9">
+                            <label class="col-form-label text-right col-md-6">Mark as admin <span class="fa fa-exclamation-circle text-danger" data-toggle="tooltip" data-placement="top" data-title="Be careful when making an account as admin"></span></label>
+                            <div class="col-md-6">
                                 <input data-switch="true" type="checkbox" data-on-color="danger" data-on-text="Yes" data-off-color="success" data-off-text="No" name="mark_as_admin"/>
                             </div>
                         </div>
@@ -148,7 +155,8 @@
                                 <label class="checkbox">
                                     <input type="checkbox" id="modify_role" name="is_modify_role"/>
                                     <span></span>
-                                    Modify role' access after account creation <div class="text-danger">( "send confirmation message" will be disabled )</div>
+                                    Modify role' access after account creation
+                                    <div class="text-danger">( "send confirmation message" will be disabled )</div>
                                 </label>
                             </div>
                         </div>

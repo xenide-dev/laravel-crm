@@ -22,7 +22,7 @@ class UserSeeder extends Seeder
             'email' => "admin@admin.com",
             'password' => Hash::make('admin'),
             'isPassChanged' => 1,
-            'user_type' => "admin",
+            'user_type' => "super-admin",
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'api_token' => Hash::make(now()),
