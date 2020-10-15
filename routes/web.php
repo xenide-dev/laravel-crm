@@ -26,8 +26,8 @@ Route::get('/directory', 'HomeController@directory')->name('directory');
 Route::group([
     'middleware' => 'is_admin'
 ], function() {
-    Route::get('/accounts', 'HomeController@accounts')->name('accounts');
-    Route::post('/accounts/create', 'HomeController@accountsCreate')->name('accounts-create');
+    Route::get('/accounts', 'AccountController@index')->name('accounts');
+    Route::post('/accounts/create', 'AccountController@accountsCreate')->name('accounts-create');
 });
 
 Route::get("/debug", function() {

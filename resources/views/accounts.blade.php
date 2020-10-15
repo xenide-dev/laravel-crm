@@ -117,9 +117,9 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>ID Number: <span class="text-danger">*</span></label>
+                                    <label>Player ID Number: <span class="text-danger">*</span></label>
                                     <input type="text" class="form-control" name="id_number" placeholder="Please enter the ID number" value="{{ old("id_number") }}"/>
-                                    <span class="form-text text-muted">Enter user ID number</span>
+                                    <span class="form-text text-muted">Enter player ID number</span>
                                 </div>
                             </div>
                         </div>
