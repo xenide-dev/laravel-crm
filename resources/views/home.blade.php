@@ -9,12 +9,15 @@
 @endsection
 
 @section("content")
+    <div class="alert alert-warning">
+        This section is under development
+    </div>
     <div class="card card-primary">
         <div class="card-header">
-            header
+            This section is under development
         </div>
         <div class="card-body">
-            body
+            This section is under development
         </div>
     </div>
 @endsection

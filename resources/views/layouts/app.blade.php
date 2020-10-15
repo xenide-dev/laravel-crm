@@ -119,7 +119,7 @@
 			<!--begin::Header-->
 			<div class="offcanvas-header d-flex align-items-center justify-content-between pb-5">
 				<h3 class="font-weight-bold m-0">User Profile
-				<small class="text-muted font-size-sm ml-2">12 messages</small></h3>
+				<small class="text-muted font-size-sm ml-2">1 message</small></h3>
 				<a href="#" class="btn btn-xs btn-icon btn-light btn-hover-primary" id="kt_quick_user_close">
 					<i class="ki ki-close icon-xs text-muted"></i>
 				</a>
@@ -130,7 +130,7 @@
 				<!--begin::Header-->
 				<div class="d-flex align-items-center mt-5">
 					<div class="symbol symbol-100 mr-5">
-						<div class="symbol-label" style="background-image:url('assets/media/users/300_21.jpg')"></div>
+						<div class="symbol-label" style="background-image:url('assets/media/users/default.jpg')"></div>
 						<i class="symbol-badge bg-success"></i>
 					</div>
 					<div class="d-flex flex-column">
@@ -351,7 +351,7 @@
 								<!--end::Dropdown Menu-->
 							</div>
 							<div class="text-center flex-grow-1">
-								<div class="text-dark-75 font-weight-bold font-size-h5">Matt Pears</div>
+								<div class="text-dark-75 font-weight-bold font-size-h5">Raymond Lee</div>
 								<div>
 									<span class="label label-dot label-success"></span>
 									<span class="font-weight-bold text-muted font-size-sm">Active</span>
@@ -374,14 +374,14 @@
 									<div class="d-flex flex-column mb-5 align-items-start">
 										<div class="d-flex align-items-center">
 											<div class="symbol symbol-circle symbol-40 mr-3">
-												<img alt="Pic" src="assets/media/users/300_12.jpg" />
+												<img alt="Pic" src="assets/media/users/default.jpg" />
 											</div>
 											<div>
-												<a href="#" class="text-dark-75 text-hover-primary font-weight-bold font-size-h6">Matt Pears</a>
+												<a href="#" class="text-dark-75 text-hover-primary font-weight-bold font-size-h6">Raymond Lee</a>
 												<span class="text-muted font-size-sm">2 Hours</span>
 											</div>
 										</div>
-										<div class="mt-2 rounded p-5 bg-light-success text-dark-50 font-weight-bold font-size-lg text-left max-w-400px">How likely are you to recommend our company to your friends and family?</div>
+										<div class="mt-2 rounded p-5 bg-light-success text-dark-50 font-weight-bold font-size-lg text-left max-w-400px">Hi this is a sample message</div>
 									</div>
 									<!--end::Message In-->
 									<!--begin::Message Out-->
@@ -392,95 +392,10 @@
 												<a href="#" class="text-dark-75 text-hover-primary font-weight-bold font-size-h6">You</a>
 											</div>
 											<div class="symbol symbol-circle symbol-40 ml-3">
-												<img alt="Pic" src="assets/media/users/300_21.jpg" />
+												<img alt="Pic" src="assets/media/users/default.jpg" />
 											</div>
 										</div>
-										<div class="mt-2 rounded p-5 bg-light-primary text-dark-50 font-weight-bold font-size-lg text-right max-w-400px">Hey there, we’re just writing to let you know that you’ve been subscribed to a repository on GitHub.</div>
-									</div>
-									<!--end::Message Out-->
-									<!--begin::Message In-->
-									<div class="d-flex flex-column mb-5 align-items-start">
-										<div class="d-flex align-items-center">
-											<div class="symbol symbol-circle symbol-40 mr-3">
-												<img alt="Pic" src="assets/media/users/300_21.jpg" />
-											</div>
-											<div>
-												<a href="#" class="text-dark-75 text-hover-primary font-weight-bold font-size-h6">Matt Pears</a>
-												<span class="text-muted font-size-sm">40 seconds</span>
-											</div>
-										</div>
-										<div class="mt-2 rounded p-5 bg-light-success text-dark-50 font-weight-bold font-size-lg text-left max-w-400px">Ok, Understood!</div>
-									</div>
-									<!--end::Message In-->
-									<!--begin::Message Out-->
-									<div class="d-flex flex-column mb-5 align-items-end">
-										<div class="d-flex align-items-center">
-											<div>
-												<span class="text-muted font-size-sm">Just now</span>
-												<a href="#" class="text-dark-75 text-hover-primary font-weight-bold font-size-h6">You</a>
-											</div>
-											<div class="symbol symbol-circle symbol-40 ml-3">
-												<img alt="Pic" src="assets/media/users/300_21.jpg" />
-											</div>
-										</div>
-										<div class="mt-2 rounded p-5 bg-light-primary text-dark-50 font-weight-bold font-size-lg text-right max-w-400px">You’ll receive notifications for all issues, pull requests!</div>
-									</div>
-									<!--end::Message Out-->
-									<!--begin::Message In-->
-									<div class="d-flex flex-column mb-5 align-items-start">
-										<div class="d-flex align-items-center">
-											<div class="symbol symbol-circle symbol-40 mr-3">
-												<img alt="Pic" src="assets/media/users/300_12.jpg" />
-											</div>
-											<div>
-												<a href="#" class="text-dark-75 text-hover-primary font-weight-bold font-size-h6">Matt Pears</a>
-												<span class="text-muted font-size-sm">40 seconds</span>
-											</div>
-										</div>
-										<div class="mt-2 rounded p-5 bg-light-success text-dark-50 font-weight-bold font-size-lg text-left max-w-400px">You can unwatch this repository immediately by clicking here:
-										<a href="#">https://github.com</a></div>
-									</div>
-									<!--end::Message In-->
-									<!--begin::Message Out-->
-									<div class="d-flex flex-column mb-5 align-items-end">
-										<div class="d-flex align-items-center">
-											<div>
-												<span class="text-muted font-size-sm">Just now</span>
-												<a href="#" class="text-dark-75 text-hover-primary font-weight-bold font-size-h6">You</a>
-											</div>
-											<div class="symbol symbol-circle symbol-40 ml-3">
-												<img alt="Pic" src="assets/media/users/300_21.jpg" />
-											</div>
-										</div>
-										<div class="mt-2 rounded p-5 bg-light-primary text-dark-50 font-weight-bold font-size-lg text-right max-w-400px">Discover what students who viewed Learn Figma - UI/UX Design. Essential Training also viewed</div>
-									</div>
-									<!--end::Message Out-->
-									<!--begin::Message In-->
-									<div class="d-flex flex-column mb-5 align-items-start">
-										<div class="d-flex align-items-center">
-											<div class="symbol symbol-circle symbol-40 mr-3">
-												<img alt="Pic" src="assets/media/users/300_12.jpg" />
-											</div>
-											<div>
-												<a href="#" class="text-dark-75 text-hover-primary font-weight-bold font-size-h6">Matt Pears</a>
-												<span class="text-muted font-size-sm">40 seconds</span>
-											</div>
-										</div>
-										<div class="mt-2 rounded p-5 bg-light-success text-dark-50 font-weight-bold font-size-lg text-left max-w-400px">Most purchased Business courses during this sale!</div>
-									</div>
-									<!--end::Message In-->
-									<!--begin::Message Out-->
-									<div class="d-flex flex-column mb-5 align-items-end">
-										<div class="d-flex align-items-center">
-											<div>
-												<span class="text-muted font-size-sm">Just now</span>
-												<a href="#" class="text-dark-75 text-hover-primary font-weight-bold font-size-h6">You</a>
-											</div>
-											<div class="symbol symbol-circle symbol-40 ml-3">
-												<img alt="Pic" src="assets/media/users/300_21.jpg" />
-											</div>
-										</div>
-										<div class="mt-2 rounded p-5 bg-light-primary text-dark-50 font-weight-bold font-size-lg text-right max-w-400px">Company BBQ to celebrate the last quater achievements and goals. Food and drinks provided</div>
+										<div class="mt-2 rounded p-5 bg-light-primary text-dark-50 font-weight-bold font-size-lg text-right max-w-400px">Hi there</div>
 									</div>
 									<!--end::Message Out-->
 								</div>
@@ -495,10 +410,10 @@
 							<textarea class="form-control border-0 p-0" rows="2" placeholder="Type a message"></textarea>
 							<div class="d-flex align-items-center justify-content-between mt-5">
 								<div class="mr-3">
-									<a href="#" class="btn btn-clean btn-icon btn-md mr-1">
+									<a class="btn btn-clean btn-icon btn-md mr-1">
 										<i class="flaticon2-photograph icon-lg"></i>
 									</a>
-									<a href="#" class="btn btn-clean btn-icon btn-md">
+									<a class="btn btn-clean btn-icon btn-md">
 										<i class="flaticon2-photo-camera icon-lg"></i>
 									</a>
 								</div>

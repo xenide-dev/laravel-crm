@@ -59,6 +59,9 @@
                             <span class="menu-icon flaticon-profile"></span>
                         </span>
                         <span class="menu-text">Submit Report</span>
+                        <span class="menu-label">
+                            <span class="label label-danger label-inline mr-2">Under dev.</span>
+                        </span>
                     </a>
                 </li>
                 <li class="menu-item" aria-haspopup="true">
@@ -67,6 +70,9 @@
                             <span class="menu-icon flaticon-information"></span>
                         </span>
                         <span class="menu-text">Information Request</span>
+                        <span class="menu-label">
+                            <span class="label label-danger label-inline mr-2">Under dev.</span>
+                        </span>
                     </a>
                 </li>
                 @if(Auth::user()->user_type == "admin" || Auth::user()->user_type == "super-admin")
