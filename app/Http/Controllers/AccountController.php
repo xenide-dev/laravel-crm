@@ -61,7 +61,8 @@ class AccountController extends Controller
 
         if(isset($request->is_modify_role)){
             // redirect to modify role page
-            return redirect()->temporarySignedRoute('accounts-create-roles', now()->addMinutes(1), [$user]);
+            // update the expiry time
+            return redirect()->temporarySignedRoute('accounts-create-roles', now()->addMinutes(60), [$user]);
 //            return redirect()->route("accounts-create-roles", [$user]);
         }else{
             // redirect to account page
@@ -79,8 +80,13 @@ class AccountController extends Controller
             // TODO: Log::alert
             // TODO: redirect to error page
         }else{
-            return view("accounts-role", compact("user"));
+            $configs = config("_privileges.urls");
+            return view("accounts-role", compact("user"), compact("configs"));
         }
+    }
 
+    public function accountsRoleUpdate(User $user, Request $request) {
+        dump($user);
+        dump($request);
     }
 }

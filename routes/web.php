@@ -30,6 +30,7 @@ Route::group([
     Route::get('/accounts', 'AccountController@index')->name('accounts');
     Route::post('/accounts/create', 'AccountController@accountsCreate')->name('accounts-create');
     Route::get('/accounts/{user}/privilege', 'AccountController@accountsRole')->name('accounts-create-roles');
+    Route::post('/accounts/{user}/privilege/update', 'AccountController@accountsRoleUpdate')->name('accounts-create-roles-update');
 });
 
 Route::get("/debug", function() {

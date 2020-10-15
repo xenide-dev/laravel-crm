@@ -25,12 +25,10 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1e925082-d8f8-4772-a0bb-7b633c448e86" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/views/accounts-role.blade.php" afterDir="false" />
+    <list default="true" id="1e925082-d8f8-4772-a0bb-7b633c448e86" name="Default Changelist" comment="Added modify privilege page">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AccountController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AccountController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/media/logos/logo-light.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/media/logos/logo-light.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/partials/_footer.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/partials/_footer.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/accounts-role.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/accounts-role.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -219,8 +217,18 @@
       <workItem from="1602666563902" duration="5873000" />
       <workItem from="1602674736645" duration="18011000" />
       <workItem from="1602753023905" duration="7686000" />
-      <workItem from="1602761599416" duration="10827000" />
+      <workItem from="1602761599416" duration="12003000" />
+      <workItem from="1602774992713" duration="43000" />
+      <workItem from="1602775051946" duration="3416000" />
     </task>
+    <task id="LOCAL-00001" summary="Added modify privilege page">
+      <created>1602773794246</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1602773794246</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -250,6 +258,10 @@
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Added modify privilege page" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added modify privilege page" />
+  </component>
   <component name="WindowStateProjectService">
     <state x="552" y="178" key="#Deployment" timestamp="1602767435729">
       <screen x="0" y="0" width="1920" height="1040" />
@@ -267,14 +279,18 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="275" key="FileChooserDialogImpl/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602251534383" />
-    <state x="794" y="439" key="NewPhpFileDialog" timestamp="1602771754623">
+    <state x="794" y="439" key="NewPhpFileDialog" timestamp="1602775147679">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="794" y="439" key="NewPhpFileDialog/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602771754623" />
+    <state x="794" y="439" key="NewPhpFileDialog/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602775147679" />
     <state x="705" y="184" key="SettingsEditor" timestamp="1602767559551">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="705" y="184" key="SettingsEditor/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602767559551" />
+    <state x="552" y="249" key="Vcs.Push.Dialog.v2" timestamp="1602773869072">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="552" y="249" key="Vcs.Push.Dialog.v2/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602773869072" />
     <state x="92" y="92" width="1736" height="856" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1602693209587">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
