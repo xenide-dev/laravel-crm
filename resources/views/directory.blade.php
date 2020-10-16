@@ -30,9 +30,9 @@
             <table class="table table-bordered table-hover table-checkable" id="blacklist" style="margin-top: 13px !important">
                 <thead>
                     <tr>
-                        <th>System ID</th>
                         <th>Player ID</th>
                         <th>Full Name</th>
+                        <th>Organization(Union/Club)</th>
                         <th>Position</th>
                         <th>Actions</th>
                     </tr>
