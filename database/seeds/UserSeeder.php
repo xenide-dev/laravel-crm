@@ -49,13 +49,14 @@ class UserSeeder extends Seeder
         // generate 9 random super admin
         for($i = 0; $i < 10; $i++){
             $userID = DB::table('users')->insertGetId([
+                $tempEmail = $faker->freeEmail
                 'fname' => $faker->firstNameMale,
                 'mname' => $faker->lastName,
                 'lname' => $faker->lastName,
                 'id_number' => $faker->randomNumber(6),
                 'phone_number' => $faker->randomNumber(5),
-                'email' => $faker->freeEmail,
-                'password' => Hash::make($faker->freeEmail),
+                'email' => $tempEmail,
+                'password' => Hash::make($tempEmail),
                 'isPassChanged' => 1,
                 'user_type' => "super-admin",
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
