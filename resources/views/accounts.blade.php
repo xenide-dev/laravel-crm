@@ -69,6 +69,7 @@
                     <th>First Name</th>
                     <th>Middle Name</th>
                     <th>Last Name</th>
+                    <th>Email</th>
                     <th>User Type</th>
                     <th>Last Active</th>
                     <th>Actions</th>

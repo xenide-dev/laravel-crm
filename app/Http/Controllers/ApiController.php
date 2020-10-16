@@ -17,8 +17,9 @@ class ApiController extends Controller
             1 =>'fname',
             2 => 'mname',
             3 => 'lname',
-            4 => 'user_type',
-            5 => 'last_online_at',
+            4 => 'email',
+            5 => 'user_type',
+            6 => 'last_online_at',
         );
 
         $totalData = User::count();
@@ -44,6 +45,7 @@ class ApiController extends Controller
                 ->orWhere('fname', 'LIKE',"%{$search}%")
                 ->orWhere('mname', 'LIKE',"%{$search}%")
                 ->orWhere('lname', 'LIKE',"%{$search}%")
+                ->orWhere('email', 'LIKE',"%{$search}%")
                 ->orWhere('user_type', 'LIKE',"%{$search}%")
                 ->offset($start)
                 ->limit($limit)
@@ -70,6 +72,7 @@ class ApiController extends Controller
                 $nestedData['fname'] = $user->fname;
                 $nestedData['mname'] = $user->mname;
                 $nestedData['lname'] = $user->lname;
+                $nestedData['email'] = $user->email;
                 $nestedData['user_type'] = $user->user_type;
                 $nestedData['iM'] = auth()->user()->id == $user->id;
                 $nestedData['last_online_at'] = (auth()->user()->id == $user->id) ?

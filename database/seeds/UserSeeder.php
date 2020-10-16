@@ -46,22 +46,58 @@ class UserSeeder extends Seeder
             }
         }
 
-        for($i = 0; $i < 20; $i++){
-            $faker = Faker\Factory::create();
-            $firstName = $faker->firstNameMale;
-            DB::table('users')->insert([
-                'fname' => $firstName,
+        // generate 9 random super admin
+        for($i = 0; $i < 10; $i++){
+            $userID = DB::table('users')->insertGetId([
+                'fname' => $faker->firstNameMale,
                 'mname' => $faker->lastName,
                 'lname' => $faker->lastName,
                 'id_number' => $faker->randomNumber(6),
                 'phone_number' => $faker->randomNumber(5),
                 'email' => $faker->freeEmail,
-                'password' => Hash::make($firstName),
-                'user_type' => "user",
+                'password' => Hash::make($faker->freeEmail),
+                'isPassChanged' => 1,
+                'user_type' => "super-admin",
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'api_token' => Hash::make(now()),
             ]);
+
+            // populate the user's permission
+            // by default all
+            // get the config in _privileges.php
+            $configs = config("_privileges.urls");
+            foreach ($configs as $config){
+                foreach ($config["access"] as $access){
+                    DB::table('user_permissions')->insert([
+                        'user_id' => $userID,
+                        "name" => $config["name"],
+                        "slug" => Str::slug($access . " " . $config["name"]),
+                        'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                        'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                    ]);
+                }
+            }
         }
+
+
+        // for 20 random acct with 'user' account type
+//        for($i = 0; $i < 20; $i++){
+//            $faker = Faker\Factory::create();
+//            $firstName = $faker->firstNameMale;
+//            DB::table('users')->insert([
+//                'fname' => $firstName,
+//                'mname' => $faker->lastName,
+//                'lname' => $faker->lastName,
+//                'id_number' => $faker->randomNumber(6),
+//                'phone_number' => $faker->randomNumber(5),
+//                'email' => $faker->freeEmail,
+//                'password' => Hash::make($firstName),
+//                'user_type' => "user",
+//                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+//                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+//                'api_token' => Hash::make(now()),
+//            ]);
+//        }
     }
 }

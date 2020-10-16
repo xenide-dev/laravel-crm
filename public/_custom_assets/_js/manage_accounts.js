@@ -27,6 +27,7 @@ var ListAccountDataTable = function() {
                 {data: 'fname'},
                 {data: 'mname'},
                 {data: 'lname'},
+                {data: 'email'},
                 {data: 'user_type'},
                 {data: 'last_online_at'},
                 {data: 'options', responsivePriority: -1},
