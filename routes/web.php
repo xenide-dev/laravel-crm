@@ -34,12 +34,8 @@ Route::group([
 });
 
 Route::get("/debug", function() {
-    $users = User::find("23");
-    if($users->userPermission()->where("slug", "view-directory")->count() > 0){
-        dump("y");
-    }else{
-        dump("n");
-    }
+    $user = User::find(1);
+    Mail::to('newuser@example.com')->send(new \App\Mail\MailConfirmation($user));
 });
 
 

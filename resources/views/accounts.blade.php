@@ -9,7 +9,7 @@
 @endsection
 
 @push("page_style_vendors")
-    <link href="assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css" />
+    <link href="{{ asset("assets/plugins/custom/datatables/datatables.bundle.css") }}" rel="stylesheet" type="text/css" />
 @endpush
 
 @section("content")
@@ -27,6 +27,11 @@
     @enderror
 
     @if (session('status'))
+        <div class="alert alert-success">
+            Success! The account has been created {{ (session('notified') ? " and notified" : '') }}
+        </div>
+    @endif
+    @if (session('event') == "updated")
         <div class="alert alert-success">
             Success! The account has been created {{ (session('notified') ? " and notified" : '') }}
         </div>
@@ -178,10 +183,10 @@
 @endsection
 
 @push("page_vendors")
-    <script src="assets/plugins/custom/datatables/datatables.bundle.js"></script>
+    <script src="{{ asset("assets/plugins/custom/datatables/datatables.bundle.js") }}"></script>
 @endpush
 
 @push("page_scripts")
-    <script src="_custom_assets/_js/_country_codes.js"></script>
-    <script src="_custom_assets/_js/manage_accounts.js"></script>
+    <script src="{{ asset("_custom_assets/_js/_country_codes.js") }}"></script>
+    <script src="{{ asset("_custom_assets/_js/manage_accounts.js") }}"></script>
 @endpush

@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\MailConfirmation;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Str;
 
@@ -71,8 +73,7 @@ class AccountController extends Controller
         // send notification message thru email
         if($request->is_send_confirmation){
             // TODO
-
-
+            Mail::to($user->email)->send(new MailConfirmation($user));
             $notified = true;
         }
 
@@ -85,7 +86,6 @@ class AccountController extends Controller
         }else{
             // redirect to account page
             return redirect()->route("accounts")->with([
-                "temp_pass" => $rand_pass,
                 "status" => "success",
                 "notified" => $notified
             ]);
@@ -104,7 +104,33 @@ class AccountController extends Controller
     }
 
     public function accountsRoleUpdate(User $user, Request $request) {
-        dump($user);
-        dump($request);
+        $notified = false;
+
+        // clear the assoc records
+        $user->userPermission()->delete();
+
+        // get the configs
+        $configs = config("_privileges.urls");
+
+        // repopulate
+        foreach ($configs as $config) {
+            $temp = $request->input($config["name"]);
+            if($temp){
+                foreach ($temp as $access) {
+                    $user->userPermission()->create([
+                        "name" => $config["name"],
+                        "slug" => $access . "-" . $config["name"]
+                    ]);
+                }
+            }
+        }
+
+        // notify the user
+        Mail::to($user->email)->send(new MailConfirmation($user));
+
+        return redirect()->route("accounts")->with([
+            "event" => "updated",
+            "notified" => $notified
+        ]);
     }
 }
