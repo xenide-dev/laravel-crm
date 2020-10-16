@@ -18,9 +18,12 @@
         <form class="form" action="{{ \Illuminate\Support\Facades\URL::signedRoute('accounts-create-roles-update', [$user]) }}" id="frmUpdatePrivilege" method="POST">
             @csrf
             <div class="card-body">
+                <div class="alert alert-info">
+                    We will send a confirmation message to the user's email once you leave this page.
+                </div>
                 @foreach($configs as $config)
                     <div class="form-group row align-items-center">
-                        <label class="col-lg-3 col-form-label  text-right">{{ ucfirst($config["name"]) }}:</label>
+                        <label class="col-lg-3 col-form-label  text-right">{{ isset($config["text"]) ? ucfirst($config["text"]) : ucfirst($config["name"]) }}:</label>
                         <div class="col-lg-6">
                             <div class="checkbox-inline">
                                 @foreach($config["access"] as $access)
@@ -37,6 +40,7 @@
             </div>
             <div class="card-footer d-flex justify-content-end">
                 <button type="submit" class="btn btn-primary font-weight-bold">Update</button>
+                <a href="{{ route("accounts") }}" class="btn btn-default ml-3">Cancel</a>
             </div>
         </form>
     </div>

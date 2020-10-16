@@ -161,7 +161,7 @@
                                 <label class="checkbox">
                                     <input type="checkbox" id="modify_role" name="is_modify_role"/>
                                     <span></span>
-                                    Modify role' access after account creation
+                                    Modify role' privilege after account creation
                                     <div class="text-danger">( "send confirmation message" will be disabled )</div>
                                 </label>
                             </div>

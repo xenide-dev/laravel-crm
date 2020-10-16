@@ -28,6 +28,7 @@ class CreateUsersTable extends Migration
             $table->string('user_type')->default("user")->comment("admin, user");
             $table->boolean('isBlacklisted')->default("0")->comment("0 - whitelisted; 1 - blacklisted");
             $table->boolean('isPassChanged')->default("0")->comment("0 - not changed; 1 - has been changed");
+            $table->boolean('isNotified')->default("0");
             $table->rememberToken();
             $table->timestamps();
             $table->timestamp("last_online_at")->nullable();

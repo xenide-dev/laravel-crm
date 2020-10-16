@@ -3,10 +3,15 @@
 return [
 
     // privilege
+    // 'name' | string => the name of the url
+    // 'access' | array => the permissions
+    // 'text' | optional | string => the display text
+
     "urls" => [
         [
             "name" => "directory",
-            "access" => [ "view" ]
+            "access" => [ "view" ],
+            "text" => "Blacklisted"
         ],
         [
             "name" => "accounts",
@@ -14,7 +19,7 @@ return [
         ],
         [
             "name" => "privilege",
-            "access" => [ "view" ]
+            "access" => [ "view", "update" ]
         ],
     ],
 

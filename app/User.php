@@ -49,4 +49,8 @@ class User extends Authenticatable
     public function contactInfo(){
         return $this->hasMany(ContactInfo::class);
     }
+
+    public function userPermission() {
+        return $this->hasMany(UserPermission::class);
+    }
 }

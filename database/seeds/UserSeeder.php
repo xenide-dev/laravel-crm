@@ -2,6 +2,8 @@
 
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class UserSeeder extends Seeder
 {
@@ -13,7 +15,7 @@ class UserSeeder extends Seeder
     public function run()
     {
         $faker = Faker\Factory::create();
-        DB::table('users')->insert([
+        $userID = DB::table('users')->insertGetId([
             'fname' => $faker->firstNameMale,
             'mname' => $faker->lastName,
             'lname' => $faker->lastName,
@@ -27,6 +29,23 @@ class UserSeeder extends Seeder
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'api_token' => Hash::make(now()),
         ]);
+
+        // populate the user's permission
+        // by default all
+        // get the config in _privileges.php
+        $configs = config("_privileges.urls");
+        foreach ($configs as $config){
+            foreach ($config["access"] as $access){
+                DB::table('user_permissions')->insert([
+                    'user_id' => $userID,
+                    "name" => $config["name"],
+                    "slug" => Str::slug($access . " " . $config["name"]),
+                    'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                    'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                ]);
+            }
+        }
+
         for($i = 0; $i < 20; $i++){
             $faker = Faker\Factory::create();
             $firstName = $faker->firstNameMale;

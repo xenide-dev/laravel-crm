@@ -34,11 +34,11 @@ Route::group([
 });
 
 Route::get("/debug", function() {
-    $users = User::get();
-    foreach ($users as $user) {
-        dump("For " . $user->fname);
-        dump(\Illuminate\Support\Facades\Cache::get("user-is-online-" . $user->id));
-        dump(!empty($user->lastSeen) ? $user->lastSeen->diffForHumans() : "no record");
+    $users = User::find("23");
+    if($users->userPermission()->where("slug", "view-directory")->count() > 0){
+        dump("y");
+    }else{
+        dump("n");
     }
 });
 
