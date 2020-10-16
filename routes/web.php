@@ -24,6 +24,10 @@ Route::get('/directory', 'HomeController@directory')->name('directory');
 Route::get('/tickets', 'HomeController@tickets')->name('tickets');
 Route::get('/information/request', 'HomeController@informationRequest')->name('information-request');
 
+// profiles
+Route::get('/profile', 'HomeController@profile')->name('profile');
+
+
 // admin routes
 Route::group([
     'middleware' => 'is_admin'

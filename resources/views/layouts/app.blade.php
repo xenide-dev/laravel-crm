@@ -57,11 +57,6 @@
 					<span></span>
 				</button>
 				<!--end::Aside Mobile Toggle-->
-				<!--begin::Header Menu Mobile Toggle-->
-				<button class="btn p-0 burger-icon ml-4" id="kt_header_mobile_toggle">
-					<span></span>
-				</button>
-				<!--end::Header Menu Mobile Toggle-->
 				<!--begin::Topbar Mobile Toggle-->
 				<button class="btn btn-hover-text-primary p-0 ml-2" id="kt_header_mobile_topbar_toggle">
 					<span class="svg-icon svg-icon-xl">
@@ -145,7 +140,7 @@
 						<i class="symbol-badge bg-success"></i>
 					</div>
 					<div class="d-flex flex-column">
-						<a href="#" class="font-weight-bold font-size-h5 text-dark-75 text-hover-primary">{{ Auth::user()->fname . " " . Auth::user()->lname }}</a>
+						<a href="{{ route("profile") }}" class="font-weight-bold font-size-h5 text-dark-75 text-hover-primary">{{ Auth::user()->fname . " " . Auth::user()->lname }}</a>
 						<div class="text-muted mt-1">Player</div>
 						<div class="navi mt-2">
 							<a href="#" class="navi-item">
@@ -180,7 +175,7 @@
 				<!--begin::Nav-->
 				<div class="navi navi-spacer-x-0 p-0">
 					<!--begin::Item-->
-					<a href="custom/apps/user/profile-1/personal-information.html" class="navi-item">
+					<a href="{{ route("profile") }}" class="navi-item">
 						<div class="navi-link">
 							<div class="symbol symbol-40 bg-light mr-3">
 								<div class="symbol-label">

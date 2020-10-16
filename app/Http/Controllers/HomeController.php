@@ -36,4 +36,7 @@ class HomeController extends Controller
         return view("information-request");
     }
 
+    public function profile() {
+        return view("user.profile");
+    }
 }
