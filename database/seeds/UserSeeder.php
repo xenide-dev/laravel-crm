@@ -48,8 +48,8 @@ class UserSeeder extends Seeder
 
         // generate 9 random super admin
         for($i = 0; $i < 10; $i++){
+            $tempEmail = $faker->freeEmail;
             $userID = DB::table('users')->insertGetId([
-                $tempEmail = $faker->freeEmail
                 'fname' => $faker->firstNameMale,
                 'mname' => $faker->lastName,
                 'lname' => $faker->lastName,
