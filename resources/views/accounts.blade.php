@@ -150,7 +150,7 @@
                         </div>
                         <div class="separator separator-dashed my-5"></div>
                         <div class="form-group row">
-                            <label class="col-form-label text-right col-md-6">Mark as admin <span class="fa fa-exclamation-circle text-danger" data-toggle="tooltip" data-placement="top" data-title="Be careful when making an account as admin"></span></label>
+                            <label class="col-form-label text-right col-md-6">Mark as admin? <span class="fa fa-exclamation-circle text-danger" data-toggle="tooltip" data-placement="top" data-title="Be careful when making an account as admin"></span></label>
                             <div class="col-md-6">
                                 <input data-switch="true" type="checkbox" data-on-color="danger" data-on-text="Yes" data-off-color="success" data-off-text="No" name="mark_as_admin"/>
                             </div>
