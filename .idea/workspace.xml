@@ -27,7 +27,6 @@
   <component name="ChangeListManager">
     <list default="true" id="1e925082-d8f8-4772-a0bb-7b633c448e86" name="Default Changelist" comment="Added modify privilege page">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2016_06_01_000003_create_oauth_refresh_tokens_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2016_06_01_000003_create_oauth_refresh_tokens_table.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -217,7 +216,8 @@
       <workItem from="1602753023905" duration="7686000" />
       <workItem from="1602761599416" duration="12003000" />
       <workItem from="1602774992713" duration="43000" />
-      <workItem from="1602775051946" duration="4538000" />
+      <workItem from="1602775051946" duration="4638000" />
+      <workItem from="1602839353594" duration="2249000" />
     </task>
     <task id="LOCAL-00001" summary="Added modify privilege page">
       <created>1602773794246</created>
@@ -277,10 +277,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="275" key="FileChooserDialogImpl/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602251534383" />
-    <state x="794" y="439" key="NewPhpFileDialog" timestamp="1602775147679">
+    <state x="794" y="439" key="NewPhpFileDialog" timestamp="1602840681764">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="794" y="439" key="NewPhpFileDialog/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602775147679" />
+    <state x="794" y="439" key="NewPhpFileDialog/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602840681764" />
     <state x="705" y="184" key="SettingsEditor" timestamp="1602767559551">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -297,6 +297,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="92" y="92" width="1736" height="856" key="com.intellij.history.integration.ui.views.SelectionHistoryDialog/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602343536577" />
+    <state x="92" y="92" width="1736" height="856" key="dock-window-1" timestamp="1602841686148">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="92" y="92" width="1736" height="856" key="dock-window-1/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602841686148" />
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1602762835755">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
