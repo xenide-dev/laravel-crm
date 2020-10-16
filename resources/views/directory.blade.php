@@ -16,7 +16,7 @@
     <div class="alert alert-warning">
         This section is under development
     </div>
-    <div class="card">
+    <div class="card card-custom">
         <div class="card-header ribbon ribbon-top ribbon-ver">
             <div class="ribbon-target bg-dark" style="top: -2px; right: 20px;">
                 Beware
