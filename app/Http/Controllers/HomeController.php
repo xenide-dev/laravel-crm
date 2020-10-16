@@ -28,4 +28,12 @@ class HomeController extends Controller
         return view('directory');
     }
 
+    public function tickets() {
+        return view("tickets");
+    }
+
+    public function informationRequest() {
+        return view("information-request");
+    }
+
 }

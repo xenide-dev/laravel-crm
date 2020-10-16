@@ -26,8 +26,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1e925082-d8f8-4772-a0bb-7b633c448e86" name="Default Changelist" comment="Added modify privilege page">
+      <change afterPath="$PROJECT_DIR$/public/_custom_assets/_js/submit_ticket.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/information-request.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/tickets.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/directory.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/directory.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/partials/_aside.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/partials/_aside.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -186,11 +191,19 @@
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JavaScript Debug._aside.blade.php">
+    <configuration name="_aside.blade.php" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/laravel-crm/resources/views/partials/_aside.blade.php" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
     <configuration name="phpunit.xml" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
       <TestRunner scope="XML" />
       <method v="2" />
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JavaScript Debug._aside.blade.php" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="ShelveChangesManager">
     <option name="remove_strategy" value="true" />
@@ -297,10 +310,58 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="275" key="FileChooserDialogImpl/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602251534383" />
-    <state x="794" y="439" key="NewPhpFileDialog" timestamp="1602859088665">
+    <state width="1877" height="340" key="GridCell.Tab.0.bottom" timestamp="1602862168090">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="794" y="439" key="NewPhpFileDialog/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602859088665" />
+    <state width="1877" height="340" key="GridCell.Tab.0.bottom/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602862168090" />
+    <state width="1877" height="340" key="GridCell.Tab.0.center" timestamp="1602862168090">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="340" key="GridCell.Tab.0.center/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602862168090" />
+    <state width="1877" height="340" key="GridCell.Tab.0.left" timestamp="1602862168090">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="340" key="GridCell.Tab.0.left/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602862168090" />
+    <state width="1877" height="340" key="GridCell.Tab.0.right" timestamp="1602862168090">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="340" key="GridCell.Tab.0.right/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602862168090" />
+    <state width="1877" height="340" key="GridCell.Tab.1.bottom" timestamp="1602862168090">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="340" key="GridCell.Tab.1.bottom/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602862168090" />
+    <state width="1877" height="340" key="GridCell.Tab.1.center" timestamp="1602862168090">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="340" key="GridCell.Tab.1.center/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602862168090" />
+    <state width="1877" height="340" key="GridCell.Tab.1.left" timestamp="1602862168090">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="340" key="GridCell.Tab.1.left/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602862168090" />
+    <state width="1877" height="340" key="GridCell.Tab.1.right" timestamp="1602862168090">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="340" key="GridCell.Tab.1.right/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602862168090" />
+    <state width="1877" height="340" key="GridCell.Tab.2.bottom" timestamp="1602862168090">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="340" key="GridCell.Tab.2.bottom/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602862168090" />
+    <state width="1877" height="340" key="GridCell.Tab.2.center" timestamp="1602862168090">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="340" key="GridCell.Tab.2.center/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602862168090" />
+    <state width="1877" height="340" key="GridCell.Tab.2.left" timestamp="1602862168090">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="340" key="GridCell.Tab.2.left/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602862168090" />
+    <state width="1877" height="340" key="GridCell.Tab.2.right" timestamp="1602862168090">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="340" key="GridCell.Tab.2.right/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602862168090" />
+    <state x="794" y="439" key="NewPhpFileDialog" timestamp="1602863015354">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="794" y="439" key="NewPhpFileDialog/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602863015354" />
     <state x="705" y="184" key="SettingsEditor" timestamp="1602767559551">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -321,10 +382,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="92" y="92" width="1736" height="856" key="dock-window-1/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602841686148" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1602858742934">
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1602863385610">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602858742934" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602863385610" />
     <state x="361" y="257" key="vcs.ApplyPatchDifferentiatedDialog" timestamp="1602841892572">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

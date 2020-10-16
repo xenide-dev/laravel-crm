@@ -53,25 +53,23 @@
                         </span>
                     </a>
                 </li>
-                <li class="menu-item" aria-haspopup="true">
-                    <a href="javascript:;" class="menu-link">
+                <li class="menu-item {{ (request()->is('tickets*')) ? 'menu-item-active' : '' }}" aria-haspopup="true">
+                    <a href="{{ route("tickets") }}" class="menu-link">
                         <span class="svg-icon menu-icon">
                             <span class="menu-icon flaticon-profile"></span>
                         </span>
-                        <span class="menu-text">Submit Report</span>
+                        <span class="menu-text">Ticket List</span>
                         <span class="menu-label">
-                            <span class="label label-danger label-inline mr-2">Under dev.</span>
                         </span>
                     </a>
                 </li>
-                <li class="menu-item" aria-haspopup="true">
-                    <a href="javascript:;" class="menu-link">
+                <li class="menu-item {{ (request()->is('information*')) ? 'menu-item-active' : '' }}" aria-haspopup="true">
+                    <a href="{{ route("information-request") }}" class="menu-link">
                         <span class="svg-icon menu-icon">
                             <span class="menu-icon flaticon-information"></span>
                         </span>
                         <span class="menu-text">Information Request</span>
                         <span class="menu-label">
-                            <span class="label label-danger label-inline mr-2">Under dev.</span>
                         </span>
                     </a>
                 </li>

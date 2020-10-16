@@ -21,6 +21,8 @@ Route::get("/", function() { // redirect route '/' to '/home'
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/directory', 'HomeController@directory')->name('directory');
+Route::get('/tickets', 'HomeController@tickets')->name('tickets');
+Route::get('/information/request', 'HomeController@informationRequest')->name('information-request');
 
 // admin routes
 Route::group([
@@ -31,6 +33,8 @@ Route::group([
     Route::post('/accounts/create', 'AccountController@accountsCreate')->name('accounts-create');
     Route::get('/accounts/{user}/privilege', 'AccountController@accountsRole')->name('accounts-create-roles');
     Route::post('/accounts/{user}/privilege/update', 'AccountController@accountsRoleUpdate')->name('accounts-create-roles-update');
+
+
 });
 
 Route::get("/debug", function() {
