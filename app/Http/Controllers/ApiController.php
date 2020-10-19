@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\BlacklistUser;
 use App\Organization;
 use App\User;
 use Illuminate\Http\Request;
@@ -152,6 +153,74 @@ class ApiController extends Controller
                 $nestedData['created_at'] = date('j M Y h:i a',strtotime($organization->created_at));
                 $nestedData['name'] = $organization->name;
                 $nestedData['type'] = $organization->type;
+                $nestedData['added_by'] = auth()->user()->fname . " " . auth()->user()->lname;
+                $nestedData['options'] = "&emsp;<a href='{$show}' title='SHOW' ><span class='glyphicon glyphicon-list'></span></a>
+//                                          &emsp;<a href='{$edit}' title='EDIT' ><span class='glyphicon glyphicon-edit'></span></a>";
+                $data[] = $nestedData;
+
+            }
+        }
+
+        $json_data = array(
+            "draw"            => intval($request->input('draw')),
+            "recordsTotal"    => intval($totalData),
+            "recordsFiltered" => intval($totalFiltered),
+            "data"            => $data
+        );
+
+        echo json_encode($json_data);
+    }
+
+    public function list_blacklisted(Request $request) {
+        $columns = array(
+            0 =>'id_number',
+            1 =>'name',
+            2 =>'organization',
+            3 => 'position',
+            4 => 'added_by',
+        );
+
+        $totalData = BlacklistUser::count();
+
+        $totalFiltered = $totalData;
+
+        if(empty($request->input('search.value')))
+        {
+            $blacklists = BlacklistUser::get();
+        }
+        else {
+            $search = $request->input('search.value');
+
+            $blacklists =  BlacklistUser::where('fname','LIKE',"%{$search}%")
+                ->orWhere('mname', 'LIKE',"%{$search}%")
+                ->orWhere('lname', 'LIKE',"%{$search}%")
+                ->orWhere('id_number', 'LIKE',"%{$search}%")
+                ->orWhere('position', 'LIKE',"%{$search}%")
+                ->get();
+
+            $totalFiltered = $blacklists->count();
+        }
+
+        $data = array();
+        if(!empty($blacklists))
+        {
+            foreach ($blacklists as $blacklist)
+            {
+//                $show =  route('posts.show',$user->id);
+//                $edit =  route('posts.edit',$user->id);
+                $show =  '';
+                $edit =  '';
+
+                $nestedData['id_number'] = $blacklist->id_number;
+                $nestedData['created_at'] = date('j M Y h:i a',strtotime($blacklist->created_at));
+                $nestedData['name'] = $blacklist->fname . " " . $blacklist->mname . " " . $blacklist->lname;
+                $nestedData['organizations'] = "";
+                $nestedData['position'] = $blacklist->position;
+                // get the organization
+//                $orgs = $blacklist->userOrganization()->get();
+//                foreach ($orgs as $org){
+//
+//                }
                 $nestedData['added_by'] = auth()->user()->fname . " " . auth()->user()->lname;
                 $nestedData['options'] = "&emsp;<a href='{$show}' title='SHOW' ><span class='glyphicon glyphicon-list'></span></a>
 //                                          &emsp;<a href='{$edit}' title='EDIT' ><span class='glyphicon glyphicon-edit'></span></a>";

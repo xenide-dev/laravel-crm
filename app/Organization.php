@@ -9,4 +9,8 @@ class Organization extends Model
     protected $fillable = [
         "name", "type", "added_by_id"
     ];
+
+    public function userOrganization() {
+        return $this->hasMany(UserOrganization::class);
+    }
 }

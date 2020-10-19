@@ -1,35 +1,32 @@
 "use strict";
 
+var datatable_name_id = "list-datatable";
+var frm_Item = "frmCreateItem";
+var frmValidation = null;
+var highest = 0;
+
 var ListDatatable = function() {
-    var table = $('#list-datatable');
+    var table = $('#' + datatable_name_id);
 
     var initTable1 = function() {
         // begin first table
         table.DataTable({
             responsive: true,
-            searchDelay: 500,
-            processing: true,
-            serverSide: true,
+            // searchDelay: 500,
             ajax: {
-                url: "/api/list/accounts",
+                url: "/api/list/blacklisted",
                 type: 'POST',
                 data: {
                     api_token: document.querySelector("meta[name='at']").getAttribute("content")
-                    // parameters for custom backend script demo
-                    // columnsDef: [
-                    // 	'OrderID', 'Country',
-                    // 	'ShipAddress', 'CompanyName', 'ShipDate',
-                    // 	'Status', 'Type', 'Actions'],
                 },
             },
             columns: [
                 {data: 'id_number'},
-                {data: 'fname'},
-                {data: 'mname'},
-                {data: 'lname'},
-                {data: 'email'},
-                {data: 'user_type'},
-                {data: 'last_online_at'},
+                {data: 'created_at'},
+                {data: 'name'},
+                {data: 'organizations'},
+                {data: 'position'},
+                {data: 'added_by'},
                 {data: 'options', responsivePriority: -1},
             ],
             columnDefs: [
@@ -39,17 +36,6 @@ var ListDatatable = function() {
                     orderable: false,
                     render: function(data, type, full, meta) {
                         return `
-							<div class="dropdown dropdown-inline">
-								<a href="javascript:;" class="btn btn-sm btn-clean btn-icon" data-toggle="dropdown">
-	                                <i class="la la-cog"></i>
-	                            </a>
-							  	<div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
-									<ul class="nav nav-hoverable flex-column">`
-                            + (!full.iM ? `<li class="nav-item"><a class="nav-link" href="#"><i class="nav-icon la la-leaf"></i><span class="nav-text">Update Privileges</span></a></li>` : '') +
-                            `<li class="nav-item"><a class="nav-link" href="#"><i class="nav-icon la la-print"></i><span class="nav-text">Print</span></a></li>
-									</ul>
-							  	</div>
-							</div>
 							<a href="javascript:;" class="btn btn-sm btn-clean btn-icon" title="Edit details">
 								<i class="la la-edit"></i>
 							</a>` + (!full.iM ? `
@@ -63,90 +49,34 @@ var ListDatatable = function() {
     };
 
     var reload = function() {
-        var table = $('#list_acct_datatable').DataTable();
+        var table = $('#' + datatable_name_id).DataTable();
         table.ajax.reload();
     };
 
-    var initCountry = function() {
-        var data = $.map(country_list, function (obj) {
-            obj.id = obj.code;
-            obj.text = obj.name;
-            return obj;
-        });
-        $('#pref_country').select2({
-            placeholder: "Select a country",
-            data: data
-        });
-        $("#pref_country").on("select2:select", function(e){
-            $("#country_code").text(e.params.data.dial_code);
-        });
-    }
-
-    var initSettings = function() {
-        // for data-switch
-        $('[data-switch=true]').bootstrapSwitch();
-
-        // for new account modal: checkboxes
-        $('#modify_role').click(function(){
-            if($(this).prop("checked") == true){
-                $("#send_confirmation").prop("disabled", true);
-                $("#send_confirmation").parent("label").toggleClass("checkbox-disabled");
-            }
-            else if($(this).prop("checked") == false){
-                $("#send_confirmation").prop("disabled", false);
-                $("#send_confirmation").parent("label").toggleClass("checkbox-disabled");
-            }
-        });
-    }
-
     var initValidation = function () {
-        var frmValidation = FormValidation.formValidation(
-            document.getElementById('frmCreateAccount'),
+        frmValidation = FormValidation.formValidation(
+            document.getElementById(frm_Item),
             {
                 fields: {
-                    email: {
-                        validators: {
-                            notEmpty: {
-                                message: 'Email is required'
-                            },
-                            emailAddress: {
-                                message: 'The value is not a valid email address'
-                            }
-                        }
-                    },
                     fname: {
                         validators: {
                             notEmpty: {
-                                message: "First Name is required"
-                            }
+                                message: 'First Name is required'
+                            },
                         }
                     },
                     lname: {
                         validators: {
                             notEmpty: {
-                                message: "Last Name is required"
-                            }
+                                message: 'Last Name is required'
+                            },
                         }
                     },
                     id_number: {
                         validators: {
                             notEmpty: {
-                                message: "ID Number is required"
-                            }
-                        }
-                    },
-                    country: {
-                        validators: {
-                            notEmpty: {
-                                message: 'Please select a country'
-                            }
-                        }
-                    },
-                    phone_number: {
-                        validators: {
-                            notEmpty: {
-                                message: 'Phone Number is required'
-                            }
+                                message: 'Player ID number is required'
+                            },
                         }
                     },
                 },
@@ -164,7 +94,7 @@ var ListDatatable = function() {
                     if(status == "Valid"){
                         Swal.fire({
                             title: "Are you sure?",
-                            text: "This account will be created",
+                            text: "This organization will be created",
                             icon: "warning",
                             showCancelButton: true,
                             confirmButtonText: "Yes, create it now!",
@@ -176,7 +106,7 @@ var ListDatatable = function() {
                             }
                         }).then(function(result) {
                             if (result.value) {
-                                $("#frmCreateAccount").submit();
+                                $("#" + frm_Item).submit();
                             } else if (result.dismiss === "cancel") {
 
                             }
@@ -196,6 +126,68 @@ var ListDatatable = function() {
             }
         });
     }
+
+    var initRepeater = function() {
+        $('#repeat_item').repeater({
+            initEmpty: false,
+            defaultValues: {
+                'text-input': 'foo'
+            },
+            show: function() {
+                initAddField();
+                initOrgName();
+                $(this).slideDown();
+            },
+            hide: function(deleteElement) {
+                if(confirm('Are you sure you want to delete this element?')) {
+                    initAddField();
+                    $(this).slideUp(deleteElement);
+                }
+            }
+        });
+    }
+
+    var initOrgName = function() {
+        // var data = $.map(country_list, function (obj) {
+        //     obj.id = obj.code;
+        //     obj.text = obj.name;
+        //     return obj;
+        // });
+        $('.select2-container').remove();
+        $('.select2').select2({
+            placeholder: "Select Value",
+            allowClear: true
+        });
+        $('.select2-container').css('width','100%');
+    }
+
+
+    var initAddField = function() {
+        // TODO check here
+        var repeatVal = $('#repeat_item').repeaterVal();
+        console.log(highest);
+        // remove fields
+        for(var i = 0; i <= highest + 2; i++){
+            try {
+                frmValidation.removeField('org[' + i + '][org_position][]');
+            }catch(err){
+                console.log(err);
+            }
+        }
+        // readd again
+        repeatVal.org.forEach(function(item, index){
+            if(highest < index){
+                highest = index;
+            }
+            frmValidation.addField('org[' + index + '][org_position][]', {
+                validators: {
+                    notEmpty: {
+                        message: "The position is required"
+                    }
+                }
+            });
+        });
+    }
     return {
         //main function to initiate the module
         init: function() {
@@ -205,9 +197,10 @@ var ListDatatable = function() {
             reload();
         },
         initSet: function() {
-            initCountry();
-            initSettings();
             initValidation();
+            initRepeater();
+            initOrgName();
+            initAddField();
         }
     };
 
@@ -216,8 +209,4 @@ var ListDatatable = function() {
 jQuery(document).ready(function() {
     ListDatatable.init();
     ListDatatable.initSet();
-
-    $(".btn-add-account").on("click", function() {
-        ListDatatable.reload();
-    })
 });

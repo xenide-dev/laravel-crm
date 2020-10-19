@@ -30,11 +30,17 @@ Route::group([
     // for organization
     Route::get('/organization', 'HomeController@organization')->name('organization');
     Route::post('/organization/create', 'OrganizationController@create')->name('organization-create');
+
+    // for blacklisted
+    Route::post('/blacklist/create', 'BlacklistUserController@create')->name('blacklist-create');
 });
 
 Route::get("/debug", function() {
-    $user = User::find(1);
-    Mail::to('newuser@example.com')->send(new \App\Mail\MailConfirmation($user));
+    $blacklist = \App\BlacklistUser::find(1);
+    $orgs = $blacklist->userOrganization()->get();
+    foreach ($orgs as $org){
+
+    }
 });
 
 

@@ -46,9 +46,11 @@
                 <thead>
                     <tr>
                         <th>Player ID</th>
+                        <th>Date</th>
                         <th>Full Name</th>
                         <th>Organization(Union/Club)</th>
                         <th>Position</th>
+                        <th>Added by</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -64,18 +66,86 @@
                         <i aria-hidden="true" class="ki ki-close"></i>
                     </button>
                 </div>
-                <form class="form" id="frmCreateItem" method="POST">
+                <form class="form" action="{{ route("blacklist-create") }}" id="frmCreateItem" method="POST">
                     @csrf
                     <div class="modal-body">
-                        <div class="form-group">
-                            <label>Full Name:</label>
-                            <input type="email" class="form-control" placeholder="Enter full name"/>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>First Name:</label>
+                                    <input type="text" name="fname" class="form-control" placeholder="Enter first name"/>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Middle Name:</label>
+                                    <input type="text" name="mname" class="form-control" placeholder="Enter middle name"/>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Last Name:</label>
+                                    <input type="text" name="lname" class="form-control" placeholder="Enter last name"/>
+                                </div>
+                            </div>
                         </div>
                         <div class="separator separator-dashed my-5"></div>
-                        <div class="form-group">
-                            <label>Message:</label>
-                            <div class="tinymce">
-                                <textarea id="tinymce-body" name="kt-tinymce-3" class="tox-target"></textarea>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Player ID Number:</label>
+                                    <input type="text" name="id_number" class="form-control" placeholder="Enter player ID number"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="separator separator-dashed my-5"></div>
+                        <div id="repeat_item">
+                            <div class="form-group row">
+                                <label class="col-lg-2 col-form-label text-right">Organization:</label>
+                                <div data-repeater-list="org" class="col-lg-10">
+                                    <div data-repeater-item="" class="form-group row align-items-center">
+                                        <div class="col-md-5">
+                                            <label>Name:</label>
+                                            <select class="form-control select2 org_name" name="org_name">
+                                                <option value=""></option>
+                                            </select>
+                                            <div class="d-md-none mb-2"></div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label>Position:</label>
+                                            <div class="checkbox-inline">
+                                                <label class="checkbox">
+                                                    <input name="org_position" value="head" type="checkbox"/>
+                                                    <span></span>
+                                                    Org. Head
+                                                </label>
+                                                <label class="checkbox">
+                                                    <input name="org_position" value="agent" type="checkbox"/>
+                                                    <span></span>
+                                                    Agent
+                                                </label>
+                                                <label class="checkbox">
+                                                    <input name="org_position" value="player" type="checkbox"/>
+                                                    <span></span>
+                                                    Player
+                                                </label>
+                                            </div>
+                                            <div class="d-md-none mb-2"></div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <a href="javascript:;" data-repeater-delete="" class="btn btn-sm font-weight-bolder btn-light-danger">
+                                                <i class="la la-trash-o"></i>Delete
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-lg-2 col-form-label text-right"></label>
+                                <div class="col-lg-4">
+                                    <a href="javascript:;" data-repeater-create="" class="btn btn-sm font-weight-bolder btn-light-primary">
+                                        <i class="la la-plus"></i>Add</a>
+                                </div>
                             </div>
                         </div>
                     </div>
