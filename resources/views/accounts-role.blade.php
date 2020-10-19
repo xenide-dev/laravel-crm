@@ -22,20 +22,22 @@
                     We will send a confirmation message to the user's email once you leave this page.
                 </div>
                 @foreach($configs as $config)
-                    <div class="form-group row align-items-center">
-                        <label class="col-lg-3 col-form-label  text-right">{{ isset($config["text"]) ? ucfirst($config["text"]) : ucfirst($config["name"]) }}:</label>
-                        <div class="col-lg-6">
-                            <div class="checkbox-inline">
-                                @foreach($config["access"] as $access)
-                                    <label class="checkbox">
-                                        <input type="checkbox" name="{{ $config["name"] }}[]" value="{{ $access }}" checked/>
-                                        <span></span>
-                                        {{ ucfirst($access) }}
-                                    </label>
-                                @endforeach
+                    @if($config["type"] == auth()->user()->user_type || $config["type"] == "all")
+                        <div class="form-group row align-items-center">
+                            <label class="col-lg-3 col-form-label  text-right">{{ isset($config["text"]) ? ucfirst($config["text"]) : ucfirst($config["name"]) }}:</label>
+                            <div class="col-lg-6">
+                                <div class="checkbox-inline">
+                                    @foreach($config["access"] as $access)
+                                        <label class="checkbox">
+                                            <input type="checkbox" name="{{ $config["name"] }}[]" value="{{ $access }}" checked/>
+                                            <span></span>
+                                            {{ ucfirst($access) }}
+                                        </label>
+                                    @endforeach
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    @endif
                 @endforeach
             </div>
             <div class="card-footer d-flex justify-content-end">

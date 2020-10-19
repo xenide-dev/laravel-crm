@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Str;
+use Mockery\Exception;
+use Swift_TransportException;
 
 class AccountController extends Controller
 {
@@ -62,18 +64,26 @@ class AccountController extends Controller
         $configs = config("_privileges.urls");
         foreach ($configs as $config){
             foreach ($config["access"] as $access){
-                $user->userPermission()->create([
-                    "name" => $config["name"],
-                    "slug" => Str::slug($access . " " . $config["name"])
-                ]);
+                // filter the privilege based on user type
+                if($config["type"] == $user_type || $config["type"] == "all"){
+                    $user->userPermission()->create([
+                        "name" => $config["name"],
+                        "slug" => Str::slug($access . " " . $config["name"])
+                    ]);
+                }
+
             }
         }
 
 
         // send notification message thru email
         if($request->is_send_confirmation){
-            // TODO
-            Mail::to($user->email)->send(new MailConfirmation($user));
+            // TODO notify
+            try {
+                Mail::to($user->email)->send(new MailConfirmation($user));
+            }catch (Exception $e) {
+                dump($e);
+            }
             $notified = true;
         }
 
@@ -125,8 +135,12 @@ class AccountController extends Controller
             }
         }
 
-        // notify the user
-        Mail::to($user->email)->send(new MailConfirmation($user));
+        // TODO notify the user
+        try{
+//            Mail::to($user->email)->send(new MailConfirmation($user));
+        }catch(Swift_TransportException $e){
+            dump($e);
+        }
 
         return redirect()->route("accounts")->with([
             "event" => "updated",
