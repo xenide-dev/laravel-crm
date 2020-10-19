@@ -1,7 +1,10 @@
 "use strict";
 
+var datatable_name_id = "list-datatable";
+var frm_Item = "frmCreateItem";
+
 var ListDatatable = function() {
-    var table = $('#list-datatable');
+    var table = $('#' + datatable_name_id);
 
     var initTable1 = function() {
         // begin first table
@@ -32,17 +35,6 @@ var ListDatatable = function() {
                     orderable: false,
                     render: function(data, type, full, meta) {
                         return `
-							<div class="dropdown dropdown-inline">
-								<a href="javascript:;" class="btn btn-sm btn-clean btn-icon" data-toggle="dropdown">
-	                                <i class="la la-cog"></i>
-	                            </a>
-							  	<div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
-									<ul class="nav nav-hoverable flex-column">`
-                            + (!full.iM ? `<li class="nav-item"><a class="nav-link" href="#"><i class="nav-icon la la-leaf"></i><span class="nav-text">Update Privileges</span></a></li>` : '') +
-                            `<li class="nav-item"><a class="nav-link" href="#"><i class="nav-icon la la-print"></i><span class="nav-text">Print</span></a></li>
-									</ul>
-							  	</div>
-							</div>
 							<a href="javascript:;" class="btn btn-sm btn-clean btn-icon" title="Edit details">
 								<i class="la la-edit"></i>
 							</a>` + (!full.iM ? `
@@ -56,13 +48,13 @@ var ListDatatable = function() {
     };
 
     var reload = function() {
-        var table = $('#list_acct_datatable').DataTable();
+        var table = $('#' + datatable_name_id).DataTable();
         table.ajax.reload();
     };
 
     var initValidation = function () {
         var frmValidation = FormValidation.formValidation(
-            document.getElementById('frmCreateItem'),
+            document.getElementById(frm_Item),
             {
                 fields: {
                     name: {
@@ -106,7 +98,7 @@ var ListDatatable = function() {
                             }
                         }).then(function(result) {
                             if (result.value) {
-                                $("#frmCreateItem").submit();
+                                $("#" + frm_Item).submit();
                             } else if (result.dismiss === "cancel") {
 
                             }
@@ -144,8 +136,4 @@ var ListDatatable = function() {
 jQuery(document).ready(function() {
     ListDatatable.init();
     ListDatatable.initSet();
-
-    $(".btn-add-account").on("click", function() {
-        ListDatatable.reload();
-    })
 });
