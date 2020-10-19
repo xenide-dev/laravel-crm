@@ -3,16 +3,6 @@
 use App\User;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 Auth::routes();
 
 Route::get("/", function() { // redirect route '/' to '/home'
@@ -27,7 +17,6 @@ Route::get('/information/request', 'HomeController@informationRequest')->name('i
 // profiles
 Route::get('/profile', 'HomeController@profile')->name('profile');
 
-
 // admin routes
 Route::group([
     'middleware' => 'is_admin'
@@ -38,7 +27,9 @@ Route::group([
     Route::get('/accounts/{user}/privilege', 'AccountController@accountsRole')->name('accounts-create-roles');
     Route::post('/accounts/{user}/privilege/update', 'AccountController@accountsRoleUpdate')->name('accounts-create-roles-update');
 
-
+    // for organization
+    Route::get('/organization', 'HomeController@organization')->name('organization');
+    Route::post('/organization/create', 'OrganizationController@create')->name('organization-create');
 });
 
 Route::get("/debug", function() {

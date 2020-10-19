@@ -71,7 +71,6 @@ class AccountController extends Controller
                         "slug" => Str::slug($access . " " . $config["name"])
                     ]);
                 }
-
             }
         }
 

@@ -15,3 +15,4 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::post("/list/accounts", "ApiController@list_accounts")->name("list-accounts");
+Route::post("/list/organizations", "ApiController@list_organizations")->name("list-organizations");

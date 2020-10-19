@@ -53,4 +53,8 @@ class User extends Authenticatable
     public function userPermission() {
         return $this->hasMany(UserPermission::class);
     }
+
+    public function userOrganization() {
+        return $this->morphMany(UserOrganization::class, "organizationable");
+    }
 }

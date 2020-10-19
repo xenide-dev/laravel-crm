@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Organization;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -83,6 +84,75 @@ class ApiController extends Controller
                     );
 //                $nestedData['body'] = substr(strip_tags($post->body),0,50)."...";
 //                $nestedData['created_at'] = date('j M Y h:i a',strtotime($post->created_at));
+                $nestedData['options'] = "&emsp;<a href='{$show}' title='SHOW' ><span class='glyphicon glyphicon-list'></span></a>
+//                                          &emsp;<a href='{$edit}' title='EDIT' ><span class='glyphicon glyphicon-edit'></span></a>";
+                $data[] = $nestedData;
+
+            }
+        }
+
+        $json_data = array(
+            "draw"            => intval($request->input('draw')),
+            "recordsTotal"    => intval($totalData),
+            "recordsFiltered" => intval($totalFiltered),
+            "data"            => $data
+        );
+
+        echo json_encode($json_data);
+    }
+
+    public function list_organizations(Request $request) {
+        $columns = array(
+            0 =>'id',
+            1 =>'name',
+            2 => 'type',
+            3 => 'added_by_id',
+        );
+
+        $totalData = Organization::count();
+
+        $totalFiltered = $totalData;
+
+        $limit = $request->input('length');
+        $start = $request->input('start');
+        $order = $columns[$request->input('order.0.column')];
+        $dir = $request->input('order.0.dir');
+
+        if(empty($request->input('search.value')))
+        {
+            $organizations = Organization::offset($start)
+                ->limit($limit)
+                ->orderBy($order,$dir)
+                ->get();
+        }
+        else {
+            $search = $request->input('search.value');
+
+            $organizations =  Organization::where('name','LIKE',"%{$search}%")
+                ->orWhere('type', 'LIKE',"%{$search}%")
+                ->offset($start)
+                ->limit($limit)
+                ->orderBy($order,$dir)
+                ->get();
+
+            $totalFiltered = $organizations->count();
+        }
+
+        $data = array();
+        if(!empty($organizations))
+        {
+            foreach ($organizations as $organization)
+            {
+//                $show =  route('posts.show',$user->id);
+//                $edit =  route('posts.edit',$user->id);
+                $show =  '';
+                $edit =  '';
+
+                $nestedData['id'] = $organization->id;
+                $nestedData['created_at'] = date('j M Y h:i a',strtotime($organization->created_at));
+                $nestedData['name'] = $organization->name;
+                $nestedData['type'] = $organization->type;
+                $nestedData['added_by'] = auth()->user()->fname . " " . auth()->user()->lname;
                 $nestedData['options'] = "&emsp;<a href='{$show}' title='SHOW' ><span class='glyphicon glyphicon-list'></span></a>
 //                                          &emsp;<a href='{$edit}' title='EDIT' ><span class='glyphicon glyphicon-edit'></span></a>";
                 $data[] = $nestedData;
