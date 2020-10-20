@@ -40,13 +40,13 @@
             <div class="card-body">
                 <table class="table table-bordered table-hover table-checkable" id="blacklist" style="margin-top: 13px !important">
                     <thead>
-                    <tr>
-                        <th>Ticket ID</th>
-                        <th>Date</th>
-                        <th>Full Name</th>
-                        <th>Status</th>
-                        <th>Actions</th>
-                    </tr>
+                        <tr>
+                            <th>Ticket ID</th>
+                            <th>Date</th>
+                            <th>Full Name</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
                     </thead>
                 </table>
             </div>

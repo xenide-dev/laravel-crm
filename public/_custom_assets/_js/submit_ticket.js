@@ -1,13 +1,16 @@
 "use strict";
 // Class definition
 
-var TinyMCE = function () {
+var ListDatatable = function () {
+
+
+
     // Private functions
     var initSubmitReport = function () {
         tinymce.init({
             selector: '#tinymce-body',
-            toolbar: 'advlist | autolink | link image | lists charmap | print preview',
-            plugins : 'advlist autolink link image lists charmap print preview'
+            toolbar: 'undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | outdent indent | preview',
+            plugins : 'advlist autolink link lists charmap preview',
         });
     }
 
@@ -21,5 +24,10 @@ var TinyMCE = function () {
 
 // Initialization
 jQuery(document).ready(function() {
-    TinyMCE.init();
+    ListDatatable.init();
+});
+$(document).on('focusin', function(e) {
+    if ($(e.target).closest(".tox-tinymce-aux, .moxman-window, .tam-assetmanager-root").length) {
+        e.stopImmediatePropagation();
+    }
 });
