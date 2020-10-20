@@ -176,8 +176,7 @@ class ApiController extends Controller
             0 =>'id_number',
             1 =>'name',
             2 =>'organization',
-            3 => 'position',
-            4 => 'added_by',
+            3 => 'added_by',
         );
 
         $totalData = BlacklistUser::count();
@@ -215,12 +214,19 @@ class ApiController extends Controller
                 $nestedData['created_at'] = date('j M Y h:i a',strtotime($blacklist->created_at));
                 $nestedData['name'] = $blacklist->fname . " " . $blacklist->mname . " " . $blacklist->lname;
                 $nestedData['organizations'] = "";
-                $nestedData['position'] = $blacklist->position;
                 // get the organization
-//                $orgs = $blacklist->userOrganization()->get();
-//                foreach ($orgs as $org){
-//
-//                }
+                $orgs = $blacklist->userOrganization()->get();
+                foreach ($orgs as $org){
+                    $org_details = $org->organization()->get()->first();
+                    $type_color = "";
+                    if($org_details->type == "Union") $type_color = "label-info";
+                    if($org_details->type == "Club") $type_color = "label-primary";
+                    if($nestedData['organizations'] == ""){
+                        $nestedData['organizations'] = "<span class='label {$type_color} label-inline'>{$org_details->type}</span> " . $org_details->name . " [" . $org->organization_position . "]<br/> ";
+                    }else{
+                        $nestedData['organizations'] .= "<span class='label {$type_color} label-inline'>{$org_details->type}</span> " . $org_details->name . " [" . $org->organization_position . "]<br/> ";
+                    }
+                }
                 $nestedData['added_by'] = auth()->user()->fname . " " . auth()->user()->lname;
                 $nestedData['options'] = "&emsp;<a href='{$show}' title='SHOW' ><span class='glyphicon glyphicon-list'></span></a>
 //                                          &emsp;<a href='{$edit}' title='EDIT' ><span class='glyphicon glyphicon-edit'></span></a>";
@@ -237,5 +243,10 @@ class ApiController extends Controller
         );
 
         echo json_encode($json_data);
+    }
+
+    public function basic_organizations(Request $request) {
+        $data = Organization::get();
+        echo json_encode($data);
     }
 }

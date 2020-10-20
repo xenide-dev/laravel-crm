@@ -16,6 +16,17 @@
     <div class="alert alert-warning">
         This section is under development
     </div>
+    @error("id_number")
+    <div class="alert alert-custom alert-danger">
+        <div class="alert-icon"><i class="flaticon-warning"></i></div>
+        <div class="alert-text">Error! {{ $message }}</div>
+    </div>
+    @enderror
+    @if (session('status'))
+        <div class="alert alert-success">
+            Success! The user has been added to the blacklist
+        </div>
+    @endif
     <div class="card card-custom">
         <div class="card-header ribbon ribbon-top ribbon-ver">
             {{-- TODO set right: 20px if can create otherwise set right: 200px--}}
@@ -49,7 +60,6 @@
                         <th>Date</th>
                         <th>Full Name</th>
                         <th>Organization(Union/Club)</th>
-                        <th>Position</th>
                         <th>Added by</th>
                         <th>Actions</th>
                     </tr>

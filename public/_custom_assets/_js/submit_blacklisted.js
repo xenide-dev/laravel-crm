@@ -4,6 +4,7 @@ var datatable_name_id = "list-datatable";
 var frm_Item = "frmCreateItem";
 var frmValidation = null;
 var highest = 0;
+var orgData = null;
 
 var ListDatatable = function() {
     var table = $('#' + datatable_name_id);
@@ -25,7 +26,6 @@ var ListDatatable = function() {
                 {data: 'created_at'},
                 {data: 'name'},
                 {data: 'organizations'},
-                {data: 'position'},
                 {data: 'added_by'},
                 {data: 'options', responsivePriority: -1},
             ],
@@ -89,6 +89,7 @@ var ListDatatable = function() {
             }
         );
         $("#btnSubmit").on("click", function() {
+            initAddField();
             if(frmValidation){
                 frmValidation.validate().then(function(status) {
                     if(status == "Valid"){
@@ -140,23 +141,44 @@ var ListDatatable = function() {
             },
             hide: function(deleteElement) {
                 if(confirm('Are you sure you want to delete this element?')) {
-                    initAddField();
                     $(this).slideUp(deleteElement);
                 }
-            }
+            },
+            isFirstItemUndeletable: true
         });
     }
 
     var initOrgName = function() {
-        // var data = $.map(country_list, function (obj) {
-        //     obj.id = obj.code;
-        //     obj.text = obj.name;
-        //     return obj;
-        // });
+        if(!orgData){
+            $.ajax({
+                url: "/api/basicload/organizations",
+                type: "POST",
+                dataType: "json",
+                data: {
+                    api_token: document.querySelector("meta[name='at']").getAttribute("content")
+                },
+                success: function(result, status, xhr){
+                    orgData = result;
+                    initSelect2();
+                },
+                error: function(xhr, status, error){
+                    console.log(xhr);
+                }
+            });
+        }else{
+            initSelect2();
+        }
+    }
+
+    var initSelect2 = function() {
+        var data = $.map(orgData, function (obj) {
+            obj.text = obj.name;
+            return obj;
+        });
         $('.select2-container').remove();
         $('.select2').select2({
             placeholder: "Select Value",
-            allowClear: true
+            data: data
         });
         $('.select2-container').css('width','100%');
     }
@@ -165,13 +187,13 @@ var ListDatatable = function() {
     var initAddField = function() {
         // TODO check here
         var repeatVal = $('#repeat_item').repeaterVal();
-        console.log(highest);
         // remove fields
         for(var i = 0; i <= highest + 2; i++){
             try {
                 frmValidation.removeField('org[' + i + '][org_position][]');
+                frmValidation.removeField('org[' + i + '][org_name]');
             }catch(err){
-                console.log(err);
+                // console.log(err);
             }
         }
         // readd again
@@ -179,6 +201,13 @@ var ListDatatable = function() {
             if(highest < index){
                 highest = index;
             }
+            frmValidation.addField('org[' + index + '][org_name]', {
+                validators: {
+                    notEmpty: {
+                        message: "Please select an organization"
+                    }
+                }
+            });
             frmValidation.addField('org[' + index + '][org_position][]', {
                 validators: {
                     notEmpty: {

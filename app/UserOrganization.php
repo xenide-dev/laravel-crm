@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class UserOrganization extends Model
 {
+    protected $fillable = [
+        "organization_id", "organization_position"
+    ];
+
+
     public function organization() {
         return $this->belongsTo(Organization::class);
     }

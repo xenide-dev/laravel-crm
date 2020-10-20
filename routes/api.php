@@ -17,3 +17,4 @@ use Illuminate\Support\Facades\Route;
 Route::post("/list/accounts", "ApiController@list_accounts")->name("list-accounts");
 Route::post("/list/organizations", "ApiController@list_organizations")->name("list-organizations");
 Route::post("/list/blacklisted", "ApiController@list_blacklisted")->name("list-blacklisted");
+Route::post("/basicload/organizations", "ApiController@basic_organizations")->name("basic-organizations");

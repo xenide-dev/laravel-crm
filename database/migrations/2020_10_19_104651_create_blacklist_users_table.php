@@ -19,8 +19,7 @@ class CreateBlacklistUsersTable extends Migration
             $table->string("mname")->nullable();
             $table->string("lname")->nullable();
             $table->string("id_number")->nullable();
-            $table->string("position")->nullable();
-            $table->unsignedBigInteger("added_by_id")->comment("the one who added");
+            $table->unsignedBigInteger("added_by_id")->nullable()->comment("the one who added");
             $table->timestamps();
             $table->foreign('added_by_id')->references('id')->on('users')->onDelete('cascade');
         });
