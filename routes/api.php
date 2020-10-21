@@ -18,6 +18,9 @@ Route::post("/list/accounts", "ApiController@list_accounts")->name("list-account
 Route::post("/list/organizations", "ApiController@list_organizations")->name("list-organizations");
 Route::post("/list/blacklisted", "ApiController@list_blacklisted")->name("list-blacklisted");
 Route::post("/list/tickets", "ApiController@list_tickets")->name("list-tickets");
-
 Route::post("/basicload/organizations", "ApiController@basic_organizations")->name("basic-organizations");
 Route::post("/basicload/reported", "ApiController@basic_reported")->name("basic-reported");
+
+
+// for admin
+Route::post("/ticketlist", "ApiController@ticketlist")->name("ticketlist");

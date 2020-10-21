@@ -302,4 +302,39 @@ class ApiController extends Controller
 
         echo json_encode($json_data);
     }
+
+    public function ticketlist(Request $request) {
+        $totalData = Ticket::count();
+
+        $totalFiltered = $totalData;
+
+        $tickets = Ticket::where("status","Pending")->get();
+
+        $data = array();
+        if(!empty($tickets))
+        {
+            foreach ($tickets as $ticket)
+            {
+                $show =  '';
+                $edit =  '';
+                $nestedData['id'] = $ticket->id;
+                $nestedData['created_at'] = date('j M Y h:i a',strtotime($ticket->created_at));
+                $nestedData['from'] = $ticket->user->full_name;
+                $nestedData['input_names'] = $ticket->input_names;
+                $nestedData['status'] = "<span class='label label-warning label-inline'>$ticket->status</span>";
+                $nestedData['options'] = "&emsp;<a href='{$show}' title='SHOW' ><span class='glyphicon glyphicon-list'></span></a>
+//                                          &emsp;<a href='{$edit}' title='EDIT' ><span class='glyphicon glyphicon-edit'></span></a>";
+                $data[] = $nestedData;
+            }
+        }
+
+        $json_data = array(
+            "draw"            => intval($request->input('draw')),
+            "recordsTotal"    => intval($totalData),
+            "recordsFiltered" => intval($totalFiltered),
+            "data"            => $data
+        );
+
+        echo json_encode($json_data);
+    }
 }
