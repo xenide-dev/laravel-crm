@@ -27,11 +27,8 @@
   <component name="ChangeListManager">
     <list default="true" id="1e925082-d8f8-4772-a0bb-7b633c448e86" name="Default Changelist" comment="Added modify privilege page">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ApiController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ApiController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/_privileges.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/_privileges.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeds/UserSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/UserSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/accounts-role.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/accounts-role.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/directory.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/directory.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/partials/_aside.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/partials/_aside.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
@@ -231,7 +228,7 @@
       <workItem from="1602839353594" duration="2249000" />
       <workItem from="1603098496785" duration="26454000" />
       <workItem from="1603185555729" duration="20288000" />
-      <workItem from="1603271232833" duration="21169000" />
+      <workItem from="1603271232833" duration="23040000" />
     </task>
     <task id="LOCAL-00001" summary="Added modify privilege page">
       <created>1602773794246</created>
@@ -363,10 +360,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="340" key="GridCell.Tab.2.right/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602862168090" />
-    <state x="794" y="439" key="NewPhpFileDialog" timestamp="1603106323949">
+    <state x="794" y="439" key="NewPhpFileDialog" timestamp="1603297116063">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="794" y="439" key="NewPhpFileDialog/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1603106323949" />
+    <state x="794" y="439" key="NewPhpFileDialog/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1603297116063" />
     <state x="705" y="184" key="SettingsEditor" timestamp="1602767559551">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -387,10 +384,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="92" y="92" width="1736" height="856" key="dock-window-1/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602841686148" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1603294723322">
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1603297027559">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1603294723322" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1603297027559" />
     <state x="361" y="257" key="vcs.ApplyPatchDifferentiatedDialog" timestamp="1602841892572">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

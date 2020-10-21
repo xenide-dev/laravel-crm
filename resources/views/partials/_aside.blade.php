@@ -55,16 +55,30 @@
                         </a>
                     </li>
                 @endcan
-                @can("view-tickets")
-                    <li class="menu-item {{ (request()->is('tickets*')) ? 'menu-item-active' : '' }}" aria-haspopup="true">
-                        <a href="{{ route("tickets") }}" class="menu-link">
+                @if(Auth::user()->user_type == "user")
+                    @can("view-tickets")
+                        <li class="menu-item {{ (request()->is('tickets*')) ? 'menu-item-active' : '' }}" aria-haspopup="true">
+                            <a href="{{ route("tickets") }}" class="menu-link">
                         <span class="svg-icon menu-icon">
                             <span class="menu-icon flaticon-profile"></span>
                         </span>
-                            <span class="menu-text">Ticket List</span>
-                        </a>
-                    </li>
-                @endcan
+                                <span class="menu-text">Ticket List</span>
+                            </a>
+                        </li>
+                    @endcan
+                @endif
+                @if(Auth::user()->user_type == "admin" || Auth::user()->user_type == "super-admin")
+                    @can("view-ticketlist")
+                        <li class="menu-item {{ (request()->is('ticketlist*')) ? 'menu-item-active' : '' }}" aria-haspopup="true">
+                            <a href="{{ route("ticketlist") }}" class="menu-link">
+                        <span class="svg-icon menu-icon">
+                            <span class="menu-icon flaticon-profile"></span>
+                        </span>
+                                <span class="menu-text">Submitted Tickets</span>
+                            </a>
+                        </li>
+                    @endcan
+                @endif
                 <li class="menu-item {{ (request()->is('information*')) ? 'menu-item-active' : '' }}" aria-haspopup="true">
                     <a href="{{ route("information-request") }}" class="menu-link">
                         <span class="svg-icon menu-icon">

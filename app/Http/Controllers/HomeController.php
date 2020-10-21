@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -29,6 +30,9 @@ class HomeController extends Controller
     }
 
     public function tickets() {
+        if (Auth::user()->user_type != "user") {
+            dd("for user only");
+        }
         return view("tickets");
     }
 
@@ -42,5 +46,9 @@ class HomeController extends Controller
 
     public function organization() {
         return view("organization");
+    }
+
+    public function ticketlist() {
+        return view("ticketlist");
     }
 }

@@ -27,6 +27,11 @@ return [
             "type" => "all"
         ],
         [
+            "name" => "ticketlist",
+            "access" => [ "view" ],
+            "type" => "admin"
+        ],
+        [
             "name" => "accounts",
             "access" => [ "view", "add", "update", "delete" ],
             "type" => "admin"

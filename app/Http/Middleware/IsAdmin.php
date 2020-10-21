@@ -21,7 +21,5 @@ class IsAdmin
         }else{
             return redirect("/home");
         }
-
-
     }
 }
