@@ -15,9 +15,6 @@ class CreateReportedUsersTable extends Migration
     {
         Schema::create('reported_users', function (Blueprint $table) {
             $table->id();
-            $table->string("fname")->nullable();
-            $table->string("mname")->nullable();
-            $table->string("lname")->nullable();
             $table->string("full_name")->nullable();
             $table->string("id_number")->nullable();
             $table->boolean("isAddedToBlacklist")->default(0);

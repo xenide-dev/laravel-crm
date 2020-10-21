@@ -33,6 +33,10 @@ Route::group([
 
     // for blacklisted
     Route::post('/blacklist/create', 'BlacklistUserController@create')->name('blacklist-create');
+
+    // for tickets
+    Route::post('/ticket/create', 'TicketController@create')->name('ticket-create');
+
 });
 
 Route::get("/debug", function() {

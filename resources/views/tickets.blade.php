@@ -8,10 +8,19 @@
     #ticket_lists
 @endsection
 
+@push("page_style_vendors")
+    <link href="{{ asset("assets/plugins/custom/datatables/datatables.bundle.css") }}" rel="stylesheet" type="text/css" />
+@endpush
+
 @section("content")
     <div class="alert alert-warning">
         This section is under development
     </div>
+    @if (session('status'))
+        <div class="alert alert-success">
+            Success! Your ticket has been submitted
+        </div>
+    @endif
     <div class="card card-custom">
         <div class="card-header">
             <h3 class="card-title">
@@ -38,12 +47,12 @@
         </div>
         <form class="form" id="frmSubmitReport" method="POST">
             <div class="card-body">
-                <table class="table table-bordered table-hover table-checkable" id="blacklist" style="margin-top: 13px !important">
+                <table class="table table-bordered table-hover table-checkable" id="list-datatable" style="margin-top: 13px !important">
                     <thead>
                         <tr>
                             <th>Ticket ID</th>
                             <th>Date</th>
-                            <th>Full Name</th>
+                            <th>Names</th>
                             <th>Status</th>
                             <th>Actions</th>
                         </tr>
@@ -62,12 +71,12 @@
                         <i aria-hidden="true" class="ki ki-close"></i>
                     </button>
                 </div>
-                <form class="form" id="frmCreateItem" method="POST">
+                <form class="form" action="{{ route("ticket-create") }}" id="frmCreateItem" method="POST">
                     @csrf
                     <div class="modal-body">
                         <div class="form-group">
-                            <label>Full Name:</label>
-                            <input type="email" class="form-control" placeholder="Enter full name"/>
+                            <label>Names:</label>
+                            <input id="report_names" class="form-control tagify" name='full_names' placeholder="Add users"/>
                         </div>
                         <div class="separator separator-dashed my-5"></div>
                         <div class="form-group">
@@ -76,12 +85,7 @@
                                 Feel free to modify the provided template
                             </div>
                             <div class="tinymce">
-                                <textarea id="tinymce-body" name="kt-tinymce-3" class="tox-target">
-                                    <p>For [name]:</p>
-                                    <ul>
-                                        <li>Organization: <i>change this line</i></li>
-                                        <li>Body message: <i>change this line</i></li>
-                                    </ul>
+                                <textarea id="tinymce-body" name="message" class="tox-target">
                                 </textarea>
                             </div>
                         </div>
@@ -98,6 +102,7 @@
 
 @push("page_vendors")
     <script src="{{ asset("assets/plugins/custom/tinymce/tinymce.bundle.js") }}"></script>
+    <script src="{{ asset("assets/plugins/custom/datatables/datatables.bundle.js") }}"></script>
 @endpush
 
 @push("page_scripts")

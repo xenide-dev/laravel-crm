@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\BlacklistUser;
 use App\Organization;
+use App\ReportedUser;
+use App\Ticket;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -248,5 +250,60 @@ class ApiController extends Controller
     public function basic_organizations(Request $request) {
         $data = Organization::get();
         echo json_encode($data);
+    }
+
+    public function basic_reported(Request $request) {
+        $reports = ReportedUser::where("isAddedToBlacklist", 0)->get();
+        $data = array();
+        foreach ($reports as $report){
+            $nestedData["id"] = $report->id;
+            $nestedData["value"] = $report->full_name;
+            $nestedData["id_number"] = $report->id_number;
+            $nestedData["active_case"] = $report->reports()->count();
+            $nestedData["class"] = "tagify__tag--primary";
+            $data[] = $nestedData;
+        }
+        echo json_encode($data);
+    }
+
+    public function list_tickets(Request $request) {
+        $columns = array(
+            0 =>'id',
+            1 =>'input_names',
+            2 =>'status',
+        );
+
+        $totalData = Ticket::count();
+
+        $totalFiltered = $totalData;
+
+        $tickets = Ticket::where("user_id", auth()->user()->id)->get();
+
+        $data = array();
+        if(!empty($tickets))
+        {
+            foreach ($tickets as $ticket)
+            {
+                $show =  '';
+                $edit =  '';
+
+                $nestedData['id'] = $ticket->id;
+                $nestedData['created_at'] = date('j M Y h:i a',strtotime($ticket->created_at));
+                $nestedData['input_names'] = $ticket->input_names;
+                $nestedData['status'] = "<span class='label label-warning label-inline'>$ticket->status</span>";
+                $nestedData['options'] = "&emsp;<a href='{$show}' title='SHOW' ><span class='glyphicon glyphicon-list'></span></a>
+//                                          &emsp;<a href='{$edit}' title='EDIT' ><span class='glyphicon glyphicon-edit'></span></a>";
+                $data[] = $nestedData;
+            }
+        }
+
+        $json_data = array(
+            "draw"            => intval($request->input('draw')),
+            "recordsTotal"    => intval($totalData),
+            "recordsFiltered" => intval($totalFiltered),
+            "data"            => $data
+        );
+
+        echo json_encode($json_data);
     }
 }
