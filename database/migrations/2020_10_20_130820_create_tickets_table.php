@@ -16,7 +16,6 @@ class CreateTicketsTable extends Migration
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger("user_id");
-            $table->string("names")->comment("comma separated values, if existing ex. ##ID-1##, Juan Dela Cruz");
             $table->longText("message")->nullable();
             $table->longText("status")->nullable();
             $table->timestamps();

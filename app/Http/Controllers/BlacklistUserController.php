@@ -20,9 +20,10 @@ class BlacklistUserController extends Controller
             'id_number' => ['required', 'unique:blacklist_users'],
         ]);
 
-        $data["fname"] = ucfirst($data["fname"]);
-        $data["mname"] = ucfirst($data["mname"]);
-        $data["lname"] = ucfirst($data["lname"]);
+        $data["fname"] = ucwords($data["fname"]);
+        $data["mname"] = ucwords($data["mname"]);
+        $data["lname"] = ucwords($data["lname"]);
+        $data["full_name"] = ucwords(sprintf("%s %s %s", $data["fname"], $data["mname"], $data["lname"]));
 
         $blacklist = BlacklistUser::create($data);
         $blacklist->added_by_id = auth()->user()->id;

@@ -15,10 +15,14 @@ class UserSeeder extends Seeder
     public function run()
     {
         $faker = Faker\Factory::create();
+        $firstName = $faker->firstNameMale;
+        $middleName = $faker->lastName;
+        $lastName = $faker->lastName;
         $userID = DB::table('users')->insertGetId([
-            'fname' => $faker->firstNameMale,
-            'mname' => $faker->lastName,
-            'lname' => $faker->lastName,
+            'fname' => $firstName,
+            'mname' => $middleName,
+            'lname' => $lastName,
+            'full_name' => ucwords(sprintf("%s %s %s", $firstName, $middleName, $lastName)),
             'id_number' => $faker->randomNumber(6),
             'phone_number' => $faker->randomNumber(5),
             'email' => "admin@admin.com",
@@ -46,13 +50,52 @@ class UserSeeder extends Seeder
             }
         }
 
+        $firstName = $faker->firstNameMale;
+        $middleName = $faker->lastName;
+        $lastName = $faker->lastName;
+        $userID = DB::table('users')->insertGetId([
+            'fname' => $firstName,
+            'mname' => $middleName,
+            'lname' => $lastName,
+            'full_name' => ucwords(sprintf("%s %s %s", $firstName, $middleName, $lastName)),
+            'id_number' => $faker->randomNumber(6),
+            'phone_number' => $faker->randomNumber(5),
+            'email' => "admin1@admin.com",
+            'password' => Hash::make('admin'),
+            'isPassChanged' => 1,
+            'user_type' => "super-admin",
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'api_token' => Hash::make(now()),
+        ]);
+
+        // populate the user's permission
+        // by default all
+        // get the config in _privileges.php
+        $configs = config("_privileges.urls");
+        foreach ($configs as $config){
+            foreach ($config["access"] as $access){
+                DB::table('user_permissions')->insert([
+                    'user_id' => $userID,
+                    "name" => $config["name"],
+                    "slug" => Str::slug($access . " " . $config["name"]),
+                    'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                    'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                ]);
+            }
+        }
+
         // generate 9 random super admin
         for($i = 0; $i < 10; $i++){
             $tempEmail = $faker->freeEmail;
+            $firstName = $faker->firstNameMale;
+            $middleName = $faker->lastName;
+            $lastName = $faker->lastName;
             $userID = DB::table('users')->insertGetId([
-                'fname' => $faker->firstNameMale,
-                'mname' => $faker->lastName,
-                'lname' => $faker->lastName,
+                'fname' => $firstName,
+                'mname' => $middleName,
+                'lname' => $lastName,
+                'full_name' => ucwords(sprintf("%s %s %s", $firstName, $middleName, $lastName)),
                 'id_number' => $faker->randomNumber(6),
                 'phone_number' => $faker->randomNumber(5),
                 'email' => $tempEmail,

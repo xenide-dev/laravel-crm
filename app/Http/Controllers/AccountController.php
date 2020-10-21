@@ -50,6 +50,7 @@ class AccountController extends Controller
         }
 
         $data["temp_password"] = $rand_pass;
+        $data["full_name"] = $data["fname"] . " " . $data["mname"] . " " . $data["lname"];
         $data["password"] = Hash::make($rand_pass);
 
         // to avoid mass assignable vulnerability

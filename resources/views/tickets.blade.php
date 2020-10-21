@@ -72,8 +72,17 @@
                         <div class="separator separator-dashed my-5"></div>
                         <div class="form-group">
                             <label>Message:</label>
+                            <div class="alert alert-info">
+                                Feel free to modify the provided template
+                            </div>
                             <div class="tinymce">
-                                <textarea id="tinymce-body" name="kt-tinymce-3" class="tox-target"></textarea>
+                                <textarea id="tinymce-body" name="kt-tinymce-3" class="tox-target">
+                                    <p>For [name]:</p>
+                                    <ul>
+                                        <li>Organization: <i>change this line</i></li>
+                                        <li>Body message: <i>change this line</i></li>
+                                    </ul>
+                                </textarea>
                             </div>
                         </div>
                     </div>

@@ -3,8 +3,9 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
-class BlacklistUser extends Model
+class ReportedUser extends Model
 {
     protected $fillable = [
         "fname", "mname", "lname", "full_name", "id_number"
@@ -22,9 +23,5 @@ class BlacklistUser extends Model
     }
     public function setFullNameAttribute($value) {
         $this->attributes["full_name"] = ucwords($value);
-    }
-
-    public function userOrganization() {
-        return $this->morphMany(UserOrganization::class, "organizationable");
     }
 }

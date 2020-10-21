@@ -14,7 +14,7 @@ class User extends Authenticatable
     use Notifiable, HasApiTokens;
 
     protected $fillable = [
-        'fname', 'mname', 'lname', 'suffix', 'id_number', 'phone_number', 'email', 'temp_password', 'password'
+        'fname', 'mname', 'lname', 'full_name', 'suffix', 'id_number', 'phone_number', 'email', 'temp_password', 'password'
     ];
 
     protected $hidden = [
@@ -34,16 +34,19 @@ class User extends Authenticatable
 
     // mutators
     public function setFNameAttribute($value) {
-        $this->attributes["fname"] = Str::ucfirst($value);
+        $this->attributes["fname"] = ucwords($value);
     }
     public function setMNameAttribute($value) {
-        $this->attributes["mname"] = Str::ucfirst($value);
+        $this->attributes["mname"] = ucwords($value);
     }
     public function setLNameAttribute($value) {
-        $this->attributes["lname"] = Str::ucfirst($value);
+        $this->attributes["lname"] = ucwords($value);
     }
     public function setSuffixAttribute($value) {
-        $this->attributes["suffix"] = Str::ucfirst($value);
+        $this->attributes["suffix"] = ucwords($value);
+    }
+    public function setFullNameAttribute($value) {
+        $this->attributes["full_name"] = ucwords($value);
     }
 
     public function contactInfo(){

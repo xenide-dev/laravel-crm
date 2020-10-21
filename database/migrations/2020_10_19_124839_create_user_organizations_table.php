@@ -15,11 +15,12 @@ class CreateUserOrganizationsTable extends Migration
     {
         Schema::create('user_organizations', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("organization_id");
+            $table->unsignedBigInteger("organization_id")->nullable();
             $table->string("organization_position");
             $table->unsignedBigInteger("organizationable_id");
             $table->string("organizationable_type");
             $table->timestamps();
+            $table->foreign('organization_id')->references('id')->on('organizations')->onDelete('set null');
         });
     }
 
