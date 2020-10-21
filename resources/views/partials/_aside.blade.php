@@ -42,25 +42,29 @@
                     <h4 class="menu-text">Main</h4>
                     <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
                 </li>
-                <li class="menu-item {{ (request()->is('directory*')) ? 'menu-item-active' : '' }}" aria-haspopup="true">
-                    <a href="/directory" class="menu-link">
+                @can("view-directory")
+                    <li class="menu-item {{ (request()->is('directory*')) ? 'menu-item-active' : '' }}" aria-haspopup="true">
+                        <a href="/directory" class="menu-link">
                         <span class="svg-icon menu-icon">
                             <span class="menu-icon flaticon-folder"></span>
                         </span>
-                        <span class="menu-text">Blacklisted</span>
-                        <span class="menu-label">
+                            <span class="menu-text">Blacklisted</span>
+                            <span class="menu-label">
                             <span class="label label-danger label-inline mr-2">Beware</span>
                         </span>
-                    </a>
-                </li>
-                <li class="menu-item {{ (request()->is('tickets*')) ? 'menu-item-active' : '' }}" aria-haspopup="true">
-                    <a href="{{ route("tickets") }}" class="menu-link">
+                        </a>
+                    </li>
+                @endcan
+                @can("view-tickets")
+                    <li class="menu-item {{ (request()->is('tickets*')) ? 'menu-item-active' : '' }}" aria-haspopup="true">
+                        <a href="{{ route("tickets") }}" class="menu-link">
                         <span class="svg-icon menu-icon">
                             <span class="menu-icon flaticon-profile"></span>
                         </span>
-                        <span class="menu-text">Ticket List</span>
-                    </a>
-                </li>
+                            <span class="menu-text">Ticket List</span>
+                        </a>
+                    </li>
+                @endcan
                 <li class="menu-item {{ (request()->is('information*')) ? 'menu-item-active' : '' }}" aria-haspopup="true">
                     <a href="{{ route("information-request") }}" class="menu-link">
                         <span class="svg-icon menu-icon">

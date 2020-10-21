@@ -16,6 +16,17 @@ return [
             "type" => "all"
         ],
         [
+            "name" => "directory",
+            "access" => [ "add" ],
+            "text" => "Blacklisted (Add)",
+            "type" => "admin"
+        ],
+        [
+            "name" => "tickets",
+            "access" => [ "view", "add" ],
+            "type" => "all"
+        ],
+        [
             "name" => "accounts",
             "access" => [ "view", "add", "update", "delete" ],
             "type" => "admin"

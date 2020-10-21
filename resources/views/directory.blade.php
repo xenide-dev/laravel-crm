@@ -29,15 +29,15 @@
     @endif
     <div class="card card-custom">
         <div class="card-header ribbon ribbon-top ribbon-ver">
-            {{-- TODO set right: 20px if can create otherwise set right: 200px--}}
-            <div class="ribbon-target bg-dark" style="top: -2px; right: 180px;">
+            <div class="ribbon-target bg-dark" style="top: -2px; @can("add-directory") right: 180px; @endcan @cannot("add-directory") right: 20px; @endcan">
                 Beware
             </div>
             <h3 class="card-title">
                 Directory Listing (Blacklisted)
             </h3>
-            <div class="card-toolbar">
-                <a class="btn btn-primary font-weight-bolder" data-toggle="modal" data-target="#modal-add-item">
+            @can("add-directory")
+                <div class="card-toolbar">
+                    <a class="btn btn-primary font-weight-bolder" data-toggle="modal" data-target="#modal-add-item">
                     <span class="svg-icon svg-icon-md">
                         <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -48,9 +48,10 @@
                             </g>
                         </svg>
                     </span>
-                    Add User
-                </a>
-            </div>
+                        Add User
+                    </a>
+                </div>
+            @endcan
         </div>
         <div class="card-body">
             <table class="table table-bordered table-hover table-checkable" id="list-datatable" style="margin-top: 13px !important">

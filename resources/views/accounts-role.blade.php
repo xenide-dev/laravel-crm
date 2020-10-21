@@ -22,7 +22,7 @@
                     We will send a confirmation message to the user's email once you leave this page.
                 </div>
                 @foreach($configs as $config)
-                    @if($config["type"] == auth()->user()->user_type || $config["type"] == "all")
+                    @if($config["type"] == $user->user_type || $config["type"] == "all")
                         <div class="form-group row align-items-center">
                             <label class="col-lg-3 col-form-label  text-right">{{ isset($config["text"]) ? ucfirst($config["text"]) : ucfirst($config["name"]) }}:</label>
                             <div class="col-lg-6">

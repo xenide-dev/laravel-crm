@@ -14,6 +14,7 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
+        // =============================== For Admin 1 ===============================
         $faker = Faker\Factory::create();
         $firstName = $faker->firstNameMale;
         $middleName = $faker->lastName;
@@ -50,6 +51,7 @@ class UserSeeder extends Seeder
             }
         }
 
+        // =============================== For Admin 2 ===============================
         $firstName = $faker->firstNameMale;
         $middleName = $faker->lastName;
         $lastName = $faker->lastName;
@@ -85,6 +87,7 @@ class UserSeeder extends Seeder
             }
         }
 
+        // =============================== For other test super-admin ===============================
         // generate 9 random super admin
         for($i = 0; $i < 10; $i++){
             $tempEmail = $faker->freeEmail;

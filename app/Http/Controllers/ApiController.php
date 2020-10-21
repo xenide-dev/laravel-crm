@@ -150,12 +150,13 @@ class ApiController extends Controller
 //                $edit =  route('posts.edit',$user->id);
                 $show =  '';
                 $edit =  '';
+                $added_by = User::where("id", $organization->added_by_id)->get()->first();
 
                 $nestedData['id'] = $organization->id;
                 $nestedData['created_at'] = date('j M Y h:i a',strtotime($organization->created_at));
                 $nestedData['name'] = $organization->name;
                 $nestedData['type'] = $organization->type;
-                $nestedData['added_by'] = auth()->user()->fname . " " . auth()->user()->lname;
+                $nestedData['added_by'] = $added_by->fname . " " . $added_by->lname;
                 $nestedData['options'] = "&emsp;<a href='{$show}' title='SHOW' ><span class='glyphicon glyphicon-list'></span></a>
 //                                          &emsp;<a href='{$edit}' title='EDIT' ><span class='glyphicon glyphicon-edit'></span></a>";
                 $data[] = $nestedData;
@@ -211,6 +212,7 @@ class ApiController extends Controller
 //                $edit =  route('posts.edit',$user->id);
                 $show =  '';
                 $edit =  '';
+                $added_by = User::where("id", $blacklist->added_by_id)->get()->first();
 
                 $nestedData['id_number'] = $blacklist->id_number;
                 $nestedData['created_at'] = date('j M Y h:i a',strtotime($blacklist->created_at));
@@ -229,7 +231,7 @@ class ApiController extends Controller
                         $nestedData['organizations'] .= "<span class='label {$type_color} label-inline'>{$org_details->type}</span> " . $org_details->name . " [" . $org->organization_position . "]<br/> ";
                     }
                 }
-                $nestedData['added_by'] = auth()->user()->fname . " " . auth()->user()->lname;
+                $nestedData['added_by'] = $added_by->fname . " " . $added_by->lname;
                 $nestedData['options'] = "&emsp;<a href='{$show}' title='SHOW' ><span class='glyphicon glyphicon-list'></span></a>
 //                                          &emsp;<a href='{$edit}' title='EDIT' ><span class='glyphicon glyphicon-edit'></span></a>";
                 $data[] = $nestedData;
@@ -267,12 +269,6 @@ class ApiController extends Controller
     }
 
     public function list_tickets(Request $request) {
-        $columns = array(
-            0 =>'id',
-            1 =>'input_names',
-            2 =>'status',
-        );
-
         $totalData = Ticket::count();
 
         $totalFiltered = $totalData;

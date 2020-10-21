@@ -17,6 +17,9 @@ Route::get('/information/request', 'HomeController@informationRequest')->name('i
 // profiles
 Route::get('/profile', 'HomeController@profile')->name('profile');
 
+// for tickets
+Route::post('/ticket/create', 'TicketController@create')->name('ticket-create');
+
 // admin routes
 Route::group([
     'middleware' => 'is_admin'
@@ -33,10 +36,6 @@ Route::group([
 
     // for blacklisted
     Route::post('/blacklist/create', 'BlacklistUserController@create')->name('blacklist-create');
-
-    // for tickets
-    Route::post('/ticket/create', 'TicketController@create')->name('ticket-create');
-
 });
 
 Route::get("/debug", function() {
