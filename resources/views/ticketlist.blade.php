@@ -26,14 +26,15 @@
             <div class="card-body">
                 <table class="table table-bordered table-hover table-checkable" id="list-datatable" style="margin-top: 13px !important">
                     <thead>
-                    <tr>
-                        <th>Ticket ID</th>
-                        <th>Date</th>
-                        <th>From</th>
-                        <th>Names</th>
-                        <th>Status</th>
-                        <th>Actions</th>
-                    </tr>
+                        <tr>
+                            <th>Ticket ID</th>
+                            <th>Date</th>
+                            <th>From</th>
+                            <th>Names</th>
+                            <th>Status</th>
+                            <th>Other Info</th>
+                            <th>Actions</th>
+                        </tr>
                     </thead>
                 </table>
             </div>

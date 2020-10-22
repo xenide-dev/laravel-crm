@@ -42,12 +42,13 @@ Route::group([
     Route::get('/ticketlist/{uuid_ticket}/{id}', 'TicketController@view_ticket')->name('view_ticket');
 });
 
-Route::get("/debug", function() {
-    $blacklist = \App\BlacklistUser::find(1);
-    $orgs = $blacklist->userOrganization()->get();
-    foreach ($orgs as $org){
+// for KYC
+Route::get('/kyc/{uuid_kyc}', 'KnowYourClientController@index')->name('kyc-home');
 
-    }
+
+// for debugging
+Route::get("/debug", function() {
+    return redirect()->temporarySignedRoute('kyc-home', now()->addMinutes(120), [ "123456 "]);
 });
 
 

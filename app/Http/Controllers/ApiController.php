@@ -8,6 +8,7 @@ use App\ReportedUser;
 use App\Ticket;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ApiController extends Controller
 {
@@ -308,7 +309,7 @@ class ApiController extends Controller
 
         $totalFiltered = $totalData;
 
-        $tickets = Ticket::where("status","Pending")->get();
+        $tickets = Ticket::with("ticket_item")->where("status","Pending")->get();
 
         $data = array();
         if(!empty($tickets))
@@ -317,11 +318,17 @@ class ApiController extends Controller
             {
                 $show =  '';
                 $edit =  '';
+                $input_names_count = count(explode(",", trim($ticket->input_names))) - 1;
                 $nestedData['id'] = $ticket->id;
                 $nestedData['created_at'] = date('j M Y h:i a',strtotime($ticket->created_at));
                 $nestedData['from'] = $ticket->user->full_name;
                 $nestedData['input_names'] = $ticket->input_names;
                 $nestedData['uuid_ticket'] = $ticket->uuid_ticket;
+                $nestedData['other_info'] = "";
+                $diff = $input_names_count - $ticket->ticket_item->count();
+                if($input_names_count > $ticket->ticket_item->count()){
+                    $nestedData['other_info'] = "<span class='label label-primary label-inline'>{$diff} new name/s</span>";
+                }
                 $nestedData['status'] = "<span class='label label-warning label-inline'>$ticket->status</span>";
                 $nestedData['options'] = "&emsp;<a href='{$show}' title='SHOW' ><span class='glyphicon glyphicon-list'></span></a>
 //                                          &emsp;<a href='{$edit}' title='EDIT' ><span class='glyphicon glyphicon-edit'></span></a>";
@@ -337,5 +344,48 @@ class ApiController extends Controller
         );
 
         echo json_encode($json_data);
+    }
+
+    public function create_organization(Request $request) {
+        $data = $request->validate([
+            'name' => ['required', 'string', 'max:255', "unique:organizations"],
+            'type' => ['required', 'string', 'max:255'],
+        ]);
+
+        $data["name"] = ucwords($data["name"]);
+        $data["added_by_id"] = Auth::guard("api")->user()->id;
+        $org = Organization::create($data);
+
+        $json_data = array(
+            "status" => "success",
+        );
+
+        echo json_encode($json_data);
+    }
+
+    public function create_reported_user(Request $request) {
+        dd($request);
+        $data = $request->validate([
+            'full_name' => ['required', 'string', 'max:255'],
+            'id_number' => ['required', 'unique:reported_users'],
+        ]);
+
+        $data["full_name"] = ucwords($data["full_name"]);
+        $reported_user = ReportedUser::create($data);
+        $reported_user->added_by_id = auth()->user()->id;
+        $reported_user->save();
+
+        foreach ($request->input("org") as $org){
+            $blacklist->userOrganization()->create([
+                "organization_id" => $org["org_name"],
+                "organization_position" => implode("|", $org["org_position"])
+            ]);
+        }
+
+        // TODO notify all user to the newly added blacklist
+
+        return redirect()->route("directory")->with([
+            "status" => "success"
+        ]);
     }
 }

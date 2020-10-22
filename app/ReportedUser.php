@@ -19,4 +19,8 @@ class ReportedUser extends Model
     public function reports() {
         return $this->hasMany(TicketItem::class);
     }
+
+    public function userOrganization() {
+        return $this->morphMany(UserOrganization::class, "organizationable");
+    }
 }

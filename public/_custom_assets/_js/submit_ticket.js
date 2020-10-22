@@ -116,9 +116,9 @@ var ListDatatable = function () {
             var template = `<div id="node-${convertToSlug(e.detail.data.value)}">
                                 <p>For <b>${e.detail.data.value}</b>:</p>
                                 <ul>
+                                    ${e.detail.data.id ? '' : `<li>ID Number: <i>change this line</i></li>` }
                                     <li>Organization: <i>change this line</i></li>
                                     <li>Body message: <i>change this line</i></li>
-                                    ${e.detail.data.id ? '' : `<li>ID Number: <i>change this line</i></li>` }
                                 </ul>
                            </div>`;
             tinymce.activeEditor.setContent(tinymce.activeEditor.getContent() + template);

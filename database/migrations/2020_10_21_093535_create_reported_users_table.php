@@ -17,8 +17,10 @@ class CreateReportedUsersTable extends Migration
             $table->id();
             $table->string("full_name")->nullable();
             $table->string("id_number")->nullable();
+            $table->unsignedBigInteger("added_by_id")->nullable();
             $table->boolean("isAddedToBlacklist")->default(0);
             $table->timestamps();
+            $table->foreign('added_by_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

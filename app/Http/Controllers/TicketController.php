@@ -46,7 +46,13 @@ class TicketController extends Controller
     }
 
     public function view_ticket($uuid_ticket, $id){
-        $ticket = Ticket::where("id", $id)->where("uuid_ticket", $uuid_ticket)->get()->first();
-        dump($ticket);
+        $ticket = Ticket::with("user", "ticket_item")->where("id", $id)->where("uuid_ticket", $uuid_ticket)->get()->first();
+        if($ticket){
+            $input_names = explode(",", trim($ticket->input_names));
+            return view("ticketlist-detail", compact("ticket"), compact("input_names"));
+        }else{
+            // TODO "url modified"
+            // TODO Log::alert()
+        }
     }
 }
