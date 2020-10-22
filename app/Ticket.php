@@ -7,8 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Ticket extends Model
 {
     protected $fillable = [
-        "message", "status", "user_id", "input_names"
+        "message", "status", "user_id", "input_names", "uuid_ticket"
     ];
+
 
     public function ticket_item() {
         return $this->hasMany(TicketItem::class);

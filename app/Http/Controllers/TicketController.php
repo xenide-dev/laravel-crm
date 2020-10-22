@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Ticket;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class TicketController extends Controller
 {
@@ -25,6 +26,7 @@ class TicketController extends Controller
         $data["status"] = "Pending";
         $data["input_names"] = $input_names;
         $data["user_id"] = auth()->user()->id;
+        $data["uuid_ticket"] = Str::uuid();
         $ticket = Ticket::create($data);
 
         foreach ($fullNames as $fullName){
@@ -41,5 +43,10 @@ class TicketController extends Controller
         return redirect()->route("tickets")->with([
             "status" => "success",
         ]);
+    }
+
+    public function view_ticket($uuid_ticket, $id){
+        $ticket = Ticket::where("id", $id)->where("uuid_ticket", $uuid_ticket)->get()->first();
+        dump($ticket);
     }
 }

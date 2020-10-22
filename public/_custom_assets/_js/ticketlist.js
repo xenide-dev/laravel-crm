@@ -37,7 +37,7 @@ var ListDatatable = function () {
                     orderable: false,
                     render: function(data, type, full, meta) {
                         return `
-							<a href="javascript:;" class="btn btn-sm btn-clean btn-icon" title="Edit details" data-toggle="modal" data-target="#modal-add-item">
+							<a href="/ticketlist/${full.uuid_ticket}/${full.id}" class="btn btn-sm btn-clean btn-icon" title="View details">
 								<i class="la la-ticket"></i>
 							</a>
 							<div class="dropdown dropdown-inline">

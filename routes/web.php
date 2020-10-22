@@ -39,6 +39,7 @@ Route::group([
 
     // for submitted tickets
     Route::get('/ticketlist', 'HomeController@ticketlist')->name('ticketlist');
+    Route::get('/ticketlist/{uuid_ticket}/{id}', 'TicketController@view_ticket')->name('view_ticket');
 });
 
 Route::get("/debug", function() {

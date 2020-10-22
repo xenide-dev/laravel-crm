@@ -19,6 +19,7 @@ class CreateTicketsTable extends Migration
             $table->longText("message")->nullable();
             $table->longText("status")->nullable();
             $table->longText("input_names")->nullable();
+            $table->uuid("uuid_ticket");
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });

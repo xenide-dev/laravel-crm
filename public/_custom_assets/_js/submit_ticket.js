@@ -45,12 +45,15 @@ var ListDatatable = function () {
                     orderable: false,
                     render: function(data, type, full, meta) {
                         return `
+                            <a href="javascript:;" class="btn btn-sm btn-clean btn-icon" title="View details">
+								<i class="la la-ticket"></i>
+							</a>
 							<a href="javascript:;" class="btn btn-sm btn-clean btn-icon" title="Edit details">
 								<i class="la la-edit"></i>
-							</a>` + (!full.iM ? `
-							<a href="javascript:;" class="btn btn-sm btn-clean btn-icon" title="Delete">
+							</a>
+                            <a href="javascript:;" class="btn btn-sm btn-clean btn-icon" title="Delete">
 								<i class="la la-trash text-danger"></i>
-							</a>`: '');
+							</a>`;
                     },
                 },
             ],
