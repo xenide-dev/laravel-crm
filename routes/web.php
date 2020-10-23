@@ -46,7 +46,7 @@ Route::group([
 });
 
 // for KYC
-Route::get('/kyc/{uuid_kyc}', 'KnowYourClientController@index')->name('kyc-home');
+Route::get('/kyc/{uuid_kyc}', 'KnowYourClientController@index')->name('kyc-link');
 
 
 // for debugging

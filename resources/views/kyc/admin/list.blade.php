@@ -54,6 +54,34 @@
             </table>
         </div>
     </div>
+    <div class="modal fade" id="modal-view-item" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="modal-add-item" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">View link</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <i aria-hidden="true" class="ki ki-close"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-warning">
+                        This link will expire in 120 minutes / 2 hours
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Link:</label>
+                                <input type="text" id="kyc_link" class="form-control" readonly/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @push("page_vendors")
@@ -61,6 +89,7 @@
 @endpush
 
 @push("page_scripts")
+    <script src="{{ asset("_custom_assets/_js/util/notify.js") }}"></script>
     <script src="{{ asset("_custom_assets/_js/kyc/list.js") }}"></script>
 @endpush
 

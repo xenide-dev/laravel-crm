@@ -28,14 +28,9 @@
     <list default="true" id="1e925082-d8f8-4772-a0bb-7b633c448e86" name="Default Changelist" comment="Added modify privilege page">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ApiController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ApiController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/KnowYourClientController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/KnowYourClientController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/KnowYourClient.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/KnowYourClient.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_10_19_111122_create_organizations_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_10_19_111122_create_organizations_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_10_22_152559_create_know_your_clients_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_10_22_152559_create_know_your_clients_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/partials/_aside.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/partials/_aside.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/_custom_assets/_js/kyc/list.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/_custom_assets/_js/kyc/list.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/kyc/admin/list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/kyc/admin/list.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -239,7 +234,7 @@
       <workItem from="1603360812001" duration="22641000" />
       <workItem from="1603443960815" duration="1031000" />
       <workItem from="1603445790525" duration="2015000" />
-      <workItem from="1603447834672" duration="1123000" />
+      <workItem from="1603447834672" duration="3259000" />
     </task>
     <task id="LOCAL-00001" summary="Added modify privilege page">
       <created>1602773794246</created>

@@ -10,6 +10,8 @@ use App\Ticket;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Str;
 
 class ApiController extends Controller
 {
@@ -405,7 +407,9 @@ class ApiController extends Controller
                 $show =  '';
                 $edit =  '';
                 $nestedData['id'] = $kyclist->id;
-                $nestedData['created_at'] = date('j M Y h:i a',strtotime($ticket->created_at));
+                $nestedData['auth_id_partial'] = substr($kyclist->uuid_kyc, 0, 6) . "...";
+                $nestedData['auth_id'] = $kyclist->uuid_kyc;
+                $nestedData['created_at'] = date('j M Y h:i a',strtotime($kyclist->created_at));
                 $nestedData['id_number'] = $kyclist->id_number;
                 $nestedData['name'] = $kyclist->full_name;
                 $unions = "";
@@ -416,12 +420,19 @@ class ApiController extends Controller
                 if($kyclist->club_id){
                     $clubs = $kyclist->club_id;
                 }
-                $organization = $unions . " | " . $clubs;
+                $organization = "";
+                if($unions != ""){
+                    $organization .= $unions . " | ";
+                }
+                if($clubs != ""){
+                    $organization .= $clubs;
+                }
                 $nestedData['organization'] = $organization;
                 $nestedData['completed'] = ($kyclist->isDone == 1) ? "Yes" : "No";
                 // TODO Maybe send a request to passbase using the authkey
                 $nestedData['passbase_status'] = "TODO";
-                $nestedData['added_by_id'] = $kyclist->user->full_name;
+                $nestedData['added_by_id'] = $kyclist->user->fname . " " . $kyclist->user->lname;
+                $nestedData['url'] = URL::temporarySignedRoute('kyc-link', now()->addMinutes(120) ,[ $kyclist->uuid_kyc ]);
                 $nestedData['options'] = "&emsp;<a href='{$show}' title='SHOW' ><span class='glyphicon glyphicon-list'></span></a>
 //                                          &emsp;<a href='{$edit}' title='EDIT' ><span class='glyphicon glyphicon-edit'></span></a>";
                 $data[] = $nestedData;
@@ -433,6 +444,20 @@ class ApiController extends Controller
             "recordsTotal"    => intval($totalData),
             "recordsFiltered" => intval($totalFiltered),
             "data"            => $data
+        );
+
+        echo json_encode($json_data);
+    }
+
+    public function kyclist_create(Request $request) {
+        $user = Auth::guard("api")->user();
+
+        $data["uuid_kyc"] = Str::uuid();
+        $kyc = $user->kyc()->create($data);
+
+        $json_data = array(
+            "status"          => "success",
+            "data"            => $kyc
         );
 
         echo json_encode($json_data);

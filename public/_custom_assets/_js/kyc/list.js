@@ -29,7 +29,7 @@ var ListDatatable = function() {
                 {data: 'organization'},
                 {data: 'completed'},
                 {data: 'passbase_status'},
-                {data: 'added_by'},
+                {data: 'added_by_id'},
                 {data: 'options', responsivePriority: -1},
             ],
             columnDefs: [
@@ -39,12 +39,21 @@ var ListDatatable = function() {
                     orderable: false,
                     render: function(data, type, full, meta) {
                         return `
+                            <a href="javascript:;" class="btn btn-sm btn-clean btn-icon kyclink" title="View Link" data-toggle="modal" data-target="#modal-view-item" data-link="${ full.url }">
+								<i class="la la-search"></i>
+							</a>
 							<a href="javascript:;" class="btn btn-sm btn-clean btn-icon" title="Edit details">
 								<i class="la la-edit"></i>
 							</a>` + (!full.iM ? `
 							<a href="javascript:;" class="btn btn-sm btn-clean btn-icon" title="Delete">
 								<i class="la la-trash text-danger"></i>
 							</a>`: '');
+                    },
+                },
+                {
+                    targets: 0,
+                    render: function(data, type, full, meta) {
+                        return `<span data-container="body" data-toggle="tooltip" data-placement="top" title="${full.auth_id}">${full.auth_id_partial}</span>`;
                     },
                 },
             ],
@@ -65,10 +74,7 @@ var ListDatatable = function() {
             reload();
         },
         initSet: function() {
-            initValidation();
-            initRepeater();
-            initOrgName();
-            initAddField();
+
         }
     };
 
@@ -94,14 +100,18 @@ jQuery(document).ready(function() {
             if (result.value) {
                 // send a generate request to api
                 $.ajax({
-                    url: "/api/basicload/reported",
+                    url: "/api/kyclist/create",
                     type: "POST",
                     dataType: "json",
                     data: {
                         api_token: document.querySelector("meta[name='at']").getAttribute("content")
                     },
                     success: function(result, status, xhr){
-                        whitelistJSON = result;
+                        // reload table
+                        if(result.status == "success"){
+                            ListDatatable.reload();
+                            notify("Success", "KYC Link has been generated", "success");
+                        }
                     },
                     error: function(xhr, status, error){
                         console.log(xhr);
@@ -111,5 +121,9 @@ jQuery(document).ready(function() {
 
             }
         });
-    })
+    });
+
+    $(document).on('click', '.kyclink', function() {
+        $("#kyc_link").val($(this).data("link"));
+    });
 });
