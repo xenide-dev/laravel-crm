@@ -57,7 +57,21 @@ class AccountController extends Controller
         $user = User::create($data);
         $user->user_type = $user_type;
         $user->api_token = Hash::make(now());
+        $user->ign = $request->input("ign");
         $user->save();
+
+        if($request->input("telegram") != ""){
+            $user->contactInfo()->create([
+                "name" => "telegram",
+                "value" => $request->input("telegram")
+            ]);
+        }
+        if($request->input("whatsapp") != ""){
+            $user->contactInfo()->create([
+                "name" => "whatsapp",
+                "value" => $request->input("whatsapp")
+            ]);
+        }
 
         // populate the user's permission
         // by default all

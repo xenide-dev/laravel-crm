@@ -136,6 +136,42 @@
                             </div>
                         </div>
                         <div class="separator separator-dashed my-5"></div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Club ID:</label>
+                                    <input type="text" class="form-control" name="club_id" placeholder="Please enter club ID" value="{{ old("club_id") }}"/>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Union ID:</label>
+                                    <input type="text" class="form-control" name="union_id" placeholder="Please enter union ID" value="{{ old("union_id") }}"/>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>IGN:</label>
+                                    <input type="text" class="form-control" name="ign" placeholder="Please enter IGN" value="{{ old("ign") }}"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="separator separator-dashed my-5"></div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Telegram:</label>
+                                    <input type="text" class="form-control" name="telegram" placeholder="Please enter telegram number" value="{{ old("club_id") }}"/>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Whatsapp:</label>
+                                    <input type="text" class="form-control" name="whatsapp" placeholder="Please enter whatsapp number" value="{{ old("union_id") }}"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="separator separator-dashed my-5"></div>
                         <div class="form-group">
                             <label>Phone Number: <span class="text-danger">*</span></label>
                             <div class="input-group">
