@@ -40,6 +40,9 @@ Route::group([
     // for submitted tickets
     Route::get('/ticketlist', 'HomeController@ticketlist')->name('ticketlist');
     Route::get('/ticketlist/{uuid_ticket}/{id}', 'TicketController@view_ticket')->name('view_ticket');
+
+    // for KYC
+    Route::get('/kyc-admin', 'KnowYourClientController@kyc_list')->name('kyc-admin');
 });
 
 // for KYC

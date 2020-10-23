@@ -14,7 +14,7 @@ class User extends Authenticatable
     use Notifiable, HasApiTokens;
 
     protected $fillable = [
-        'fname', 'mname', 'lname', 'full_name', 'suffix', 'id_number', 'phone_number', 'email', 'temp_password', 'password'
+        'fname', 'mname', 'lname', 'full_name', 'suffix', 'id_number', 'phone_number', 'email', 'temp_password', 'password', "ign"
     ];
 
     protected $hidden = [
@@ -59,5 +59,9 @@ class User extends Authenticatable
 
     public function userOrganization() {
         return $this->morphMany(UserOrganization::class, "organizationable");
+    }
+
+    public function kyc() {
+        return $this->hasMany(KnowYourClient::class);
     }
 }

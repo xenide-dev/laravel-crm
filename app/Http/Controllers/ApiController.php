@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\BlacklistUser;
+use App\KnowYourClient;
 use App\Organization;
 use App\ReportedUser;
 use App\Ticket;
@@ -387,5 +388,53 @@ class ApiController extends Controller
         return redirect()->route("directory")->with([
             "status" => "success"
         ]);
+    }
+
+    public function kyclist(Request $request) {
+        $totalData = KnowYourClient::with("user")->count();
+
+        $totalFiltered = $totalData;
+
+        $kyclists = KnowYourClient::get();
+
+        $data = array();
+        if(!empty($kyclists))
+        {
+            foreach ($kyclists as $kyclist)
+            {
+                $show =  '';
+                $edit =  '';
+                $nestedData['id'] = $kyclist->id;
+                $nestedData['created_at'] = date('j M Y h:i a',strtotime($ticket->created_at));
+                $nestedData['id_number'] = $kyclist->id_number;
+                $nestedData['name'] = $kyclist->full_name;
+                $unions = "";
+                $clubs = "";
+                if($kyclist->union_id){
+                    $unions = $kyclist->union_id;
+                }
+                if($kyclist->club_id){
+                    $clubs = $kyclist->club_id;
+                }
+                $organization = $unions . " | " . $clubs;
+                $nestedData['organization'] = $organization;
+                $nestedData['completed'] = ($kyclist->isDone == 1) ? "Yes" : "No";
+                // TODO Maybe send a request to passbase using the authkey
+                $nestedData['passbase_status'] = "TODO";
+                $nestedData['added_by_id'] = $kyclist->user->full_name;
+                $nestedData['options'] = "&emsp;<a href='{$show}' title='SHOW' ><span class='glyphicon glyphicon-list'></span></a>
+//                                          &emsp;<a href='{$edit}' title='EDIT' ><span class='glyphicon glyphicon-edit'></span></a>";
+                $data[] = $nestedData;
+            }
+        }
+
+        $json_data = array(
+            "draw"            => intval($request->input('draw')),
+            "recordsTotal"    => intval($totalData),
+            "recordsFiltered" => intval($totalFiltered),
+            "data"            => $data
+        );
+
+        echo json_encode($json_data);
     }
 }

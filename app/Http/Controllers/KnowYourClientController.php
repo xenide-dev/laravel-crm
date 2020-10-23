@@ -12,4 +12,8 @@ class KnowYourClientController extends Controller
         }
         return view("kyc.index");
     }
+
+    public function kyc_list(){
+        return view("kyc.admin.list");
+    }
 }

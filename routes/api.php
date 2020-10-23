@@ -27,6 +27,7 @@ Route::post("/organization/create", "ApiController@create_organization")->name("
 // for reported user
 Route::post("/reported_user/create", "ApiController@create_reported_user")->name("create-reported-user");
 
-
 // for admin
 Route::post("/ticketlist", "ApiController@ticketlist")->name("ticketlist");
+Route::post("/kyclist", "ApiController@kyclist")->name("kyclist");
+Route::post("/kyclist/create", "ApiController@kyclist_create")->name("kyclist-create");

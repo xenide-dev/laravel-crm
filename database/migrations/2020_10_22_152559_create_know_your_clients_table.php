@@ -31,9 +31,11 @@ class CreateKnowYourClientsTable extends Migration
             $table->string("device_mac")->nullable();
             $table->string("device_ip")->nullable();
             $table->string("status")->default("Pending");
+            $table->unsignedBigInteger("user_id")->nullable();
             $table->boolean("isDone")->default(0);
             $table->boolean("isLinkExpired")->default(0);
             $table->timestamps();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

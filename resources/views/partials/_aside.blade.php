@@ -100,6 +100,18 @@
                             <span class="menu-text">Organization</span>
                         </a>
                     </li>
+                    <li class="menu-section">
+                        <h4 class="menu-text">KYC</h4>
+                        <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
+                    </li>
+                    <li class="menu-item {{ (request()->is('kyc-admin*')) ? 'menu-item-active' : '' }}" aria-haspopup="true">
+                        <a href="{{ route("kyc-admin") }}" class="menu-link">
+                                <span class="svg-icon menu-icon">
+                                    <span class="menu-icon flaticon-map"></span>
+                                </span>
+                            <span class="menu-text">List</span>
+                        </a>
+                    </li>
                     @can("view-accounts")
                         <li class="menu-section">
                             <h4 class="menu-text">Accounts</h4>
