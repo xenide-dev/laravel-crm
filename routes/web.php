@@ -46,12 +46,27 @@ Route::group([
 });
 
 // for KYC
-Route::get('/kyc/{uuid_kyc}', 'KnowYourClientController@index')->name('kyc-link');
+Route::get('/kyc/{uuid_kyc}/{knowYourClient}', 'KnowYourClientController@index')->name('kyc-link');
+Route::post('/kyc/{uuid_kyc}/{knowYourClient}/submit', 'KnowYourClientController@submit')->name('kyc-submit');
 
 
 // for debugging
 Route::get("/debug", function() {
-    return redirect()->temporarySignedRoute('kyc-home', now()->addMinutes(120), [ "123456"]);
+
+    $client = new GuzzleHttp\Client([
+        'base_uri' => 'https://api.passbase.com/api/v1/',
+        'headers' => [
+            'Authorization' => config("_passbase.passbase_key"),
+            'Accept' => 'application/json',
+        ]
+    ]);
+    $id = "38431cd2-af16-41f0-8069-eba5734dbbd3";
+// Send a request to https://app.passbase.com/api/v1/authentications/by_key/{$key}
+    $response = $client->request('GET', "authentications/by_key/{$id}");
+// Store the response in variable
+    $body = $response->getBody()->getContents();
+
+    dd(json_decode($body));
 });
 
 

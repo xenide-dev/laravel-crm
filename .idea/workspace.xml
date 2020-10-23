@@ -26,11 +26,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1e925082-d8f8-4772-a0bb-7b633c448e86" name="Default Changelist" comment="Added modify privilege page">
+      <change beforePath="$PROJECT_DIR$/.idea/laravel-crm.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/laravel-crm.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ApiController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ApiController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/KnowYourClient.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/KnowYourClient.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/_custom_assets/_js/kyc/list.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/_custom_assets/_js/kyc/list.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/kyc/admin/list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/kyc/admin/list.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/KnowYourClientController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/KnowYourClientController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/_custom_assets/_js/kyc/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/_custom_assets/_js/kyc/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/_custom_assets/_js/kyc/validation.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/_custom_assets/_js/kyc/validation.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/kyc/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/kyc/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -175,6 +181,7 @@
       <path value="$PROJECT_DIR$/vendor/laminas/laminas-diactoros" />
       <path value="$PROJECT_DIR$/vendor/laravel/passport" />
       <path value="$PROJECT_DIR$/vendor/firebase/php-jwt" />
+      <path value="$PROJECT_DIR$/vendor/passbase/passbase-php" />
     </include_path>
   </component>
   <component name="ProjectId" id="1idxtVf9DCdcmsq8gtsT0zNt03z" />
@@ -234,7 +241,7 @@
       <workItem from="1603360812001" duration="22641000" />
       <workItem from="1603443960815" duration="1031000" />
       <workItem from="1603445790525" duration="2015000" />
-      <workItem from="1603447834672" duration="3259000" />
+      <workItem from="1603447834672" duration="21522000" />
     </task>
     <task id="LOCAL-00001" summary="Added modify privilege page">
       <created>1602773794246</created>
@@ -294,6 +301,10 @@
     <option name="LAST_COMMIT_MESSAGE" value="Added Gate definition" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="723" y="351" key="#Composer" timestamp="1603458478921">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="723" y="351" key="#Composer/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1603458478921" />
     <state x="552" y="178" key="#Deployment" timestamp="1602767435729">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -366,10 +377,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="340" key="GridCell.Tab.2.right/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602862168090" />
-    <state x="794" y="439" key="NewPhpFileDialog" timestamp="1603445207189">
+    <state x="794" y="439" key="NewPhpFileDialog" timestamp="1603470819606">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="794" y="439" key="NewPhpFileDialog/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1603445207189" />
+    <state x="794" y="439" key="NewPhpFileDialog/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1603470819606" />
     <state x="705" y="184" key="SettingsEditor" timestamp="1602767559551">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -378,26 +389,30 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="552" y="249" key="Vcs.Push.Dialog.v2/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602773869072" />
-    <state x="92" y="92" width="1736" height="856" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1603368732389">
+    <state x="92" y="92" width="1736" height="856" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1603464596026">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="92" y="92" width="1736" height="856" key="com.intellij.history.integration.ui.views.FileHistoryDialog/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1603368732389" />
+    <state x="92" y="92" width="1736" height="856" key="com.intellij.history.integration.ui.views.FileHistoryDialog/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1603464596026" />
     <state x="92" y="92" width="1736" height="856" key="com.intellij.history.integration.ui.views.SelectionHistoryDialog" timestamp="1602343536577">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="92" y="92" width="1736" height="856" key="com.intellij.history.integration.ui.views.SelectionHistoryDialog/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602343536577" />
+    <state x="777" y="430" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1603456808372">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="777" y="430" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1603456808372" />
     <state x="92" y="92" width="1736" height="856" key="dock-window-1" timestamp="1602841686148">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="92" y="92" width="1736" height="856" key="dock-window-1/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602841686148" />
-    <state x="616" y="240" key="run.anything.popup" timestamp="1603374897722">
+    <state x="616" y="240" key="run.anything.popup" timestamp="1603469224718">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="616" y="240" key="run.anything.popup/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1603374897722" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1603445070287">
+    <state x="616" y="240" key="run.anything.popup/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1603469224718" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1603468006331">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1603445070287" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1603468006331" />
     <state x="361" y="257" key="vcs.ApplyPatchDifferentiatedDialog" timestamp="1602841892572">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

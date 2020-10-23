@@ -31,7 +31,7 @@
 </head>
 <!--end::Head-->
 <!--begin::Body-->
-<body id="kt_body" class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
+<body id="kt_body" class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading" data-kid="{{ $uuid_kyc }}" data-lid="{{ $kyc->id }}">
 <!--begin::Main-->
 <div class="d-flex flex-column flex-root">
     <div class="container">
@@ -40,7 +40,7 @@
                 <h2>Welcome to Omniscient</h2>
             </div>
         </div>
-        <div class="card card-custom">
+        <div class="card card-custom" id="kyc_card">
             <div class="card-body">
                 <div class="wizard wizard-1" id="kt_wizard" data-wizard-state="step-first" data-wizard-clickable="false">
                     <!--begin::Wizard Nav-->
@@ -101,12 +101,21 @@
                     </div>
                     <div class="row justify-content-center my-10 px-8 my-lg-15 px-lg-10">
                         <div class="col-xl-12 col-xxl-7">
-                            <form class="form" id="kt_form" method="POST">
+                            <form class="form" action="{{ route("kyc-submit", [ "uuid_kyc" => $uuid_kyc, "knowYourClient" => $kyc->id])  }}" id="kt_form" method="POST">
+                                @csrf
                                 <div class="pb-5" data-wizard-type="step-content" data-wizard-state="current">
-                                    <h4 class="mb-10 font-weight-bold text-dark">Prove your identity</h4>
+                                    <h3 class="mb-10 font-weight-bold text-dark">Setup Your Current Location</h3>
                                     <div class="row">
                                         <div class="col-xl-12 align-center">
                                             <div id="passbase-button"></div>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-5">
+                                        <div class="col-xl-12 align-center">
+                                            <div class="form-group">
+                                                <label>Verification Key</label>
+                                                <input type="password" class="form-control form-control-solid form-control-lg" name="verkey" id="ver_key" placeholder="Please click 'Verify me' to get the verification key" readonly/>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -116,25 +125,25 @@
                                         <div class="col-xl-3">
                                             <div class="form-group">
                                                 <label>First Name: <small class="text-danger">*</small></label>
-                                                <input type="text" class="form-control form-control-solid form-control-lg" name="fname" placeholder="First Name" />
+                                                <input type="text" class="form-control form-control-solid form-control-lg" name="fname" placeholder="First Name" id="fname"/>
                                             </div>
                                         </div>
                                         <div class="col-xl-3">
                                             <div class="form-group">
                                                 <label>Middle Name:</label>
-                                                <input type="text" class="form-control form-control-solid form-control-lg" name="mname" placeholder="Middle Name" />
+                                                <input type="text" class="form-control form-control-solid form-control-lg" name="mname" placeholder="Middle Name" id="mname"/>
                                             </div>
                                         </div>
                                         <div class="col-xl-3">
                                             <div class="form-group">
                                                 <label>Last Name: <small class="text-danger">*</small></label>
-                                                <input type="text" class="form-control form-control-solid form-control-lg" name="lname" placeholder="Last Name" />
+                                                <input type="text" class="form-control form-control-solid form-control-lg" name="lname" placeholder="Last Name" id="lname"/>
                                             </div>
                                         </div>
                                         <div class="col-xl-3">
                                             <div class="form-group">
                                                 <label>Extension (if any):</label>
-                                                <input type="text" class="form-control form-control-solid form-control-lg" name="suffix" placeholder="Name Extension (jr, sr, etc)" />
+                                                <input type="text" class="form-control form-control-solid form-control-lg" name="suffix" placeholder="Name Extension (jr, sr, etc)" id="suffix"/>
                                             </div>
                                         </div>
                                     </div>
@@ -142,7 +151,7 @@
                                         <div class="col-xl-3">
                                             <div class="form-group">
                                                 <label>ID Number: <small class="text-danger">*</small></label>
-                                                <input type="text" class="form-control form-control-solid form-control-lg" name="id_number" placeholder="ID Number" />
+                                                <input type="text" class="form-control form-control-solid form-control-lg" name="id_number" placeholder="ID Number" id="id_number" />
                                             </div>
                                         </div>
                                         <div class="col-xl-6">
@@ -154,7 +163,7 @@
                                         <div class="col-xl-3">
                                             <div class="form-group">
                                                 <label>Contact Number:</label>
-                                                <input type="text" class="form-control form-control-solid form-control-lg" name="phone_number" placeholder="Contact Number" />
+                                                <input type="text" class="form-control form-control-solid form-control-lg" name="phone_number" placeholder="Contact Number" id="contact_number" />
                                             </div>
                                         </div>
                                     </div>
@@ -163,19 +172,19 @@
                                         <div class="col-xl-4">
                                             <div class="form-group">
                                                 <label>In-Game Name (IGN): <small class="text-danger">*</small></label>
-                                                <input type="text" class="form-control form-control-solid form-control-lg" name="ign" placeholder="IGN" />
+                                                <input type="text" class="form-control form-control-solid form-control-lg" name="ign" placeholder="IGN" id="ign" />
                                             </div>
                                         </div>
                                         <div class="col-xl-4">
                                             <div class="form-group">
                                                 <label>Club ID/s:</label>
-                                                <input type="text" class="form-control form-control-solid form-control-lg" name="club_id" placeholder="Club ID" />
+                                                <input type="text" class="form-control form-control-solid form-control-lg" name="club_id" placeholder="Club ID (comma separated values)" id="club_ids" />
                                             </div>
                                         </div>
                                         <div class="col-xl-4">
                                             <div class="form-group">
                                                 <label>Union ID/s:</label>
-                                                <input type="text" class="form-control form-control-solid form-control-lg" name="union_id" placeholder="Union ID" />
+                                                <input type="text" class="form-control form-control-solid form-control-lg" name="union_id" placeholder="Union ID (comma separated values)" id="union_ids" />
                                             </div>
                                         </div>
                                     </div>
@@ -184,22 +193,17 @@
                                     <h4 class="mb-10 font-weight-bold text-dark">Review your details and submit</h4>
                                     <h6 class="font-weight-bolder mb-3">Personal Information:</h6>
                                     <div class="text-dark-50 line-height-lg">
-                                        <div>First Name Middle Name Last Name Extension-Optional</div>
-                                        <div>ID Number</div>
-                                        <div>Email Address</div>
-                                        <div>Contact Number</div>
+                                        <div>Name: <b id="final_name"></b></div>
+                                        <div>ID Number: <b id="final_id_number"></b></div>
+                                        <div>Email Address: <b id="final_email"></b></div>
+                                        <div>Contact Number: <b id="final_contact_number"></b></div>
                                     </div>
                                     <div class="separator separator-dashed my-5"></div>
-                                    <h6 class="font-weight-bolder mb-3">Organizational Involvement:</h6>
+                                    <h6 class="font-weight-bolder mb-3">Other Infos:</h6>
                                     <div class="text-dark-50 line-height-lg">
-                                        <div>Player</div>
-                                        <div>Union's Head (US Union)</div>
-                                        <div>Club's Head (US General Club)</div>
-                                    </div>
-                                    <div class="separator separator-dashed my-5"></div>
-                                    <h6 class="font-weight-bolder mb-3">Submitted Documents:</h6>
-                                    <div class="text-dark-50 line-height-lg">
-                                        <div>Passport ID</div>
+                                        <div>IGN: <b id="final_ign"></b></div>
+                                        <div>Unions/s: <b id="final_unions"></b></div>
+                                        <div>Club/s: <b id="final_clubs"></b></div>
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-between border-top mt-5 pt-10">
@@ -226,7 +230,12 @@
 <script src="{{ asset("assets/js/scripts.bundle.js") }}"></script>
 <!--end::Global Theme Bundle-->
 <!--begin::Page Scripts(used by this page)-->
-<script type="text/javascript" src="https://unpkg.com/@passbase/button/button.js"></script>
+{{--<script type="text/javascript" src="https://unpkg.com/@passbase/button@v3/button.js"></script>--}}
+<script
+    type="text/javascript"
+    src="https://unpkg.com/@passbase/button/button.js"
+></script>
+<script src="{{ asset("_custom_assets/_js/util/notify.js") }}"></script>
 <script src="{{ asset("_custom_assets/_js/kyc/index.js") }}"></script>
 <script src="{{ asset("_custom_assets/_js/kyc/validation.js") }}"></script>
 <!--end::Page Scripts-->

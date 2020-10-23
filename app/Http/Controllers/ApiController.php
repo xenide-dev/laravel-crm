@@ -432,7 +432,7 @@ class ApiController extends Controller
                 // TODO Maybe send a request to passbase using the authkey
                 $nestedData['passbase_status'] = "TODO";
                 $nestedData['added_by_id'] = $kyclist->user->fname . " " . $kyclist->user->lname;
-                $nestedData['url'] = URL::temporarySignedRoute('kyc-link', now()->addMinutes(120) ,[ $kyclist->uuid_kyc ]);
+                $nestedData['url'] = URL::temporarySignedRoute('kyc-link', now()->addMinutes(120) ,[ $kyclist->uuid_kyc, $kyclist->id ]);
                 $nestedData['options'] = "&emsp;<a href='{$show}' title='SHOW' ><span class='glyphicon glyphicon-list'></span></a>
 //                                          &emsp;<a href='{$edit}' title='EDIT' ><span class='glyphicon glyphicon-edit'></span></a>";
                 $data[] = $nestedData;

@@ -16,7 +16,13 @@ var KTWizard1 = function () {
             _formEl,
             {
                 fields: {
-
+                    verkey: {
+                        validators: {
+                            notEmpty: {
+                                message: "Verify your identity first by clicking 'Verify me'"
+                            }
+                        }
+                    },
                 },
                 plugins: {
                     trigger: new FormValidation.plugins.Trigger(),
@@ -83,50 +89,12 @@ var KTWizard1 = function () {
                 }
             }
         ));
-
-        // Step 3
-        _validations.push(FormValidation.formValidation(
-            _formEl,
-            {
-                fields: {
-                    delivery: {
-                        validators: {
-                            notEmpty: {
-                                message: 'Delivery type is required'
-                            }
-                        }
-                    },
-                    packaging: {
-                        validators: {
-                            notEmpty: {
-                                message: 'Packaging type is required'
-                            }
-                        }
-                    },
-                    preferreddelivery: {
-                        validators: {
-                            notEmpty: {
-                                message: 'Preferred delivery window is required'
-                            }
-                        }
-                    }
-                },
-                plugins: {
-                    trigger: new FormValidation.plugins.Trigger(),
-                    // Bootstrap Framework Integration
-                    bootstrap: new FormValidation.plugins.Bootstrap({
-                        //eleInvalidClass: '',
-                        eleValidClass: '',
-                    })
-                }
-            }
-        ));
     }
 
     var _initWizard = function () {
         // Initialize form wizard
         _wizardObj = new KTWizard(_wizardEl, {
-            startStep: 2, // initial active step number
+            startStep: 1, // initial active step number
             clickableSteps: false  // allow step clicking
         });
 
@@ -136,8 +104,12 @@ var KTWizard1 = function () {
                 return; // Skip if stepped back
             }
 
+            if(wizard.getStep() == 2){
+                getPrevData();
+            }
+
             // Validate form before change wizard step
-            var validator = _validations[wizard.getStep() - 1]; // get validator for current step
+            var validator = _validations[wizard.getStep() - 1]; // get validator for currnt step
 
             if (validator) {
                 validator.validate().then(function (status) {
@@ -215,3 +187,15 @@ var KTWizard1 = function () {
 jQuery(document).ready(function () {
     KTWizard1.init();
 });
+
+function getPrevData() {
+    console.log($("#fname").val());
+    $("#final_name").text($("#fname").val() + " " + $("#mname").val() + " " + $("#lname").val() + " " + $("#suffix").val());
+    $("#final_email").text($("#user_email").val());
+    $("#final_id_number").text($("#id_number").val());
+    $("#final_contact_number").text($("#contact_number").val());
+    $("#final_ign").text($("#ign").val());
+    $("#final_unions").text($("#union_ids").val());
+    $("#final_clubs").text($("#club_ids").val());
+}
+
