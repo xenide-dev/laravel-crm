@@ -48,7 +48,7 @@ Route::get('/kyc/{uuid_kyc}', 'KnowYourClientController@index')->name('kyc-home'
 
 // for debugging
 Route::get("/debug", function() {
-    return redirect()->temporarySignedRoute('kyc-home', now()->addMinutes(120), [ "123456 "]);
+    return redirect()->temporarySignedRoute('kyc-home', now()->addMinutes(120), [ "123456"]);
 });
 
 

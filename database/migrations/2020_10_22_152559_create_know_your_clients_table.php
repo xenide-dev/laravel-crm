@@ -17,6 +17,7 @@ class CreateKnowYourClientsTable extends Migration
             $table->id();
             $table->uuid("uuid_kyc")->nullable();
             $table->string("id_number")->nullable();
+            $table->longText("passbase_authkey")->nullable();
             $table->string("ign")->nullable();
             $table->string("club_id")->nullable();
             $table->string("union_id")->nullable();
