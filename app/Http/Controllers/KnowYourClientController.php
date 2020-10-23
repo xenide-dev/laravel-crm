@@ -11,9 +11,8 @@ class KnowYourClientController extends Controller
         if(!$request->hasValidSignature()) {
             dd("invalid");
         }
-
         if($knowYourClient->isDone == 1) {
-            return view("home");
+            return redirect()->route("home");
         }
 
         $kyc = $knowYourClient;
