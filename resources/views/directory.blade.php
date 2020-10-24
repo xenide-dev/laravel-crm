@@ -243,5 +243,6 @@
 @endpush
 
 @push("page_scripts")
+    <script src="{{ asset("_custom_assets/_js/util/notify.js") }}"></script>
     <script src="{{ asset("_custom_assets/_js/submit_blacklisted.js") }}"></script>
 @endpush

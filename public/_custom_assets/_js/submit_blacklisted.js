@@ -39,7 +39,7 @@ var ListDatatable = function() {
 							<a href="javascript:;" class="btn btn-sm btn-clean btn-icon" title="View details">
 								<i class="la la-search"></i>
 							</a>
-                            <a href="javascript:;" class="btn btn-sm btn-clean btn-icon" title="Delete">
+                            <a href="javascript:;" class="btn btn-sm btn-clean btn-icon delete-item" title="Delete" data-id="${full.id}" data-key="${full.id_key}">
 								<i class="la la-trash text-danger"></i>
 							</a>`;
                     },
@@ -88,10 +88,10 @@ var ListDatatable = function() {
                     if(status == "Valid"){
                         Swal.fire({
                             title: "Are you sure?",
-                            text: "This organization will be created",
+                            text: "This user will be added to the blacklist",
                             icon: "warning",
                             showCancelButton: true,
-                            confirmButtonText: "Yes, create it now!",
+                            confirmButtonText: "Yes!",
                             cancelButtonText: "No, cancel!",
                             reverseButtons: true,
                             customClass: {
@@ -264,4 +264,43 @@ var ListDatatable = function() {
 jQuery(document).ready(function() {
     ListDatatable.init();
     ListDatatable.initSet();
+
+    $(document).on('click', '.delete-item', function() {
+        var $this = $(this);
+        Swal.fire({
+            title: "Are you sure?",
+            text: "All of the information associated with this user will also be deleted",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Yes, delete it now!",
+            cancelButtonText: "No, cancel!",
+            reverseButtons: true,
+            customClass: {
+                confirmButton: "btn btn-success",
+                cancelButton: "btn btn-default"
+            }
+        }).then(function(result) {
+            if (result.value) {
+                $.ajax({
+                    url: "/api/blacklist/delete",
+                    type: "POST",
+                    dataType: "json",
+                    data: {
+                        api_token: document.querySelector("meta[name='at']").getAttribute("content"),
+                        id: $this.data("id"),
+                        id_key: $this.data("key"),
+                    },
+                    success: function(result, status, xhr){
+                        if(result.status == "success"){
+                            notify("Success", "User has been removed to the blacklist", "success")
+                            ListDatatable.reload();
+                        }
+                    },
+                    error: function(xhr, status, error){
+                        notify("Error", xhr, "danger")
+                    }
+                });
+            }
+        });
+    });
 });

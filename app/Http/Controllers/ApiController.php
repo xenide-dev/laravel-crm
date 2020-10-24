@@ -225,6 +225,8 @@ class ApiController extends Controller
                 $edit =  '';
                 $added_by = User::where("id", $blacklist->added_by_id)->get()->first();
 
+                $nestedData['id'] = $blacklist->id;
+                $nestedData['id_key'] = Hash::make($blacklist->id . config("app.key"));
                 $nestedData['id_number'] = $blacklist->id_number;
                 $nestedData['created_at'] = date('j M Y h:i a',strtotime($blacklist->banned_date));
                 $nestedData['name'] = $blacklist->fname . " " . $blacklist->mname . " " . $blacklist->lname;
@@ -502,6 +504,26 @@ class ApiController extends Controller
             return response()->json([
                 'status' => "success",
                 'user' => $user
+            ]);
+        }else{
+            // TODO LOG::alert()
+            return response()->json([
+                'status' => "error",
+            ]);
+        }
+    }
+
+    public function blacklist_delete(Request $request) {
+        $id = $request->input("id");
+        $id_key = $request->input("id_key");
+
+        // check if matched
+        if(Hash::check($id . config("app.key"), $id_key)){
+            $user = BlacklistUser::find($id);
+            $user->delete();
+
+            return response()->json([
+                'status' => "success",
             ]);
         }else{
             // TODO LOG::alert()

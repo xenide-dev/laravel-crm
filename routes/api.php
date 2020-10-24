@@ -31,8 +31,11 @@ Route::post("/reported_user/create", "ApiController@create_reported_user")->name
 Route::post("/ticketlist", "ApiController@ticketlist")->name("ticketlist");
 Route::post("/kyclist", "ApiController@kyclist")->name("kyclist");
 Route::post("/kyclist/create", "ApiController@kyclist_create")->name("kyclist-create");
-Route::post("/account/delete", "ApiController@account_delete");
 Route::post("/account/get", "ApiController@account_get");
+
+// for admin deletes
+Route::post("/account/delete", "ApiController@account_delete");
+Route::post("/blacklist/delete", "ApiController@blacklist_delete");
 
 // unauthenticated api
 Route::post("/kyclist/update", function(Request $request) {
