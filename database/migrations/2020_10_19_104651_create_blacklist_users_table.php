@@ -27,6 +27,7 @@ class CreateBlacklistUsersTable extends Migration
             $table->longText("notified_user_ids")->nullable()->comment("the user's id who see this blacklist user ex. 1|2|3");
             $table->unsignedBigInteger("added_by_id")->nullable()->comment("the one who added");
             $table->timestamps();
+            $table->softDeletes();
             $table->foreign('added_by_id')->references('id')->on('users')->onDelete('cascade');
         });
     }

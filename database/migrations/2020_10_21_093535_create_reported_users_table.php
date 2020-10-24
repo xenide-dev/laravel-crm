@@ -20,6 +20,7 @@ class CreateReportedUsersTable extends Migration
             $table->unsignedBigInteger("added_by_id")->nullable();
             $table->boolean("isAddedToBlacklist")->default(0);
             $table->timestamps();
+            $table->softDeletes();
             $table->foreign('added_by_id')->references('id')->on('users')->onDelete('cascade');
         });
     }

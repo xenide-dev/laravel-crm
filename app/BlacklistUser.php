@@ -3,9 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class BlacklistUser extends Model
 {
+    use SoftDeletes;
+
     protected $fillable = [
         "fname", "mname", "lname", "full_name", "id_number", "banned_date", "email", "phone_number", "notes"
     ];

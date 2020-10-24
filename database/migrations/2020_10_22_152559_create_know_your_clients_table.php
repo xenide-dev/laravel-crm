@@ -35,6 +35,7 @@ class CreateKnowYourClientsTable extends Migration
             $table->boolean("isDone")->default(0);
             $table->boolean("isLinkExpired")->default(0);
             $table->timestamps();
+            $table->softDeletes();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }

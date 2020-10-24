@@ -3,10 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
 
 class ReportedUser extends Model
 {
+    use SoftDeletes;
+
     protected $fillable = [
         "full_name", "id_number"
     ];
