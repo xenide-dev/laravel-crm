@@ -232,6 +232,16 @@ var ListDatatable = function() {
             // console.log(err);
         }
     }
+
+    var initNotes = function () {
+        tinymce.init({
+            selector: '#tinymce-body',
+            placeholder: 'Add some notes here',
+            toolbar: 'undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | outdent indent | preview',
+            plugins : 'advlist autolink link lists charmap preview',
+        });
+    }
+
     return {
         //main function to initiate the module
         init: function() {
@@ -245,6 +255,7 @@ var ListDatatable = function() {
             initRepeater();
             initOrgName();
             initAddField();
+            initNotes()
         }
     };
 

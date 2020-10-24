@@ -96,6 +96,56 @@
                         </div>
                         <div class="separator separator-dashed my-5"></div>
                         <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Telegram:</label>
+                                    <input type="text" name="telegram" class="form-control" placeholder="Enter telegram number"/>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Whatsapp:</label>
+                                    <input type="text" name="whatsapp" class="form-control" placeholder="Enter whatsapp number"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="separator separator-dashed my-5"></div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Email:</label>
+                                    <input type="email" name="email" class="form-control" placeholder="Enter email address"/>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Phone:</label>
+                                    <input type="text" name="phone_number" class="form-control" placeholder="Enter phone number"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="separator separator-dashed my-5"></div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Facebook:</label>
+                                    <input type="text" name="facebook" class="form-control" placeholder="Enter facebook address / name"/>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Instagram:</label>
+                                    <input type="text" name="instagram" class="form-control" placeholder="Enter instagram username"/>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Twitter:</label>
+                                    <input type="text" name="twitter" class="form-control" placeholder="Enter twitter username"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>First Name:</label>
@@ -112,6 +162,17 @@
                                 <div class="form-group">
                                     <label>Last Name:</label>
                                     <input type="text" name="lname" class="form-control" placeholder="Enter last name"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="separator separator-dashed my-5"></div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Notes:</label>
+                                    <div class="tinymce">
+                                        <textarea id="tinymce-body" name="notes" class="tox-target"></textarea>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -178,6 +239,7 @@
 
 @push("page_vendors")
     <script src="{{ asset("assets/plugins/custom/datatables/datatables.bundle.js") }}"></script>
+    <script src="{{ asset("assets/plugins/custom/tinymce/tinymce.bundle.js") }}"></script>
 @endpush
 
 @push("page_scripts")

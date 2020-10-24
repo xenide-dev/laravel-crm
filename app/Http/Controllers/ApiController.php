@@ -226,7 +226,7 @@ class ApiController extends Controller
                 $added_by = User::where("id", $blacklist->added_by_id)->get()->first();
 
                 $nestedData['id_number'] = $blacklist->id_number;
-                $nestedData['created_at'] = date('j M Y h:i a',strtotime($blacklist->created_at));
+                $nestedData['created_at'] = date('j M Y h:i a',strtotime($blacklist->banned_date));
                 $nestedData['name'] = $blacklist->fname . " " . $blacklist->mname . " " . $blacklist->lname;
                 $nestedData['organizations'] = "";
                 // get the organization

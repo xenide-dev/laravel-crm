@@ -28,11 +28,46 @@ class BlacklistUserController extends Controller
         if(isset($data["lname"])){
             $lname = ucwords($data["lname"]);
         }
+        if($request->input("email")){
+            $data["email"] = $request->input("email");
+        }
+        if($request->input("phone_number")){
+            $data["phone_number"] = $request->input("phone_number");
+        }
+        if($request->input("notes")){
+            $data["notes"] = $request->input("notes");
+        }
         $data["full_name"] = ucwords(sprintf("%s %s %s", $fname, $mname, $lname));
 
         $blacklist = BlacklistUser::create($data);
         $blacklist->added_by_id = auth()->user()->id;
         $blacklist->save();
+
+        // add contact infos
+        if($request->input("telegram")){
+            $blacklist->blacklistContactInfo()->create([
+               "name" => "telegram",
+               "value" => $request->input("telegram"),
+            ]);
+        }
+        if($request->input("facebook")){
+            $blacklist->blacklistContactInfo()->create([
+                "name" => "facebook",
+                "value" => $request->input("facebook"),
+            ]);
+        }
+        if($request->input("twitter")){
+            $blacklist->blacklistContactInfo()->create([
+                "name" => "twitter",
+                "value" => $request->input("twitter"),
+            ]);
+        }
+        if($request->input("whatsapp")){
+            $blacklist->blacklistContactInfo()->create([
+                "name" => "whatsapp",
+                "value" => $request->input("whatsapp"),
+            ]);
+        }
 
         // if org exist
         if($request->input("org")){

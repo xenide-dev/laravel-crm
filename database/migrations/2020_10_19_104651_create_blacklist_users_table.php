@@ -21,6 +21,9 @@ class CreateBlacklistUsersTable extends Migration
             $table->string("lname")->nullable();
             $table->string("full_name")->nullable();
             $table->string("id_number")->nullable();
+            $table->string("phone_number")->nullable();
+            $table->string("email")->nullable();
+            $table->longText("notes")->nullable();
             $table->longText("notified_user_ids")->nullable()->comment("the user's id who see this blacklist user ex. 1|2|3");
             $table->unsignedBigInteger("added_by_id")->nullable()->comment("the one who added");
             $table->timestamps();
