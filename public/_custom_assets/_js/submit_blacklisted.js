@@ -127,10 +127,20 @@ var ListDatatable = function() {
             },
             hide: function(deleteElement) {
                 if(confirm('Are you sure you want to delete this element?')) {
+                    var repeatVal = $('#repeat_item').repeaterVal();
+                    // remove fields
+                    for(var i = 0; i <= highest + 2; i++){
+                        console.log(repeatVal);
+                        try {
+                            frmValidation.removeField('org[' + i + '][org_position][]');
+                            frmValidation.removeField('org[' + i + '][org_name]');
+                        }catch(err){
+                            // console.log(err);
+                        }
+                    }
                     $(this).slideUp(deleteElement);
                 }
             },
-            isFirstItemUndeletable: true
         });
     }
 
@@ -177,36 +187,43 @@ var ListDatatable = function() {
 
     var initAddField = function() {
         // TODO check here
-        var repeatVal = $('#repeat_item').repeaterVal();
-        // remove fields
-        for(var i = 0; i <= highest + 2; i++){
-            try {
-                frmValidation.removeField('org[' + i + '][org_position][]');
-                frmValidation.removeField('org[' + i + '][org_name]');
-            }catch(err){
-                // console.log(err);
+        try {
+            var repeatVal = $('#repeat_item').repeaterVal();
+            // remove fields
+            for(var i = 0; i <= highest + 2; i++){
+                console.log(repeatVal);
+                try {
+                    frmValidation.removeField('org[' + i + '][org_position][]');
+                    frmValidation.removeField('org[' + i + '][org_name]');
+                }catch(err){
+                    // console.log(err);
+                }
             }
+            // readd again
+            if(repeatVal.org){
+                repeatVal.org.forEach(function(item, index){
+                    if(highest < index){
+                        highest = index;
+                    }
+                    frmValidation.addField('org[' + index + '][org_name]', {
+                        validators: {
+                            notEmpty: {
+                                message: "Please select an organization"
+                            }
+                        }
+                    });
+                    frmValidation.addField('org[' + index + '][org_position][]', {
+                        validators: {
+                            notEmpty: {
+                                message: "The position is required"
+                            }
+                        }
+                    });
+                });
+            }
+        } catch (err) {
+            // console.log(err);
         }
-        // readd again
-        repeatVal.org.forEach(function(item, index){
-            if(highest < index){
-                highest = index;
-            }
-            frmValidation.addField('org[' + index + '][org_name]', {
-                validators: {
-                    notEmpty: {
-                        message: "Please select an organization"
-                    }
-                }
-            });
-            frmValidation.addField('org[' + index + '][org_position][]', {
-                validators: {
-                    notEmpty: {
-                        message: "The position is required"
-                    }
-                }
-            });
-        });
     }
     return {
         //main function to initiate the module

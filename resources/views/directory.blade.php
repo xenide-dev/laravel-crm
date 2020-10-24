@@ -83,7 +83,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>Player ID Number:</label>
+                                    <label>Player ID Number: <span class="text-danger">*</span></label>
                                     <input type="text" name="id_number" class="form-control" placeholder="Enter player ID number"/>
                                 </div>
                             </div>
