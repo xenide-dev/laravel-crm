@@ -22,7 +22,7 @@ Route::post('/ticket/create', 'TicketController@create')->name('ticket-create');
 
 // admin routes
 Route::group([
-    'middleware' => 'is_admin'
+    'middleware' => ['is_admin', 'prevent-back-history']
 ], function() {
     // for accounts
     Route::get('/accounts', 'AccountController@index')->name('accounts');
