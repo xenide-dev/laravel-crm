@@ -533,4 +533,26 @@ class ApiController extends Controller
             ]);
         }
     }
+
+    public function blacklist_get(Request $request) {
+        $id = $request->input("id");
+        $id_key = $request->input("id_key");
+
+        // check if matched
+        if(Hash::check($id . config("app.key"), $id_key)){
+            $user = BlacklistUser::with("blacklistContactInfo", "userOrganization")->find($id);
+            $user->userOrganization->load("organization");
+            $banned_date = date('j M Y h:i a',strtotime($user->banned_date));
+            return response()->json([
+                'status' => "success",
+                'user' => $user,
+                'banned_date' => $banned_date
+            ]);
+        }else{
+            // TODO LOG::alert()
+            return response()->json([
+                'status' => "error",
+            ]);
+        }
+    }
 }

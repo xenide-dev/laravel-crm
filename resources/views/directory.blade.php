@@ -81,16 +81,22 @@
                     @csrf
                     <div class="modal-body">
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <label>Date: <span class="text-danger">*</span></label>
                                 <div class="form-group">
                                     <input class="form-control" name="banned_date" type="datetime-local" id="example-datetime-local-input"/>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Player ID Number: <span class="text-danger">*</span></label>
                                     <input type="text" name="id_number" class="form-control" placeholder="Enter player ID number"/>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>IGN:</label>
+                                    <input type="text" name="ign" class="form-control" placeholder="Enter player IGN"/>
                                 </div>
                             </div>
                         </div>
@@ -230,6 +236,135 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary font-weight-bold" id="btnSubmit">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modal-view-item" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="modal-view-item" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">View details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <i aria-hidden="true" class="ki ki-close"></i>
+                    </button>
+                </div>
+                <form class="form" action="{{ route("blacklist-create") }}" id="frmCreateItem" method="POST">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Date:</label>
+                                <div class="form-group">
+                                    <input class="form-control" name="banned_date" type="text" readonly/>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Player ID Number:</label>
+                                    <input type="text" name="id_number" class="form-control" placeholder="Enter player ID number" readonly/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="separator separator-dashed my-5"></div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Telegram:</label>
+                                    <input type="text" name="telegram" class="form-control" placeholder="Enter telegram number" readonly/>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Whatsapp:</label>
+                                    <input type="text" name="whatsapp" class="form-control" placeholder="Enter whatsapp number" readonly/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="separator separator-dashed my-5"></div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Email:</label>
+                                    <input type="email" name="email" class="form-control" placeholder="Enter email address" readonly/>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Phone:</label>
+                                    <input type="text" name="phone_number" class="form-control" placeholder="Enter phone number" readonly/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="separator separator-dashed my-5"></div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Facebook:</label>
+                                    <input type="text" name="facebook" class="form-control" placeholder="Enter facebook address / name" readonly/>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Instagram:</label>
+                                    <input type="text" name="instagram" class="form-control" placeholder="Enter instagram username" readonly/>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Twitter:</label>
+                                    <input type="text" name="twitter" class="form-control" placeholder="Enter twitter username" readonly/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>First Name:</label>
+                                    <input type="text" name="fname" class="form-control" placeholder="Enter first name" readonly/>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Middle Name:</label>
+                                    <input type="text" name="mname" class="form-control" placeholder="Enter middle name" readonly/>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Last Name:</label>
+                                    <input type="text" name="lname" class="form-control" placeholder="Enter last name" readonly/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="separator separator-dashed my-5"></div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Notes:</label>
+                                    <div id="tinymce-body"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="separator separator-dashed my-5"></div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Union:</label>
+                                    <input type="text" name="union_id" class="form-control" readonly/>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Club:</label>
+                                    <input type="text" name="club_id" class="form-control" readonly/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
                     </div>
                 </form>
             </div>

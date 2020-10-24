@@ -21,6 +21,7 @@ class CreateBlacklistUsersTable extends Migration
             $table->string("lname")->nullable();
             $table->string("full_name")->nullable();
             $table->string("id_number")->nullable();
+            $table->string("ign")->nullable();
             $table->string("phone_number")->nullable();
             $table->string("email")->nullable();
             $table->longText("notes")->nullable();

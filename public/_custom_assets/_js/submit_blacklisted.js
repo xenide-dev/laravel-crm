@@ -36,7 +36,7 @@ var ListDatatable = function() {
                     orderable: false,
                     render: function(data, type, full, meta) {
                         return `
-							<a href="javascript:;" class="btn btn-sm btn-clean btn-icon" title="View details">
+							<a href="javascript:;" class="btn btn-sm btn-clean btn-icon view-item" title="View details" data-toggle="modal" data-target="#modal-view-item" data-id="${full.id}" data-key="${full.id_key}">
 								<i class="la la-search"></i>
 							</a>
                             <a href="javascript:;" class="btn btn-sm btn-clean btn-icon delete-item" title="Delete" data-id="${full.id}" data-key="${full.id_key}">
@@ -300,6 +300,61 @@ jQuery(document).ready(function() {
                         notify("Error", xhr, "danger")
                     }
                 });
+            }
+        });
+    });
+
+    $(document).on('click', '.view-item', function() {
+        var $this = $(this);
+        $.ajax({
+            url: "/api/blacklist/get",
+            type: "POST",
+            dataType: "json",
+            data: {
+                api_token: document.querySelector("meta[name='at']").getAttribute("content"),
+                id: $this.data("id"),
+                id_key: $this.data("key"),
+            },
+            success: function(result, status, xhr){
+                console.log(result);
+                if(result.status == "success"){
+                    $('#modal-view-item [name="banned_date"]').val(result.banned_date);
+                    $('#modal-view-item [name="id_number"]').val(result.user.id_number);
+                    $('#modal-view-item [name="fname"]').val(result.user.fname);
+                    $('#modal-view-item [name="mname"]').val(result.user.mname);
+                    $('#modal-view-item [name="lname"]').val(result.user.lname);
+                    $('#modal-view-item [name="email"]').val(result.user.email);
+                    $('#modal-view-item [name="phone_number"]').val(result.user.phone_number);
+                    $('#modal-view-item #tinymce-body').html(result.user.notes);
+                    // $('#modal-view-item [name="ign"]').val(result.user.ign);
+                    var unions = "", clubs = "";
+                    result.user.user_organization.forEach(function(item, index){
+                        if(item.organization.type == "Club"){
+                            clubs += item.organization.id_number + ", ";
+                        }else if(item.organization.type == "Union"){
+                            unions += item.organization.id_number + ", ";
+                        }
+                    });
+                    $('#modal-view-item [name="club_id"]').val(clubs);
+                    $('#modal-view-item [name="union_id"]').val(unions);
+
+                    result.user.blacklist_contact_info.forEach(function(item, index){
+                        if(item.name == "telegram"){
+                            $('#modal-view-item [name="telegram"]').val(item.value);
+                        }else if(item.name == "whatsapp"){
+                            $('#modal-view-item [name="whatsapp"]').val(item.value);
+                        }else if(item.name == "facebook"){
+                            $('#modal-view-item [name="facebook"]').val(item.value);
+                        }else if(item.name == "twitter"){
+                            $('#modal-view-item [name="twitter"]').val(item.value);
+                        }else if(item.name == "instagram"){
+                            $('#modal-view-item [name="instagram"]').val(item.value);
+                        }
+                    });
+                }
+            },
+            error: function(xhr, status, error){
+                notify("Error", xhr, "danger")
             }
         });
     });

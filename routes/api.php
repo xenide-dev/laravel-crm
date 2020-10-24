@@ -31,7 +31,10 @@ Route::post("/reported_user/create", "ApiController@create_reported_user")->name
 Route::post("/ticketlist", "ApiController@ticketlist")->name("ticketlist");
 Route::post("/kyclist", "ApiController@kyclist")->name("kyclist");
 Route::post("/kyclist/create", "ApiController@kyclist_create")->name("kyclist-create");
+
+// for admin gets
 Route::post("/account/get", "ApiController@account_get");
+Route::post("/blacklist/get", "ApiController@blacklist_get");
 
 // for admin deletes
 Route::post("/account/delete", "ApiController@account_delete");

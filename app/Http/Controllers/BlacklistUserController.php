@@ -19,14 +19,14 @@ class BlacklistUserController extends Controller
         ]);
 
         $fname = $mname = $lname = "";
-        if(isset($data["fname"])){
-            $fname = ucwords($data["fname"]);
+        if($request->input("fname")){
+            $data["fname"] = ucwords($request->input("fname"));
         }
-        if(isset($data["mname"])){
-            $mname = ucwords($data["mname"]);
+        if($request->input("mname")){
+            $data["mname"] = ucwords($request->input("mname"));
         }
-        if(isset($data["lname"])){
-            $lname = ucwords($data["lname"]);
+        if($request->input("lname")){
+            $data["lname"] = ucwords($request->input("lname"));
         }
         if($request->input("email")){
             $data["email"] = $request->input("email");
@@ -36,6 +36,9 @@ class BlacklistUserController extends Controller
         }
         if($request->input("notes")){
             $data["notes"] = $request->input("notes");
+        }
+        if($request->input("ign")){
+            $data["ign"] = $request->input("ign");
         }
         $data["full_name"] = ucwords(sprintf("%s %s %s", $fname, $mname, $lname));
 
@@ -66,6 +69,12 @@ class BlacklistUserController extends Controller
             $blacklist->blacklistContactInfo()->create([
                 "name" => "whatsapp",
                 "value" => $request->input("whatsapp"),
+            ]);
+        }
+        if($request->input("instagram")){
+            $blacklist->blacklistContactInfo()->create([
+                "name" => "instagram",
+                "value" => $request->input("instagram"),
             ]);
         }
 
