@@ -13,9 +13,6 @@
 @endpush
 
 @section("content")
-    <div class="alert alert-warning">
-        This section is under development
-    </div>
     @error("id_number")
     <div class="alert alert-custom alert-danger">
         <div class="alert-icon"><i class="flaticon-warning"></i></div>
