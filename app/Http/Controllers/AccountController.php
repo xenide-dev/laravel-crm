@@ -212,7 +212,7 @@ class AccountController extends Controller
 
         // TODO notify the user
         try{
-            // Mail::to($user->email)->send(new MailConfirmation($user));
+             Mail::to($user->email)->send(new MailConfirmation($user));
         }catch(Swift_TransportException $e){
             dump($e);
         }
