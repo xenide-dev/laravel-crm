@@ -104,7 +104,7 @@
                             <form class="form" action="{{ route("kyc-submit", [ "uuid_kyc" => $uuid_kyc, "knowYourClient" => $kyc->id])  }}" id="kt_form" method="POST">
                                 @csrf
                                 <div class="pb-5" data-wizard-type="step-content" data-wizard-state="current">
-                                    <h3 class="mb-10 font-weight-bold text-dark">Setup Your Current Location</h3>
+                                    <h3 class="mb-10 font-weight-bold text-dark">Verify your Identity</h3>
                                     <div class="row">
                                         <div class="col-xl-12 align-center">
                                             <div id="passbase-button"></div>
