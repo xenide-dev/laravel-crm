@@ -237,9 +237,9 @@ class ApiController extends Controller
                     if($org_details->type == "Union") $type_color = "label-info";
                     if($org_details->type == "Club") $type_color = "label-primary";
                     if($nestedData['organizations'] == ""){
-                        $nestedData['organizations'] = "<span class='label {$type_color} label-inline'>{$org_details->type}</span> " . $org_details->name . " [" . $org->organization_position . "]<br/> ";
+                        $nestedData['organizations'] = "<span class='label {$type_color} label-inline'>{$org_details->type}</span> " . " (" . $org_details->id_number . ") " . $org_details->name . " [" . $org->organization_position . "]<br/> ";
                     }else{
-                        $nestedData['organizations'] .= "<span class='label {$type_color} label-inline'>{$org_details->type}</span> " . $org_details->name . " [" . $org->organization_position . "]<br/> ";
+                        $nestedData['organizations'] .= "<span class='label {$type_color} label-inline'>{$org_details->type}</span> " . " (" . $org_details->id_number . ") " . $org_details->name . " [" . $org->organization_position . "]<br/> ";
                     }
                 }
                 $nestedData['added_by'] = $added_by->fname . " " . $added_by->lname;
