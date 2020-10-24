@@ -58,6 +58,13 @@ var ListDatatable = function() {
             document.getElementById(frm_Item),
             {
                 fields: {
+                    banned_date: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Date is required'
+                            },
+                        }
+                    },
                     id_number: {
                         validators: {
                             notEmpty: {

@@ -15,6 +15,7 @@ class CreateBlacklistUsersTable extends Migration
     {
         Schema::create('blacklist_users', function (Blueprint $table) {
             $table->id();
+            $table->dateTime("banned_date")->nullable();
             $table->string("fname")->nullable();
             $table->string("mname")->nullable();
             $table->string("lname")->nullable();

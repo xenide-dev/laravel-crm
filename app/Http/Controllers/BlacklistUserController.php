@@ -14,26 +14,34 @@ class BlacklistUserController extends Controller
 
     public function create(Request $request) {
         $data = $request->validate([
-            'fname' => ['required', 'string', 'max:255'],
-            'mname' => ['required', 'string', 'max:255'],
-            'lname' => ['required', 'string', 'max:255'],
             'id_number' => ['required', 'unique:blacklist_users'],
+            'banned_date' => ['required'],
         ]);
 
-        $data["fname"] = ucwords($data["fname"]);
-        $data["mname"] = ucwords($data["mname"]);
-        $data["lname"] = ucwords($data["lname"]);
-        $data["full_name"] = ucwords(sprintf("%s %s %s", $data["fname"], $data["mname"], $data["lname"]));
+        $fname = $mname = $lname = "";
+        if(isset($data["fname"])){
+            $fname = ucwords($data["fname"]);
+        }
+        if(isset($data["mname"])){
+            $mname = ucwords($data["mname"]);
+        }
+        if(isset($data["lname"])){
+            $lname = ucwords($data["lname"]);
+        }
+        $data["full_name"] = ucwords(sprintf("%s %s %s", $fname, $mname, $lname));
 
         $blacklist = BlacklistUser::create($data);
         $blacklist->added_by_id = auth()->user()->id;
         $blacklist->save();
 
-        foreach ($request->input("org") as $org){
-            $blacklist->userOrganization()->create([
-                "organization_id" => $org["org_name"],
-                "organization_position" => implode("|", $org["org_position"])
-            ]);
+        // if org exist
+        if($request->input("org")){
+            foreach ($request->input("org") as $org){
+                $blacklist->userOrganization()->create([
+                    "organization_id" => $org["org_name"],
+                    "organization_position" => implode("|", $org["org_position"])
+                ]);
+            }
         }
 
         // TODO notify all user to the newly added blacklist

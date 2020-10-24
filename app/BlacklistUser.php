@@ -7,7 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class BlacklistUser extends Model
 {
     protected $fillable = [
-        "fname", "mname", "lname", "full_name", "id_number"
+        "fname", "mname", "lname", "full_name", "id_number", "banned_date"
+    ];
+
+    protected $casts = [
+        'banned_date' => 'datetime',
     ];
 
     // mutators

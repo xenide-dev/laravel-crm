@@ -82,6 +82,12 @@
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-md-6">
+                                <label>Date: <span class="text-danger">*</span></label>
+                                <div class="form-group">
+                                    <input class="form-control" name="banned_date" type="datetime-local" id="example-datetime-local-input"/>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Player ID Number: <span class="text-danger">*</span></label>
                                     <input type="text" name="id_number" class="form-control" placeholder="Enter player ID number"/>
