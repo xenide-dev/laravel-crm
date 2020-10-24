@@ -16,8 +16,8 @@ class CreateOrganizationsTable extends Migration
         Schema::create('organizations', function (Blueprint $table) {
             $table->id();
             $table->string("id_number")->comment("organization id");
-            $table->string("name")->comment("the name of organization");
-            $table->string("type")->comment("union | club");
+            $table->string("name")->nullable()->comment("the name of organization");
+            $table->string("type")->nullable()->comment("union | club");
             $table->unsignedBigInteger("added_by_id")->comment("the one who added");
             $table->timestamps();
             $table->foreign('added_by_id')->references('id')->on('users')->onDelete('cascade');

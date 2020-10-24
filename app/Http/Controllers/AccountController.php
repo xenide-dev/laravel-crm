@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\MailConfirmation;
+use App\Organization;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
@@ -33,9 +34,9 @@ class AccountController extends Controller
     {
         $data = $request->validate([
             'fname' => ['required', 'string', 'max:255'],
-            'mname' => ['required', 'string', 'max:255'],
+            'mname' => ['max:255'],
             'lname' => ['required', 'string', 'max:255'],
-            'suffix' => ['required', 'string', 'max:255'],
+            'suffix' => ['max:255'],
             'id_number' => ['required', 'string', 'max:255', 'unique:users'],
             'phone_number' => ['required', 'string', 'max:255'],
             'country' => ['required', 'string', 'max:255'],
@@ -50,6 +51,7 @@ class AccountController extends Controller
         }
 
         $data["temp_password"] = $rand_pass;
+        $data["country"] = $request->input("country");
         $data["full_name"] = $data["fname"] . " " . $data["mname"] . " " . $data["lname"];
         $data["password"] = Hash::make($rand_pass);
 
@@ -73,6 +75,65 @@ class AccountController extends Controller
             ]);
         }
 
+        // retrieve orgs and save
+        if($request->input("club_id") != ""){
+            $club_ids = json_decode($request->input("club_id"));
+            foreach ($club_ids as $club_id){
+                // check if already existing
+                $club = Organization::where("id_number", $club_id->value)->get()->first();
+                if($club){
+                    $user->userOrganization()->create([
+                        "organization_id" => $club->id,
+                        "organization_position" => "" // empty since we don't know the position
+                    ]);
+
+                }else{
+                    // add new org to table
+                    $org = Organization::create([
+                        "id_number" => $club_id->value,
+                        "type" => "Club",
+                        "added_by_id" => auth()->user()->id
+                    ]);
+                    $org->save();
+
+                    // now assign to user
+                    $user->userOrganization()->create([
+                        "organization_id" => $org->id,
+                        "organization_position" => "" // empty since we don't know the position
+                    ]);
+                }
+            }
+        }
+
+        if($request->input("union_id") != ""){
+            $union_ids = json_decode($request->input("union_id"));
+            foreach ($union_ids as $union_id){
+                // check if already existing
+                $union = Organization::where("id_number", $union_id->value)->get()->first();
+                if($union){
+                    $user->userOrganization()->create([
+                        "organization_id" => $union->id,
+                        "organization_position" => "" // empty since we don't know the position
+                    ]);
+
+                }else{
+                    // add new org to table
+                    $org = Organization::create([
+                        "id_number" => $union_id->value,
+                        "type" => "Union",
+                        "added_by_id" => auth()->user()->id
+                    ]);
+                    $org->save();
+
+                    // now assign to user
+                    $user->userOrganization()->create([
+                        "organization_id" => $org->id,
+                        "organization_position" => "" // empty since we don't know the position
+                    ]);
+                }
+            }
+        }
+
         // populate the user's permission
         // by default all
         // get the config in _privileges.php
@@ -89,7 +150,6 @@ class AccountController extends Controller
             }
         }
 
-
         // send notification message thru email
         if($request->is_send_confirmation){
             // TODO notify
@@ -97,6 +157,7 @@ class AccountController extends Controller
                 Mail::to($user->email)->send(new MailConfirmation($user));
             }catch (Swift_TransportException $e) {
                 dump($e);
+                // TODO: Log::alert
             }
             $notified = true;
         }

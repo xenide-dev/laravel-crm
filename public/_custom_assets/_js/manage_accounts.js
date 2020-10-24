@@ -44,16 +44,16 @@ var ListAccountDataTable = function() {
 	                                <i class="la la-cog"></i>
 	                            </a>
 							  	<div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
-									<ul class="nav nav-hoverable flex-column">`
+									<ul class="nav nav-hoverable flex-column">
+									    <li class="nav-item view-item" data-toggle="modal" data-target="#modal-view-item" data-id="${full.id}" data-key="${full.id_key}"><a class="nav-link" href="javascript:;"><i class="nav-icon la la-user"></i><span class="nav-text">View Account</span></a></li>`
 							    		+ (!full.iM ? `<li class="nav-item"><a class="nav-link" href="#"><i class="nav-icon la la-leaf"></i><span class="nav-text">Update Privileges</span></a></li>` : '') +
-							    		`<li class="nav-item"><a class="nav-link" href="#"><i class="nav-icon la la-print"></i><span class="nav-text">Print</span></a></li>
-									</ul>
+                                    `</ul>
 							  	</div>
 							</div>
 							<a href="javascript:;" class="btn btn-sm btn-clean btn-icon" title="Edit details">
 								<i class="la la-edit"></i>
 							</a>` + (!full.iM ? `
-							<a href="javascript:;" class="btn btn-sm btn-clean btn-icon" title="Delete">
+							<a href="javascript:;" class="btn btn-sm btn-clean btn-icon deleteAccount" title="Delete" data-id="${full.id}" data-key="${full.id_key}">
 								<i class="la la-trash text-danger"></i>
 							</a>`: '');
                     },
@@ -104,7 +104,7 @@ var ListAccountDataTable = function() {
 
     var initCountry = function() {
         var data = $.map(country_list, function (obj) {
-            obj.id = obj.code;
+            obj.id = `${obj.name} (${obj.code}) ${obj.dial_code}`;
             obj.text = obj.name;
             return obj;
         });
@@ -231,6 +231,18 @@ var ListAccountDataTable = function() {
             }
         });
     }
+
+    var initTagify = function() {
+        var input = document.getElementById('club_ids');
+        var tagify1 = new Tagify(input, {
+            delimiters: ", ", // add new tags when a comma or a space character is entered
+        });
+        var input2 = document.getElementById('union_ids');
+        var tagify2 = new Tagify(input2, {
+            delimiters: ", ", // add new tags when a comma or a space character is entered
+        });
+    }
+
     return {
         //main function to initiate the module
         init: function() {
@@ -243,6 +255,7 @@ var ListAccountDataTable = function() {
             initCountry();
             initSettings();
             initValidation();
+            initTagify();
         }
     };
 
@@ -255,4 +268,90 @@ jQuery(document).ready(function() {
     $(".btn-add-account").on("click", function() {
         ListAccountDataTable.reload();
     })
+
+    $(document).on('click', '.deleteAccount', function() {
+        var $this = $(this);
+        Swal.fire({
+            title: "Are you sure?",
+            text: "All of the information associated with this account will also be deleted",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Yes, delete it now!",
+            cancelButtonText: "No, cancel!",
+            reverseButtons: true,
+            customClass: {
+                confirmButton: "btn btn-success",
+                cancelButton: "btn btn-default"
+            }
+        }).then(function(result) {
+            if (result.value) {
+                $.ajax({
+                    url: "/api/account/delete",
+                    type: "POST",
+                    dataType: "json",
+                    data: {
+                        api_token: document.querySelector("meta[name='at']").getAttribute("content"),
+                        id: $this.data("id"),
+                        id_key: $this.data("key"),
+                    },
+                    success: function(result, status, xhr){
+                        if(result.status == "success"){
+                            notify("Success", "Account has been deleted", "success")
+                            ListAccountDataTable.reload();
+                        }
+                    },
+                    error: function(xhr, status, error){
+                        notify("Error", xhr, "danger")
+                    }
+                });
+            }
+        });
+    });
+
+    $(document).on('click', '.view-item', function() {
+        var $this = $(this);
+        $.ajax({
+            url: "/api/account/get",
+            type: "POST",
+            dataType: "json",
+            data: {
+                api_token: document.querySelector("meta[name='at']").getAttribute("content"),
+                id: $this.data("id"),
+                id_key: $this.data("key"),
+            },
+            success: function(result, status, xhr){
+                if(result.status == "success"){
+                    $('#modal-view-item [name="fname"]').val(result.user.fname);
+                    $('#modal-view-item [name="mname"]').val(result.user.mname);
+                    $('#modal-view-item [name="lname"]').val(result.user.lname);
+                    $('#modal-view-item [name="suffix"]').val(result.user.suffix);
+                    $('#modal-view-item [name="email"]').val(result.user.email);
+                    $('#modal-view-item [name="id_number"]').val(result.user.id_number);
+                    $('#modal-view-item [name="ign"]').val(result.user.ign);
+                    $('#modal-view-item [name="phone_number"]').val(result.user.country + " " + result.user.phone_number);
+                    var unions = "", clubs = "";
+                    result.user.user_organization.forEach(function(item, index){
+                        if(item.organization.type == "Club"){
+                            clubs += item.organization.id_number + ", ";
+                        }else if(item.organization.type == "Union"){
+                            unions += item.organization.id_number + ", ";
+                        }
+                    });
+                    $('#modal-view-item [name="club_id"]').val(clubs);
+                    $('#modal-view-item [name="union_id"]').val(unions);
+
+                    result.user.contact_info.forEach(function(item, index){
+                        if(item.name == "telegram"){
+                            $('#modal-view-item [name="telegram"]').val(item.value);
+                        }else if(item.name == "whatsapp"){
+                            $('#modal-view-item [name="whatsapp"]').val(item.value);
+                        }
+                    });
+                }
+            },
+            error: function(xhr, status, error){
+                notify("Error", xhr, "danger")
+            }
+        });
+    });
 });

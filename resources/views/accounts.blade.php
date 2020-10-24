@@ -13,6 +13,18 @@
 @endpush
 
 @section("content")
+    @error("mname")
+    <div class="alert alert-custom alert-danger">
+        <div class="alert-icon"><i class="flaticon-warning"></i></div>
+        <div class="alert-text">Error! {{ $message }}</div>
+    </div>
+    @enderror
+    @error("suffix")
+    <div class="alert alert-custom alert-danger">
+        <div class="alert-icon"><i class="flaticon-warning"></i></div>
+        <div class="alert-text">Error! {{ $message }}</div>
+    </div>
+    @enderror
     @error("email")
         <div class="alert alert-custom alert-danger">
             <div class="alert-icon"><i class="flaticon-warning"></i></div>
@@ -140,13 +152,13 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Club ID:</label>
-                                    <input type="text" class="form-control" name="club_id" placeholder="Please enter club ID" value="{{ old("club_id") }}"/>
+                                    <input type="text" class="form-control" name="club_id" id="club_ids" placeholder="Please enter club ID" value="{{ old("club_id") }}"/>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Union ID:</label>
-                                    <input type="text" class="form-control" name="union_id" placeholder="Please enter union ID" value="{{ old("union_id") }}"/>
+                                    <input type="text" class="form-control" name="union_id" id="union_ids" placeholder="Please enter union ID" value="{{ old("union_id") }}"/>
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -217,6 +229,110 @@
             </div>
         </div>
     </div>
+    {{-- View Account --}}
+    <div class="modal fade" id="modal-view-item" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="modal-view-item" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Account Details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <i aria-hidden="true" class="ki ki-close"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>First Name:</label>
+                                <input type="text" name="fname" class="form-control" readonly/>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Middle Name:</label>
+                                <input type="text" name="mname" class="form-control" readonly/>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Last Name:</label>
+                                <input type="text" name="lname" class="form-control" readonly/>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Suffix (jr, sr, etc.):</label>
+                                <input type="text" name="suffix" class="form-control" readonly/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="separator separator-dashed my-5"></div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>E-mail:</label>
+                                <input type="email" class="form-control" name="email" readonly/>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Player ID Number:</label>
+                                <input type="text" class="form-control" name="id_number" readonly/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="separator separator-dashed my-5"></div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Club ID:</label>
+                                <input type="text" class="form-control" name="club_id" readonly/>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Union ID:</label>
+                                <input type="text" class="form-control" name="union_id" readonly/>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>IGN:</label>
+                                <input type="text" class="form-control" name="ign" readonly/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="separator separator-dashed my-5"></div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Telegram:</label>
+                                <input type="text" class="form-control" name="telegram" readonly/>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Whatsapp:</label>
+                                <input type="text" class="form-control" name="whatsapp" readonly/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="separator separator-dashed my-5"></div>
+                    <div class="form-group">
+                        <label>Phone Number:</label>
+                        <input type="text" class="form-control" name="phone_number" readonly/>
+                    </div>
+                    <div class="separator separator-dashed my-5"></div>
+                    <div class="alert alert-primary">
+                        This is an admin account
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @push("page_vendors")
@@ -224,6 +340,7 @@
 @endpush
 
 @push("page_scripts")
+    <script src="{{ asset("_custom_assets/_js/util/notify.js") }}"></script>
     <script src="{{ asset("_custom_assets/_js/_country_codes.js") }}"></script>
     <script src="{{ asset("_custom_assets/_js/manage_accounts.js") }}"></script>
 @endpush

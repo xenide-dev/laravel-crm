@@ -10,6 +10,7 @@ use App\Ticket;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Str;
 
@@ -83,6 +84,9 @@ class ApiController extends Controller
                 $nestedData['email'] = $user->email;
                 $nestedData['user_type'] = $user->user_type;
                 $nestedData['iM'] = auth()->user()->id == $user->id;
+                $nestedData['id'] = $user->id;
+                // config("app.key") is used for added security
+                $nestedData['id_key'] = Hash::make($user->id . config("app.key"));
                 $nestedData['last_online_at'] = (auth()->user()->id == $user->id) ?
                     "<span class='label label-pill label-inline label-info'>You</span>" :
                     (!empty($user->lastSeen) ?
@@ -461,5 +465,46 @@ class ApiController extends Controller
         );
 
         echo json_encode($json_data);
+    }
+
+    public function account_delete(Request $request) {
+        $id = $request->input("id");
+        $id_key = $request->input("id_key");
+
+        // check if matched
+        if(Hash::check($id . config("app.key"), $id_key)){
+            $user = User::find($id);
+            $user->delete();
+
+            return response()->json([
+                'status' => "success",
+            ]);
+        }else{
+            // TODO LOG::alert()
+            return response()->json([
+                'status' => "error",
+            ]);
+        }
+    }
+
+    public function account_get(Request $request) {
+        $id = $request->input("id");
+        $id_key = $request->input("id_key");
+
+        // check if matched
+        if(Hash::check($id . config("app.key"), $id_key)){
+            $user = User::with("contactInfo", "userOrganization")->find($id);
+            $user->userOrganization->load("organization");
+
+            return response()->json([
+                'status' => "success",
+                'user' => $user
+            ]);
+        }else{
+            // TODO LOG::alert()
+            return response()->json([
+                'status' => "error",
+            ]);
+        }
     }
 }
