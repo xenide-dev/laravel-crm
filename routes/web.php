@@ -29,6 +29,7 @@ Route::group([
     Route::post('/accounts/create', 'AccountController@accountsCreate')->name('accounts-create');
     Route::get('/accounts/{user}/privilege', 'AccountController@accountsRole')->name('accounts-create-roles');
     Route::post('/accounts/{user}/privilege/update', 'AccountController@accountsRoleUpdate')->name('accounts-create-roles-update');
+    Route::get('/accounts/{user}/privilege/get', 'AccountController@accountsUpdatePrivilege')->name('accounts-update-privilege');
 
     // for organization
     Route::get('/organization', 'HomeController@organization')->name('organization');

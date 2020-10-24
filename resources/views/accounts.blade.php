@@ -340,6 +340,9 @@
 @endpush
 
 @push("page_scripts")
+    <script>
+        const BASE_URL = '{{ \Illuminate\Support\Facades\URL::to("/") }}'
+    </script>
     <script src="{{ asset("_custom_assets/_js/util/notify.js") }}"></script>
     <script src="{{ asset("_custom_assets/_js/_country_codes.js") }}"></script>
     <script src="{{ asset("_custom_assets/_js/manage_accounts.js") }}"></script>

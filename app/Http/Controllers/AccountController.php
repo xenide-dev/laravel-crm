@@ -212,7 +212,7 @@ class AccountController extends Controller
 
         // TODO notify the user
         try{
-//            Mail::to($user->email)->send(new MailConfirmation($user));
+            // Mail::to($user->email)->send(new MailConfirmation($user));
         }catch(Swift_TransportException $e){
             dump($e);
         }
@@ -221,5 +221,20 @@ class AccountController extends Controller
             "event" => "updated",
             "notified" => $notified
         ]);
+    }
+
+    public function accountsUpdatePrivilege(User $user, Request $request) {
+        if($request->input("isHide")){
+            if($request->input("isHide") == 1){
+                $isHide = 1;
+                $configs = config("_privileges.urls");
+                return view("accounts-role", compact("user"), compact("configs"), compact("isHide"));
+            }else{
+                // TODO Log::alert()
+            }
+        }else{
+            // TODO Log::alert()
+        }
+
     }
 }

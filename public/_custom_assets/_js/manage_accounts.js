@@ -46,7 +46,7 @@ var ListAccountDataTable = function() {
 							  	<div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
 									<ul class="nav nav-hoverable flex-column">
 									    <li class="nav-item view-item" data-toggle="modal" data-target="#modal-view-item" data-id="${full.id}" data-key="${full.id_key}"><a class="nav-link" href="javascript:;"><i class="nav-icon la la-user"></i><span class="nav-text">View Account</span></a></li>`
-							    		+ (!full.iM ? `<li class="nav-item"><a class="nav-link" href="#"><i class="nav-icon la la-leaf"></i><span class="nav-text">Update Privileges</span></a></li>` : '') +
+							    		+ (!full.iM ? `<li class="nav-item"><a class="nav-link" href="${ BASE_URL + "/accounts/" + full.id + "/privilege/get?isHide=1"}"><i class="nav-icon la la-leaf"></i><span class="nav-text">Update Privileges</span></a></li>` : '') +
                                     `</ul>
 							  	</div>
 							</div>

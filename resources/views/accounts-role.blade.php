@@ -15,12 +15,20 @@
                 Update permissions to "{{ $user->fname }}"
             </h3>
         </div>
-        <form class="form" action="{{ \Illuminate\Support\Facades\URL::signedRoute('accounts-create-roles-update', [$user]) }}" id="frmUpdatePrivilege" method="POST">
+        <form class="form" action="{{ \Illuminate\Support\Facades\URL::signedRoute('accounts-create-roles-update', [$user, "notified" => false]) }}" id="frmUpdatePrivilege" method="POST">
             @csrf
             <div class="card-body">
-                <div class="alert alert-info">
-                    We will send a confirmation message to the user's email once you leave this page.
-                </div>
+                @if(isset($isHide))
+                    @if(!$isHide)
+                        <div class="alert alert-info">
+                            We will send a confirmation message to the user's email once you leave this page.
+                        </div>
+                    @endif
+                @else
+                    <div class="alert alert-info">
+                        We will send a confirmation message to the user's email once you leave this page.
+                    </div>
+                @endif
                 @foreach($configs as $config)
                     @if($config["type"] == $user->user_type || $config["type"] == "all")
                         <div class="form-group row align-items-center">
