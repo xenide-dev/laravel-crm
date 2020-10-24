@@ -115,9 +115,10 @@ class ApiController extends Controller
     public function list_organizations(Request $request) {
         $columns = array(
             0 =>'id',
-            1 =>'name',
-            2 => 'type',
-            3 => 'added_by_id',
+            1 =>'id_number',
+            2 =>'name',
+            3 => 'type',
+            4 => 'added_by_id',
         );
 
         $totalData = Organization::count();
@@ -141,6 +142,7 @@ class ApiController extends Controller
 
             $organizations =  Organization::where('name','LIKE',"%{$search}%")
                 ->orWhere('type', 'LIKE',"%{$search}%")
+                ->orWhere('id_number', 'LIKE',"%{$search}%")
                 ->offset($start)
                 ->limit($limit)
                 ->orderBy($order,$dir)
@@ -161,6 +163,7 @@ class ApiController extends Controller
                 $added_by = User::where("id", $organization->added_by_id)->get()->first();
 
                 $nestedData['id'] = $organization->id;
+                $nestedData['id_number'] = $organization->id_number;
                 $nestedData['created_at'] = date('j M Y h:i a',strtotime($organization->created_at));
                 $nestedData['name'] = $organization->name;
                 $nestedData['type'] = $organization->type;

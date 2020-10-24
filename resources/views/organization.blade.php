@@ -52,6 +52,7 @@
             <table class="table table-bordered table-hover table-checkable" id="list-datatable" style="margin-top: 13px !important">
                 <thead>
                 <tr>
+                    <th>Sys ID</th>
                     <th>Org ID</th>
                     <th>Date</th>
                     <th>Name</th>
@@ -75,6 +76,10 @@
                 <form class="form" action="{{ route("organization-create") }}" id="frmCreateItem" method="POST">
                     @csrf
                     <div class="modal-body">
+                        <div class="form-group">
+                            <label>Organization ID Number:</label>
+                            <input type="text" name="id_number" class="form-control" placeholder="Enter organization id number"/>
+                        </div>
                         <div class="form-group">
                             <label>Organization Name:</label>
                             <input type="email" name="name" class="form-control" placeholder="Enter organization name"/>

@@ -81,6 +81,15 @@
                     @csrf
                     <div class="modal-body">
                         <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Player ID Number:</label>
+                                    <input type="text" name="id_number" class="form-control" placeholder="Enter player ID number"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="separator separator-dashed my-5"></div>
+                        <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>First Name:</label>
@@ -97,15 +106,6 @@
                                 <div class="form-group">
                                     <label>Last Name:</label>
                                     <input type="text" name="lname" class="form-control" placeholder="Enter last name"/>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="separator separator-dashed my-5"></div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Player ID Number:</label>
-                                    <input type="text" name="id_number" class="form-control" placeholder="Enter player ID number"/>
                                 </div>
                             </div>
                         </div>

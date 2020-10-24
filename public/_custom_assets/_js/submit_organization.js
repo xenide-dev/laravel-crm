@@ -22,6 +22,7 @@ var ListDatatable = function() {
             },
             columns: [
                 {data: 'id'},
+                {data: 'id_number'},
                 {data: 'created_at'},
                 {data: 'name'},
                 {data: 'type'},
@@ -57,10 +58,10 @@ var ListDatatable = function() {
             document.getElementById(frm_Item),
             {
                 fields: {
-                    name: {
+                    id_number: {
                         validators: {
                             notEmpty: {
-                                message: 'Organization Name is required'
+                                message: 'Organization ID Number is required'
                             },
                         }
                     },

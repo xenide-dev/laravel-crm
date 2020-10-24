@@ -58,20 +58,6 @@ var ListDatatable = function() {
             document.getElementById(frm_Item),
             {
                 fields: {
-                    fname: {
-                        validators: {
-                            notEmpty: {
-                                message: 'First Name is required'
-                            },
-                        }
-                    },
-                    lname: {
-                        validators: {
-                            notEmpty: {
-                                message: 'Last Name is required'
-                            },
-                        }
-                    },
                     id_number: {
                         validators: {
                             notEmpty: {
@@ -172,7 +158,12 @@ var ListDatatable = function() {
 
     var initSelect2 = function() {
         var data = $.map(orgData, function (obj) {
-            obj.text = obj.name;
+            var org_name = obj.name;
+            if(org_name){
+                obj.text = obj.id_number + " (" + org_name + ")";
+            }else{
+                obj.text = obj.id_number;
+            }
             return obj;
         });
         $('.select2-container').remove();
