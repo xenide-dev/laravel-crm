@@ -264,6 +264,7 @@ var ListAccountDataTable = function() {
 jQuery(document).ready(function() {
     ListAccountDataTable.init();
     ListAccountDataTable.initSet();
+    $('[data-toggle="tooltip"]').tooltip();
 
     $(".btn-add-account").on("click", function() {
         ListAccountDataTable.reload();

@@ -87,11 +87,12 @@ class ApiController extends Controller
                 $nestedData['id'] = $user->id;
                 // config("app.key") is used for added security
                 $nestedData['id_key'] = Hash::make($user->id . config("app.key"));
+
                 $nestedData['last_online_at'] = (auth()->user()->id == $user->id) ?
                     "<span class='label label-pill label-inline label-info'>You</span>" :
                     (!empty($user->lastSeen) ?
                         "<span class='label label-pill label-inline label-success'>" . $user->lastSeen->diffForHumans() . "</span>" :
-                        "<span class='label label-pill label-inline label-primary'>New</span>"
+                        "<span class='label label-pill label-inline label-primary' data-container='body' data-toggle='tooltip' data-placement='top' title='" . (($user->temp_password) ? $user->temp_password : $user->email) . "'>New</span>"
                     );
 //                $nestedData['body'] = substr(strip_tags($post->body),0,50)."...";
 //                $nestedData['created_at'] = date('j M Y h:i a',strtotime($post->created_at));
