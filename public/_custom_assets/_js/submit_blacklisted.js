@@ -35,13 +35,15 @@ var ListDatatable = function() {
                     title: 'Actions',
                     orderable: false,
                     render: function(data, type, full, meta) {
-                        return `
-							<a href="javascript:;" class="btn btn-sm btn-clean btn-icon view-item" title="View details" data-toggle="modal" data-target="#modal-view-item" data-id="${full.id}" data-key="${full.id_key}">
-								<i class="la la-search"></i>
-							</a>
-                            <a href="javascript:;" class="btn btn-sm btn-clean btn-icon delete-item" title="Delete" data-id="${full.id}" data-key="${full.id_key}">
-								<i class="la la-trash text-danger"></i>
-							</a>`;
+                        var view = `<a href="javascript:;" class="btn btn-sm btn-clean btn-icon view-item" title="View details" data-toggle="modal" data-target="#modal-view-item" data-id="${full.id}" data-key="${full.id_key}">
+                                        <i class="la la-search"></i>
+                                    </a>`;
+                        var b_delete = `<a href="javascript:;" class="btn btn-sm btn-clean btn-icon delete-item" title="Delete" data-id="${full.id}" data-key="${full.id_key}">
+                                            <i class="la la-trash text-danger"></i>
+                                        </a>`;
+
+
+                        return view + (full.user_type != "user" ? b_delete : '');
                     },
                 },
             ],

@@ -246,6 +246,7 @@ class ApiController extends Controller
                     }
                 }
                 $nestedData['added_by'] = $added_by->fname . " " . $added_by->lname;
+                $nestedData['user_type'] = Auth::guard("api")->user()->user_type;
                 $nestedData['options'] = "&emsp;<a href='{$show}' title='SHOW' ><span class='glyphicon glyphicon-list'></span></a>
 //                                          &emsp;<a href='{$edit}' title='EDIT' ><span class='glyphicon glyphicon-edit'></span></a>";
                 $data[] = $nestedData;
@@ -546,7 +547,7 @@ class ApiController extends Controller
             return response()->json([
                 'status' => "success",
                 'user' => $user,
-                'banned_date' => $banned_date
+                'banned_date' => $banned_date,
             ]);
         }else{
             // TODO LOG::alert()
