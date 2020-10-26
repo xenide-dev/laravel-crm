@@ -37,7 +37,7 @@ class AccountController extends Controller
             'mname' => ['max:255'],
             'lname' => ['required', 'string', 'max:255'],
             'suffix' => ['max:255'],
-            'id_number' => ['required', 'string', 'max:255', 'unique:users'],
+            'id_number' => ['max:255', 'unique:users'],
             'phone_number' => ['required', 'string', 'max:255'],
             'country' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
@@ -96,10 +96,13 @@ class AccountController extends Controller
         // retrieve orgs and save
         if($request->input("org")){
             foreach ($request->input("org") as $org){
-                $user->userOrganization()->create([
-                    "organization_id" => $org["org_name"],
-                    "organization_position" => implode("|", $org["org_position"])
-                ]);
+                if($org["org_name"]){
+                    $user->userOrganization()->create([
+                        "organization_id" => $org["org_name"],
+                        "organization_position" => implode("|", $org["org_position"])
+                    ]);
+                }
+
             }
         }
 

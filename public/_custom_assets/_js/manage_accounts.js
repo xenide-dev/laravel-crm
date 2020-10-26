@@ -151,39 +151,39 @@ var ListAccountDataTable = function() {
     var initAddField = function() {
         // TODO check here
         try {
-            var repeatVal = $('#repeat_item').repeaterVal();
-            // remove fields
-            for(var i = 0; i <= highest + 2; i++){
-                console.log(repeatVal);
-                try {
-                    frmValidation.removeField('org[' + i + '][org_position][]');
-                    frmValidation.removeField('org[' + i + '][org_name]');
-                }catch(err){
-                    // console.log(err);
-                }
-            }
-            // readd again
-            if(repeatVal.org){
-                repeatVal.org.forEach(function(item, index){
-                    if(highest < index){
-                        highest = index;
-                    }
-                    frmValidation.addField('org[' + index + '][org_name]', {
-                        validators: {
-                            notEmpty: {
-                                message: "Please select an organization"
-                            }
-                        }
-                    });
-                    frmValidation.addField('org[' + index + '][org_position][]', {
-                        validators: {
-                            notEmpty: {
-                                message: "The position is required"
-                            }
-                        }
-                    });
-                });
-            }
+            // var repeatVal = $('#repeat_item').repeaterVal();
+            // // remove fields
+            // for(var i = 0; i <= highest + 2; i++){
+            //     console.log(repeatVal);
+            //     try {
+            //         frmValidation.removeField('org[' + i + '][org_position][]');
+            //         frmValidation.removeField('org[' + i + '][org_name]');
+            //     }catch(err){
+            //         // console.log(err);
+            //     }
+            // }
+            // // readd again
+            // if(repeatVal.org){
+            //     repeatVal.org.forEach(function(item, index){
+            //         if(highest < index){
+            //             highest = index;
+            //         }
+            //         frmValidation.addField('org[' + index + '][org_name]', {
+            //             validators: {
+            //                 notEmpty: {
+            //                     message: "Please select an organization"
+            //                 }
+            //             }
+            //         });
+            //         frmValidation.addField('org[' + index + '][org_position][]', {
+            //             validators: {
+            //                 notEmpty: {
+            //                     message: "The position is required"
+            //                 }
+            //             }
+            //         });
+            //     });
+            // }
         } catch (err) {
             // console.log(err);
         }
@@ -272,13 +272,6 @@ var ListAccountDataTable = function() {
                         validators: {
                             notEmpty: {
                                 message: "Last Name is required"
-                            }
-                        }
-                    },
-                    id_number: {
-                        validators: {
-                            notEmpty: {
-                                message: "ID Number is required"
                             }
                         }
                     },
