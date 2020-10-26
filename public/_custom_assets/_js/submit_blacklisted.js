@@ -24,6 +24,7 @@ var ListDatatable = function() {
             columns: [
                 {data: 'id_number'},
                 {data: 'created_at'},
+                {data: 'country'},
                 {data: 'name'},
                 {data: 'organizations'},
                 {data: 'added_by'},
@@ -54,6 +55,18 @@ var ListDatatable = function() {
         var table = $('#' + datatable_name_id).DataTable();
         table.ajax.reload();
     };
+
+    var initCountry = function() {
+        var data = $.map(country_list, function (obj) {
+            obj.id = `${obj.name}`;
+            obj.text = obj.name;
+            return obj;
+        });
+        $('#country').select2({
+            placeholder: "Select a country",
+            data: data
+        });
+    }
 
     var initValidation = function () {
         frmValidation = FormValidation.formValidation(
@@ -185,8 +198,8 @@ var ListDatatable = function() {
             }
             return obj;
         });
-        $('.select2-container').remove();
-        $('.select2').select2({
+        // $('.select2-container').remove();
+        $('.org_name').select2({
             placeholder: "Select Value",
             data: data
         });
@@ -298,7 +311,8 @@ var ListDatatable = function() {
             initRepeater();
             initOrgName();
             initAddField();
-            initNotes()
+            initNotes();
+            initCountry();
         }
     };
 

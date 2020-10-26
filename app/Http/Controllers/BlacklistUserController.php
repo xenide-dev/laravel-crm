@@ -40,6 +40,9 @@ class BlacklistUserController extends Controller
         if($request->input("ign")){
             $data["ign"] = $request->input("ign");
         }
+        if($request->input("country")){
+            $data["country"] = $request->input("country");
+        }
         $data["full_name"] = ucwords(sprintf("%s %s %s", $fname, $mname, $lname));
 
         $blacklist = BlacklistUser::create($data);

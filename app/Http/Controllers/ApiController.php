@@ -187,13 +187,6 @@ class ApiController extends Controller
     }
 
     public function list_blacklisted(Request $request) {
-        $columns = array(
-            0 =>'id_number',
-            1 =>'name',
-            2 =>'organization',
-            3 => 'added_by',
-        );
-
         $totalData = BlacklistUser::count();
 
         $totalFiltered = $totalData;
@@ -229,7 +222,8 @@ class ApiController extends Controller
                 $nestedData['id'] = $blacklist->id;
                 $nestedData['id_key'] = Hash::make($blacklist->id . config("app.key"));
                 $nestedData['id_number'] = $blacklist->id_number;
-                $nestedData['created_at'] = date('j M Y h:i a',strtotime($blacklist->banned_date));
+                $nestedData['created_at'] = date('j M Y',strtotime($blacklist->banned_date));
+                $nestedData['country'] = $blacklist->country;
                 $nestedData['name'] = $blacklist->fname . " " . $blacklist->mname . " " . $blacklist->lname;
                 $nestedData['organizations'] = "";
                 // get the organization
@@ -543,7 +537,7 @@ class ApiController extends Controller
         if(Hash::check($id . config("app.key"), $id_key)){
             $user = BlacklistUser::with("blacklistContactInfo", "userOrganization")->find($id);
             $user->userOrganization->load("organization");
-            $banned_date = date('j M Y h:i a',strtotime($user->banned_date));
+            $banned_date = date('j M Y',strtotime($user->banned_date));
             return response()->json([
                 'status' => "success",
                 'user' => $user,

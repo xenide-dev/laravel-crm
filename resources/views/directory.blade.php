@@ -56,6 +56,7 @@
                     <tr>
                         <th>Player ID</th>
                         <th>Date</th>
+                        <th>Country</th>
                         <th>Full Name</th>
                         <th>Organization(Union/Club)</th>
                         <th>Added by</th>
@@ -81,7 +82,7 @@
                             <div class="col-md-4">
                                 <label>Date: <span class="text-danger">*</span></label>
                                 <div class="form-group">
-                                    <input class="form-control" name="banned_date" type="datetime-local" id="example-datetime-local-input"/>
+                                    <input class="form-control" name="banned_date" type="date" id="example-datetime-local-input"/>
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -114,16 +115,24 @@
                         </div>
                         <div class="separator separator-dashed my-5"></div>
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Email:</label>
                                     <input type="email" name="email" class="form-control" placeholder="Enter email address"/>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Phone:</label>
                                     <input type="text" name="phone_number" class="form-control" placeholder="Enter phone number"/>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Country:</label>
+                                    <select name="country" id="country" class="form-control select2">
+                                        <option value="">-- Please select a country --</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -247,7 +256,7 @@
                         <i aria-hidden="true" class="ki ki-close"></i>
                     </button>
                 </div>
-                <form class="form" action="{{ route("blacklist-create") }}" id="frmCreateItem" method="POST">
+                <form class="form" action="{{ route("blacklist-create") }}" id="frmViewItem" method="POST">
                     @csrf
                     <div class="modal-body">
                         <div class="row">
@@ -376,5 +385,6 @@
 
 @push("page_scripts")
     <script src="{{ asset("_custom_assets/_js/util/notify.js") }}"></script>
+    <script src="{{ asset("_custom_assets/_js/_country_codes.js") }}"></script>
     <script src="{{ asset("_custom_assets/_js/submit_blacklisted.js") }}"></script>
 @endpush

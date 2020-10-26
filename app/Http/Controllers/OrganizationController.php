@@ -19,8 +19,8 @@ class OrganizationController extends Controller
         ]);
 
         $data["added_by_id"] = auth()->user()->id;
-        if(isset($data["name"])){
-            $data["name"] = ucwords($data["name"]);
+        if($request->input("name")){
+            $data["name"] = ucwords($request->input("name"));
         }
         Organization::create($data);
 
