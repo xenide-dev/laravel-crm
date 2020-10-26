@@ -539,7 +539,7 @@ class ApiController extends Controller
         if(Hash::check($id . config("app.key"), $id_key)){
             $user = BlacklistUser::with("blacklistContactInfo", "userOrganization")->find($id);
             $user->userOrganization->load("organization");
-            $banned_date = date('j M Y',strtotime($user->banned_date));
+            $banned_date = ($user->banned_date) ? date('j M Y',strtotime($user->banned_date)) : "---- ";
             return response()->json([
                 'status' => "success",
                 'user' => $user,

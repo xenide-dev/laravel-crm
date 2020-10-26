@@ -82,6 +82,24 @@ class BlacklistUserController extends Controller
                 "value" => $request->input("instagram"),
             ]);
         }
+        if($request->input("venmo")){
+            $blacklist->blacklistContactInfo()->create([
+                "name" => "venmo",
+                "value" => $request->input("venmo"),
+            ]);
+        }
+        if($request->input("cashapp")){
+            $blacklist->blacklistContactInfo()->create([
+                "name" => "cashapp",
+                "value" => $request->input("cashapp"),
+            ]);
+        }
+        if($request->input("paypal")){
+            $blacklist->blacklistContactInfo()->create([
+                "name" => "paypal",
+                "value" => $request->input("paypal"),
+            ]);
+        }
 
         // if org exist
         if($request->input("org")){

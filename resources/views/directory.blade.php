@@ -160,6 +160,27 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
+                                    <label>Venmo:</label>
+                                    <input type="text" class="form-control" name="venmo" placeholder="Please enter a value"/>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Cashapp:</label>
+                                    <input type="text" class="form-control" name="cashapp" placeholder="Please enter a value"/>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Paypal:</label>
+                                    <input type="text" class="form-control" name="paypal" placeholder="Please enter a value"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="separator separator-dashed my-5"></div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
                                     <label>First Name:</label>
                                     <input type="text" name="fname" class="form-control" placeholder="Enter first name"/>
                                 </div>
@@ -333,6 +354,27 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
+                                    <label>Venmo:</label>
+                                    <input type="text" class="form-control" name="venmo" readonly/>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Cashapp:</label>
+                                    <input type="text" class="form-control" name="cashapp" readonly/>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Paypal:</label>
+                                    <input type="text" class="form-control" name="paypal" readonly/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="separator separator-dashed my-5"></div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
                                     <label>First Name:</label>
                                     <input type="text" name="fname" class="form-control" readonly/>
                                 </div>
@@ -361,17 +403,8 @@
                         </div>
                         <div class="separator separator-dashed my-5"></div>
                         <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Union:</label>
-                                    <input type="text" name="union_id" class="form-control" readonly/>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Club:</label>
-                                    <input type="text" name="club_id" class="form-control" readonly/>
-                                </div>
+                            <div class="col-md-12 user_organization">
+                                <h3>Organizations:</h3>
                             </div>
                         </div>
                     </div>

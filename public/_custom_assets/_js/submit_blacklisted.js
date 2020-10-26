@@ -386,27 +386,40 @@ jQuery(document).ready(function() {
                     // $('#modal-view-item [name="ign"]').val(result.user.ign);
                     var unions = "", clubs = "";
                     result.user.user_organization.forEach(function(item, index){
+                        if(clubs == ""){
+                            clubs = "<h5>Club/s:</h5><ul>";
+                        }
+                        if(unions == ""){
+                            unions = "<h5>Union/s:</h5><ul>"
+                        }
                         if(item.organization.type == "Club"){
-                            clubs += item.organization.id_number + ", ";
+                            clubs += `<li>(${item.organization.id_number}) ${item.organization.name}</li>`;
                         }else if(item.organization.type == "Union"){
-                            unions += item.organization.id_number + ", ";
+                            unions += `<li>(${item.organization.id_number}) ${item.organization.name}</li>`;
                         }
                     });
-                    $('#modal-view-item [name="club_id"]').val(clubs);
-                    $('#modal-view-item [name="union_id"]').val(unions);
+                    if(unions != ""){
+                        unions += "</ul>";
+                        $('.user_organization').append(unions);
+                    }
+                    if(clubs != ""){
+                        clubs += "</ul>";
+                        $('.user_organization').append(clubs);
+                    }
 
                     result.user.blacklist_contact_info.forEach(function(item, index){
-                        if(item.name == "telegram"){
-                            $('#modal-view-item [name="telegram"]').val(item.value);
-                        }else if(item.name == "whatsapp"){
-                            $('#modal-view-item [name="whatsapp"]').val(item.value);
-                        }else if(item.name == "facebook"){
-                            $('#modal-view-item [name="facebook"]').val(item.value);
-                        }else if(item.name == "twitter"){
-                            $('#modal-view-item [name="twitter"]').val(item.value);
-                        }else if(item.name == "instagram"){
-                            $('#modal-view-item [name="instagram"]').val(item.value);
-                        }
+                        $('#modal-view-item [name="' + item.name + '"]').val(item.value);
+                        // if(item.name == "telegram"){
+                        //     $('#modal-view-item [name="telegram"]').val(item.value);
+                        // }else if(item.name == "whatsapp"){
+                        //     $('#modal-view-item [name="whatsapp"]').val(item.value);
+                        // }else if(item.name == "facebook"){
+                        //     $('#modal-view-item [name="facebook"]').val(item.value);
+                        // }else if(item.name == "twitter"){
+                        //     $('#modal-view-item [name="twitter"]').val(item.value);
+                        // }else if(item.name == "instagram"){
+                        //     $('#modal-view-item [name="instagram"]').val(item.value);
+                        // }
                     });
                 }
             },
