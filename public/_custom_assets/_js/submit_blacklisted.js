@@ -30,7 +30,6 @@ var ListDatatable = function() {
                 {data: 'country'},
                 {data: 'name'},
                 {data: 'organizations'},
-                {data: 'added_by'},
                 {data: 'options', responsivePriority: -1},
             ],
             columnDefs: [
@@ -663,10 +662,27 @@ jQuery(document).ready(function() {
                     $('#modal-update-item [name="email"]').val(result.user.email);
                     $('#modal-update-item [name="phone_number"]').val(result.user.phone_number);
                     $('#modal-update-item [name="country"]').val(result.user.country);
-                    $('#modal-update-item #update-tinymce-body').html(result.user.notes);
+                    if(result.user.notes){
+                        tinymce.get("update-tinymce-body").setContent(result.user.notes);
+                    }else{
+                        tinymce.get("update-tinymce-body").setContent('');
+                    }
                     $('#modal-update-item [name="ign"]').val(result.user.ign);
                     var unions = "", clubs = "";
+                    var $repeater = $('#update_repeat_item').repeater();
+                    $repeater.setList([
+                        {
+                            'org.org_name': '1',
+                            'org.org_position': ['head']
+                        },
+                    ]);
                     result.user.user_organization.forEach(function(item, index){
+                        // $repeater.setList([
+                        //     {
+                        //         'org_name': item.organization.id,
+                        //         'org_position': ['head']
+                        //     },
+                        // ]);
                         if(clubs == ""){
                             clubs = "<h5>Club/s:</h5><ul>";
                         }

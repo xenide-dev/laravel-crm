@@ -15,7 +15,7 @@ class BlacklistUserController extends Controller
     public function create(Request $request) {
         if($request->input("id_number")){
             $data = $request->validate([
-                'id_number' => ['unique:blacklist_users'],
+                'id_number' => ['unique:blacklist_users,id_number,NULL,id,deleted_at,NULL'],
             ]);
         }else{
             $data = array();

@@ -59,7 +59,6 @@
                         <th>Country</th>
                         <th>Full Name</th>
                         <th>Organization(Union/Club)</th>
-                        <th>Added by</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
