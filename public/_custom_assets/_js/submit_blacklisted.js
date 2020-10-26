@@ -68,7 +68,7 @@ var ListDatatable = function() {
                                         </a>`;
 
 
-                        return view + (full.user_type != "user" ? b_update + b_delete : '');
+                        return view + (full.user_type != "user" ? b_delete : '');
                     },
                 },
                 {
@@ -706,43 +706,43 @@ jQuery(document).ready(function() {
                     $('#modal-update-item [name="ign"]').val(result.user.ign);
                     var unions = "", clubs = "";
 
-                    var template = `<div data-repeater-item="" class="form-group row align-items-center">
-                                        <div class="col-md-5">
-                                            <label>Name:</label>
-                                            <select class="form-control select2 org_name" name="org_name">
-                                                <option value=""></option>
-                                            </select>
-                                            <div class="d-md-none mb-2"></div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label>Position:</label>
-                                            <div class="checkbox-inline">
-                                                <label class="checkbox">
-                                                    <input name="org_position" value="head" type="checkbox"/>
-                                                    <span></span>
-                                                    Org. Head
-                                                </label>
-                                                <label class="checkbox">
-                                                    <input name="org_position" value="agent" type="checkbox"/>
-                                                    <span></span>
-                                                    Agent
-                                                </label>
-                                                <label class="checkbox">
-                                                    <input name="org_position" value="player" type="checkbox"/>
-                                                    <span></span>
-                                                    Player
-                                                </label>
-                                            </div>
-                                            <div class="d-md-none mb-2"></div>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <a href="javascript:;" data-repeater-delete="" class="btn btn-sm font-weight-bolder btn-light-danger">
-                                                <i class="la la-trash-o"></i>Delete
-                                            </a>
-                                        </div>
-                                    </div>`;
-
                     result.user.user_organization.forEach(function(item, index){
+                        var template = `<div data-repeater-item="" class="form-group row align-items-center">
+                                            <div class="col-md-5">
+                                                <label>Name:</label>
+                                                <select class="form-control select2 org_name" name="org_name">
+                                                    <option value=""></option>
+                                                </select>
+                                                <div class="d-md-none mb-2"></div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label>Position:</label>
+                                                <div class="checkbox-inline">
+                                                    <label class="checkbox">
+                                                        <input name="org_position" value="head" type="checkbox"/>
+                                                        <span></span>
+                                                        Org. Head
+                                                    </label>
+                                                    <label class="checkbox">
+                                                        <input name="org_position" value="agent" type="checkbox"/>
+                                                        <span></span>
+                                                        Agent
+                                                    </label>
+                                                    <label class="checkbox">
+                                                        <input name="org_position" value="player" type="checkbox"/>
+                                                        <span></span>
+                                                        Player
+                                                    </label>
+                                                </div>
+                                                <div class="d-md-none mb-2"></div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <a href="javascript:;" data-repeater-delete="" class="btn btn-sm font-weight-bolder btn-light-danger">
+                                                    <i class="la la-trash-o"></i>Delete
+                                                </a>
+                                            </div>
+                                        </div>`;
+                        $("#update_repeat_item #orgs").append("Hello");
                         if(clubs == ""){
                             clubs = "<h5>Club/s:</h5><ul>";
                         }
