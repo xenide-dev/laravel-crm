@@ -68,7 +68,7 @@ var ListDatatable = function() {
                                         </a>`;
 
 
-                        return view + (full.user_type != "user" ? b_delete : '');
+                        return view + (full.user_type != "user" ? b_update + b_delete : '');
                     },
                 },
                 {
@@ -556,6 +556,9 @@ var ListDatatable = function() {
             initAddField();
             initNotes();
             initCountry();
+        },
+        initOrgName: function() {
+            initOrgName();
         }
     };
 
@@ -704,79 +707,24 @@ jQuery(document).ready(function() {
                         tinymce.get("update-tinymce-body").setContent('');
                     }
                     $('#modal-update-item [name="ign"]').val(result.user.ign);
-                    var unions = "", clubs = "";
+
+                    var data = $.map(orgData, function (obj) {
+                        var org_name = obj.name;
+                        if(org_name){
+                            obj.text = obj.id_number + " (" + org_name + ")";
+                        }else{
+                            obj.text = obj.id_number;
+                        }
+                        return obj;
+                    });
 
                     result.user.user_organization.forEach(function(item, index){
-                        var template = `<div data-repeater-item="" class="form-group row align-items-center">
-                                            <div class="col-md-5">
-                                                <label>Name:</label>
-                                                <select class="form-control select2 org_name" name="org_name">
-                                                    <option value=""></option>
-                                                </select>
-                                                <div class="d-md-none mb-2"></div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <label>Position:</label>
-                                                <div class="checkbox-inline">
-                                                    <label class="checkbox">
-                                                        <input name="org_position" value="head" type="checkbox"/>
-                                                        <span></span>
-                                                        Org. Head
-                                                    </label>
-                                                    <label class="checkbox">
-                                                        <input name="org_position" value="agent" type="checkbox"/>
-                                                        <span></span>
-                                                        Agent
-                                                    </label>
-                                                    <label class="checkbox">
-                                                        <input name="org_position" value="player" type="checkbox"/>
-                                                        <span></span>
-                                                        Player
-                                                    </label>
-                                                </div>
-                                                <div class="d-md-none mb-2"></div>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <a href="javascript:;" data-repeater-delete="" class="btn btn-sm font-weight-bolder btn-light-danger">
-                                                    <i class="la la-trash-o"></i>Delete
-                                                </a>
-                                            </div>
-                                        </div>`;
-                        $("#update_repeat_item #orgs").append("Hello");
-                        if(clubs == ""){
-                            clubs = "<h5>Club/s:</h5><ul>";
-                        }
-                        if(unions == ""){
-                            unions = "<h5>Union/s:</h5><ul>"
-                        }
-                        if(item.organization.type == "Club"){
-                            clubs += `<li>(${item.organization.id_number}) ${item.organization.name}</li>`;
-                        }else if(item.organization.type == "Union"){
-                            unions += `<li>(${item.organization.id_number}) ${item.organization.name}</li>`;
-                        }
+                        console.log(item);
+
                     });
-                    if(unions != ""){
-                        unions += "</ul>";
-                        $('.user_organization').append(unions);
-                    }
-                    if(clubs != ""){
-                        clubs += "</ul>";
-                        $('.user_organization').append(clubs);
-                    }
 
                     result.user.blacklist_contact_info.forEach(function(item, index){
                         $('#modal-update-item [name="' + item.name + '"]').val(item.value);
-                        // if(item.name == "telegram"){
-                        //     $('#modal-view-item [name="telegram"]').val(item.value);
-                        // }else if(item.name == "whatsapp"){
-                        //     $('#modal-view-item [name="whatsapp"]').val(item.value);
-                        // }else if(item.name == "facebook"){
-                        //     $('#modal-view-item [name="facebook"]').val(item.value);
-                        // }else if(item.name == "twitter"){
-                        //     $('#modal-view-item [name="twitter"]').val(item.value);
-                        // }else if(item.name == "instagram"){
-                        //     $('#modal-view-item [name="instagram"]').val(item.value);
-                        // }
                     });
                 }
             },

@@ -571,27 +571,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="separator separator-dashed my-5"></div>
-                        <div id="update_repeat_item">
-                            <div class="form-group row">
-                                <label class="col-lg-2 col-form-label">
-                                    Organization:
-                                    <button type="button" class="btn btn-primary btn-sm mt-3" data-toggle="modal" data-target="#modal-add-org"><i class="fas fa-plus-circle"></i></button>
-                                </label>
-                                <div data-repeater-list="org" class="col-lg-10">
-                                    <div id="orgs">
-
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-lg-2 col-form-label text-right"></label>
-                                <div class="col-lg-4">
-                                    <a href="javascript:;" data-repeater-create="" class="btn btn-sm font-weight-bolder btn-light-primary">
-                                        <i class="la la-plus"></i>Add</a>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
