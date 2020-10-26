@@ -32,16 +32,29 @@ class AccountController extends Controller
 
     public function accountsCreate(Request $request)
     {
-        $data = $request->validate([
-            'fname' => ['required', 'string', 'max:255'],
-            'mname' => ['max:255'],
-            'lname' => ['required', 'string', 'max:255'],
-            'suffix' => ['max:255'],
-            'id_number' => ['max:255', 'unique:users'],
-            'phone_number' => ['required', 'string', 'max:255'],
-            'country' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-        ]);
+        if($request->input("id_number")){
+            $data = $request->validate([
+                'fname' => ['string', 'max:255'],
+                'mname' => ['max:255'],
+                'lname' => ['string', 'max:255'],
+                'suffix' => ['max:255'],
+                'id_number' => ['max:255', 'unique:users'],
+                'phone_number' => ['required', 'string', 'max:255'],
+                'country' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            ]);
+        }else{
+            $data = $request->validate([
+                'fname' => ['string', 'max:255'],
+                'mname' => ['max:255'],
+                'lname' => ['string', 'max:255'],
+                'suffix' => ['max:255'],
+                'phone_number' => ['required', 'string', 'max:255'],
+                'country' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            ]);
+        }
+
 
         $user_type = "user";
         $notified = false;
