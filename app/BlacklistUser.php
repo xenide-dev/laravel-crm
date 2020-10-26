@@ -10,7 +10,7 @@ class BlacklistUser extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        "fname", "mname", "lname", "full_name", "id_number", "banned_date", "email", "phone_number", "notes", "country"
+        "fname", "mname", "lname", "full_name", "id_number", "banned_date", "email", "phone_number", "notes", "country", "ign"
     ];
 
     protected $casts = [

@@ -3,6 +3,7 @@
 var datatable_name_id = "list-datatable";
 var frm_Item = "frmCreateItem";
 var frmValidation = null;
+var frmUpdateValidation = null;
 var highest = 0;
 var orgData = null;
 var frm_Item2 = "frmOrgItem";
@@ -44,9 +45,12 @@ var ListDatatable = function() {
                         var b_delete = `<a href="javascript:;" class="btn btn-sm btn-clean btn-icon delete-item" title="Delete" data-id="${full.id}" data-key="${full.id_key}">
                                             <i class="la la-trash text-danger"></i>
                                         </a>`;
+                        var b_update = `<a href="javascript:;" class="btn btn-sm btn-clean btn-icon update-item" title="Update" data-toggle="modal" data-target="#modal-update-item" data-id="${full.id}" data-key="${full.id_key}">
+                                            <i class="la la-edit text-primary"></i>
+                                        </a>`;
 
 
-                        return view + (full.user_type != "user" ? b_delete : '');
+                        return view + (full.user_type != "user" ? b_update + b_delete : '');
                     },
                 },
             ],
@@ -68,11 +72,43 @@ var ListDatatable = function() {
             placeholder: "Select a country",
             data: data
         });
+        $('#update_country').select2({
+            placeholder: "Select a country",
+            data: data
+        });
     }
 
     var initValidation = function () {
         frmValidation = FormValidation.formValidation(
             document.getElementById(frm_Item),
+            {
+                fields: {
+                    // banned_date: {
+                    //     validators: {
+                    //         notEmpty: {
+                    //             message: 'Date is required'
+                    //         },
+                    //     }
+                    // },
+                    // id_number: {
+                    //     validators: {
+                    //         notEmpty: {
+                    //             message: 'Player ID number is required'
+                    //         },
+                    //     }
+                    // },
+                },
+                plugins: {
+                    trigger: new FormValidation.plugins.Trigger(),
+                    bootstrap: new FormValidation.plugins.Bootstrap(),
+                    submitButton: new FormValidation.plugins.SubmitButton(),
+                    // defaultSubmit: new FormValidation.plugins.DefaultSubmit(),
+                }
+            }
+        );
+        // for update
+        frmUpdateValidation = FormValidation.formValidation(
+            document.getElementById("frmUpdateItem"),
             {
                 fields: {
                     // banned_date: {
@@ -163,6 +199,43 @@ var ListDatatable = function() {
                 });
             }
         });
+        $("#btnUpdateSubmit").on("click", function() {
+            if(frmValidation){
+                frmValidation.validate().then(function(status) {
+                    if(status == "Valid"){
+                        Swal.fire({
+                            title: "Are you sure?",
+                            text: "",
+                            icon: "warning",
+                            showCancelButton: true,
+                            confirmButtonText: "Yes!",
+                            cancelButtonText: "No, cancel!",
+                            reverseButtons: true,
+                            customClass: {
+                                confirmButton: "btn btn-success",
+                                cancelButton: "btn btn-default"
+                            }
+                        }).then(function(result) {
+                            if (result.value) {
+                                $("#frmUpdateItem").submit();
+                            } else if (result.dismiss === "cancel") {
+
+                            }
+                        });
+                    }else{
+                        Swal.fire({
+                            text: "Sorry, looks like there are some errors detected, please try again.",
+                            icon: "error",
+                            buttonsStyling: false,
+                            confirmButtonText: "Ok, got it!",
+                            customClass: {
+                                confirmButton: "btn font-weight-bold btn-light"
+                            }
+                        });
+                    }
+                });
+            }
+        });
         // for Organization
         $("#btnOrgSubmit").on("click", function() {
             if(frmOrgValidation){
@@ -234,9 +307,31 @@ var ListDatatable = function() {
     var initRepeater = function() {
         $('#repeat_item').repeater({
             initEmpty: false,
-            defaultValues: {
-                'text-input': 'foo'
+            show: function() {
+                initAddField();
+                initOrgName();
+                $(this).slideDown();
             },
+            hide: function(deleteElement) {
+                if(confirm('Are you sure you want to delete this element?')) {
+                    var repeatVal = $('#repeat_item').repeaterVal();
+                    // remove fields
+                    for(var i = 0; i <= highest + 2; i++){
+                        console.log(repeatVal);
+                        try {
+                            frmValidation.removeField('org[' + i + '][org_position][]');
+                            frmValidation.removeField('org[' + i + '][org_name]');
+                        }catch(err){
+                            // console.log(err);
+                        }
+                    }
+                    $(this).slideUp(deleteElement);
+                }
+            },
+        });
+
+        $('#update_repeat_item').repeater({
+            initEmpty: false,
             show: function() {
                 initAddField();
                 initOrgName();
@@ -363,7 +458,7 @@ var ListDatatable = function() {
 
     var initNotes = function () {
         tinymce.init({
-            selector: '#tinymce-body',
+            selector: '#tinymce-body, #update-tinymce-body',
             placeholder: 'Add some notes here',
             toolbar: 'undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | outdent indent | image | preview ',
             plugins : 'advlist autolink link lists charmap preview image',
@@ -497,8 +592,8 @@ jQuery(document).ready(function() {
                     $('#modal-view-item [name="email"]').val(result.user.email);
                     $('#modal-view-item [name="phone_number"]').val(result.user.phone_number);
                     $('#modal-view-item [name="country"]').val(result.user.country);
-                    $('#modal-view-item #tinymce-body').html(result.user.notes);
-                    // $('#modal-view-item [name="ign"]').val(result.user.ign);
+                    $('#modal-view-item #view-tinymce-body').html(result.user.notes);
+                    $('#modal-view-item [name="ign"]').val(result.user.ign);
                     var unions = "", clubs = "";
                     result.user.user_organization.forEach(function(item, index){
                         if(clubs == ""){
@@ -524,6 +619,77 @@ jQuery(document).ready(function() {
 
                     result.user.blacklist_contact_info.forEach(function(item, index){
                         $('#modal-view-item [name="' + item.name + '"]').val(item.value);
+                        // if(item.name == "telegram"){
+                        //     $('#modal-view-item [name="telegram"]').val(item.value);
+                        // }else if(item.name == "whatsapp"){
+                        //     $('#modal-view-item [name="whatsapp"]').val(item.value);
+                        // }else if(item.name == "facebook"){
+                        //     $('#modal-view-item [name="facebook"]').val(item.value);
+                        // }else if(item.name == "twitter"){
+                        //     $('#modal-view-item [name="twitter"]').val(item.value);
+                        // }else if(item.name == "instagram"){
+                        //     $('#modal-view-item [name="instagram"]').val(item.value);
+                        // }
+                    });
+                }
+            },
+            error: function(xhr, status, error){
+                notify("Error", xhr, "danger")
+            }
+        });
+    });
+
+    // for onclick update
+    $(document).on('click', '.update-item', function() {
+        var $this = $(this);
+        $.ajax({
+            url: "/api/blacklist/get",
+            type: "POST",
+            dataType: "json",
+            data: {
+                api_token: document.querySelector("meta[name='at']").getAttribute("content"),
+                id: $this.data("id"),
+                id_key: $this.data("key"),
+            },
+            success: function(result, status, xhr){
+                $("#modal-update-item input").val('');
+                $('.user_organization').html("<h3>Organizations:</h3>");
+                if(result.status == "success"){
+                    $('#modal-update-item [name="banned_date"]').val(result.banned_date);
+                    $('#modal-update-item [name="id_number"]').val(result.user.id_number);
+                    $('#modal-update-item [name="fname"]').val(result.user.fname);
+                    $('#modal-update-item [name="mname"]').val(result.user.mname);
+                    $('#modal-update-item [name="lname"]').val(result.user.lname);
+                    $('#modal-update-item [name="email"]').val(result.user.email);
+                    $('#modal-update-item [name="phone_number"]').val(result.user.phone_number);
+                    $('#modal-update-item [name="country"]').val(result.user.country);
+                    $('#modal-update-item #update-tinymce-body').html(result.user.notes);
+                    $('#modal-update-item [name="ign"]').val(result.user.ign);
+                    var unions = "", clubs = "";
+                    result.user.user_organization.forEach(function(item, index){
+                        if(clubs == ""){
+                            clubs = "<h5>Club/s:</h5><ul>";
+                        }
+                        if(unions == ""){
+                            unions = "<h5>Union/s:</h5><ul>"
+                        }
+                        if(item.organization.type == "Club"){
+                            clubs += `<li>(${item.organization.id_number}) ${item.organization.name}</li>`;
+                        }else if(item.organization.type == "Union"){
+                            unions += `<li>(${item.organization.id_number}) ${item.organization.name}</li>`;
+                        }
+                    });
+                    if(unions != ""){
+                        unions += "</ul>";
+                        $('.user_organization').append(unions);
+                    }
+                    if(clubs != ""){
+                        clubs += "</ul>";
+                        $('.user_organization').append(clubs);
+                    }
+
+                    result.user.blacklist_contact_info.forEach(function(item, index){
+                        $('#modal-update-item [name="' + item.name + '"]').val(item.value);
                         // if(item.name == "telegram"){
                         //     $('#modal-view-item [name="telegram"]').val(item.value);
                         // }else if(item.name == "whatsapp"){
