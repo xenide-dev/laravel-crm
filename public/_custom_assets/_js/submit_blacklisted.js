@@ -5,6 +5,8 @@ var frm_Item = "frmCreateItem";
 var frmValidation = null;
 var highest = 0;
 var orgData = null;
+var frm_Item2 = "frmOrgItem";
+var frmOrgValidation = null;
 
 var ListDatatable = function() {
     var table = $('#' + datatable_name_id);
@@ -96,6 +98,33 @@ var ListDatatable = function() {
                 }
             }
         );
+        frmOrgValidation = FormValidation.formValidation(
+            document.getElementById(frm_Item2),
+            {
+                fields: {
+                    org_id: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Organization ID number is required'
+                            },
+                        }
+                    },
+                    org_type: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Organization Type is required'
+                            },
+                        }
+                    },
+                },
+                plugins: {
+                    trigger: new FormValidation.plugins.Trigger(),
+                    bootstrap: new FormValidation.plugins.Bootstrap(),
+                    submitButton: new FormValidation.plugins.SubmitButton(),
+                    // defaultSubmit: new FormValidation.plugins.DefaultSubmit(),
+                }
+            }
+        );
         $("#btnSubmit").on("click", function() {
             initAddField();
             if(frmValidation){
@@ -118,6 +147,72 @@ var ListDatatable = function() {
                                 $("#" + frm_Item).submit();
                             } else if (result.dismiss === "cancel") {
 
+                            }
+                        });
+                    }else{
+                        Swal.fire({
+                            text: "Sorry, looks like there are some errors detected, please try again.",
+                            icon: "error",
+                            buttonsStyling: false,
+                            confirmButtonText: "Ok, got it!",
+                            customClass: {
+                                confirmButton: "btn font-weight-bold btn-light"
+                            }
+                        });
+                    }
+                });
+            }
+        });
+        // for Organization
+        $("#btnOrgSubmit").on("click", function() {
+            if(frmOrgValidation){
+                frmOrgValidation.validate().then(function(status) {
+                    if(status == "Valid"){
+                        Swal.fire({
+                            title: "Are you sure?",
+                            text: "This organization will be created",
+                            icon: "warning",
+                            showCancelButton: true,
+                            confirmButtonText: "Yes, create it now!",
+                            cancelButtonText: "No, cancel!",
+                            reverseButtons: true,
+                            customClass: {
+                                confirmButton: "btn btn-success",
+                                cancelButton: "btn btn-default"
+                            }
+                        }).then(function(result) {
+                            if (result.value) {
+                                $.ajax({
+                                    url: "/api/organization/create",
+                                    type: "POST",
+                                    dataType: "json",
+                                    data: {
+                                        api_token: document.querySelector("meta[name='at']").getAttribute("content"),
+                                        name: $("#org_name").val(),
+                                        type: $("#org_type").val(),
+                                        id_number: $("#org_id").val(),
+                                    },
+                                    success: function(result, status, xhr){
+                                        if(result.status == "success"){
+                                            // reload org list
+                                            initOrgName(true);
+                                            notify("Success", "The organization has been created", "success");
+                                            document.getElementById("frmOrgItem").reset();
+                                            $("#org_type").selectpicker("refresh");
+                                            $('#modal-add-org').modal('toggle');
+                                        }else{
+                                            console.log("error creating");
+                                        }
+                                    },
+                                    error: function(xhr, status, error){
+                                        xhr.responseJSON.errors.name.forEach(function(item, index) {
+                                            notify("Error", item, "danger");
+                                            document.getElementById("frmOrgItem").reset();
+                                            $("#org_type").selectpicker("refresh");
+                                            frmOrgValidation.resetForm(true);
+                                        });
+                                    }
+                                });
                             }
                         });
                     }else{
@@ -166,7 +261,7 @@ var ListDatatable = function() {
         });
     }
 
-    var initOrgName = function() {
+    var initOrgName = function(isReload = false) {
         if(!orgData){
             $.ajax({
                 url: "/api/basicload/organizations",
@@ -184,6 +279,25 @@ var ListDatatable = function() {
                 }
             });
         }else{
+            if(isReload){
+                $.ajax({
+                    url: "/api/basicload/organizations",
+                    type: "POST",
+                    dataType: "json",
+                    data: {
+                        api_token: document.querySelector("meta[name='at']").getAttribute("content")
+                    },
+                    success: function(result, status, xhr){
+                        orgData = result;
+                        initSelect2();
+                    },
+                    error: function(xhr, status, error){
+                        console.log(xhr);
+                    }
+                });
+            }else{
+                initSelect2();
+            }
             initSelect2();
         }
     }

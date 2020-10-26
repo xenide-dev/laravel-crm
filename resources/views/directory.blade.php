@@ -212,7 +212,10 @@
                         <div class="separator separator-dashed my-5"></div>
                         <div id="repeat_item">
                             <div class="form-group row">
-                                <label class="col-lg-2 col-form-label text-right">Organization:</label>
+                                <label class="col-lg-2 col-form-label">
+                                    Organization:
+                                    <button type="button" class="btn btn-primary btn-sm mt-3" data-toggle="modal" data-target="#modal-add-org"><i class="fas fa-plus-circle"></i></button>
+                                </label>
                                 <div data-repeater-list="org" class="col-lg-10">
                                     <div data-repeater-item="" class="form-group row align-items-center">
                                         <div class="col-md-5">
@@ -410,6 +413,43 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modal-add-org" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="modal-add-org" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content border border-warning">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add Organization</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <i aria-hidden="true" class="ki ki-close"></i>
+                    </button>
+                </div>
+                <form class="form" action="{{ route("ticket-create") }}" id="frmOrgItem" method="POST">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>Organization ID:</label>
+                            <input type="text" id="org_id" name="org_id" class="form-control" placeholder="Enter organization ID number"/>
+                        </div>
+                        <div class="form-group">
+                            <label>Organization Name:</label>
+                            <input type="text" id="org_name" name="org_name" class="form-control" placeholder="Enter organization name"/>
+                        </div>
+                        <div class="form-group">
+                            <label>Organization Type:</label>
+                            <select class="form-control selectpicker" id="org_type" name="org_type">
+                                <option value="">-- Please select a value --</option>
+                                <option value="Union">Union</option>
+                                <option value="Club">Club</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary font-weight-bold" id="btnOrgSubmit">Submit</button>
                     </div>
                 </form>
             </div>

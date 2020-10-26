@@ -357,11 +357,13 @@ class ApiController extends Controller
 
     public function create_organization(Request $request) {
         $data = $request->validate([
-            'name' => ['required', 'string', 'max:255', "unique:organizations"],
+            'id_number' => ["unique:organizations"],
             'type' => ['required', 'string', 'max:255'],
         ]);
 
-        $data["name"] = ucwords($data["name"]);
+        if($request->input("name")){
+            $data["name"] = ucwords($request->input("name"));
+        }
         $data["added_by_id"] = Auth::guard("api")->user()->id;
         $org = Organization::create($data);
 

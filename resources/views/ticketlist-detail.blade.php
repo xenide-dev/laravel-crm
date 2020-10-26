@@ -232,7 +232,7 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label>Organization Name:</label>
-                            <input type="email" id="org_name" name="org_name" class="form-control" placeholder="Enter organization name"/>
+                            <input type="text" id="org_name" name="org_name" class="form-control" placeholder="Enter organization name"/>
                         </div>
                         <div class="form-group">
                             <label>Organization Type:</label>
