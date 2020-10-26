@@ -66,12 +66,12 @@
                     @csrf
                     <div class="modal-body">
                         <div class="form-group">
-                            <label>Full Name:</label>
+                            <label>Name / Request:</label>
                             <input type="email" class="form-control" placeholder="Enter full name"/>
                         </div>
                         <div class="separator separator-dashed my-5"></div>
                         <div class="form-group">
-                            <label>Request Message:</label>
+                            <label>Detailed Request:</label>
                             <div class="tinymce">
                                 <textarea id="tinymce-body" name="kt-tinymce-3" class="tox-target"></textarea>
                             </div>

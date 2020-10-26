@@ -75,8 +75,8 @@
                     @csrf
                     <div class="modal-body">
                         <div class="form-group">
-                            <label>Names:</label>
-                            <input id="report_names" class="form-control tagify" name='full_names' placeholder="Add users"/>
+                            <label>Subject:</label>
+                            <input id="report_names" class="form-control tagify" name='full_names' placeholder="Add subject"/>
                         </div>
                         <div class="separator separator-dashed my-5"></div>
                         <div class="form-group">

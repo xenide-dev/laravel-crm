@@ -44,6 +44,14 @@ var ListDatatable = function() {
                     width: '100px'
                 },
                 {
+                    targets: 6,
+                    visible: false
+                },
+                {
+                    targets: 7,
+                    visible: false
+                },
+                {
                     targets: -1,
                     title: 'Actions',
                     width: '150px',
@@ -65,13 +73,14 @@ var ListDatatable = function() {
                 },
                 {
                     targets: -2,
-                    title: 'Contact Info.',
+                    title: 'Other Info.',
                     width: '200px',
+                    visible: false,
                     render: function(data, type, full, meta) {
                         var output = "";
                         if(full.contact_info.length > 0){
                             full.contact_info.forEach(function(item, index){
-                                var template = `<div><span class="label label-primary label-inline">${item.name}</span> ${item.value}</div>`;
+                                var template = `<div><span class="label label-primary label-inline">${item.name}</span> <span class="label label-success label-inline">${item.value}</span></div> <hr/>`;
                                 output += template;
                             });
                         }

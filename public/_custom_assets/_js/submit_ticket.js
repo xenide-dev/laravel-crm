@@ -135,7 +135,7 @@ var ListDatatable = function () {
     var initSubmitReport = function () {
         tinymce.init({
             selector: '#tinymce-body',
-            placeholder: 'Please enter the names first',
+            placeholder: 'Please enter the subject first',
             toolbar: 'undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | outdent indent | preview',
             plugins : 'advlist autolink link lists charmap preview',
         });
