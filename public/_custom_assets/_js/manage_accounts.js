@@ -420,6 +420,7 @@ jQuery(document).ready(function() {
                 if(result.status == "success"){
                     // clear all fields
                     $("#modal-view-item input").val('');
+                    $('.user_organization').html("<h3>Organizations:</h3>");
                     $('#modal-view-item [name="fname"]').val(result.user.fname);
                     $('#modal-view-item [name="mname"]').val(result.user.mname);
                     $('#modal-view-item [name="lname"]').val(result.user.lname);

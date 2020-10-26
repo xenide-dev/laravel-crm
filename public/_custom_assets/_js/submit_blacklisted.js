@@ -372,7 +372,8 @@ jQuery(document).ready(function() {
                 id_key: $this.data("key"),
             },
             success: function(result, status, xhr){
-                console.log(result);
+                $("#modal-view-item input").val('');
+                $('.user_organization').html("<h3>Organizations:</h3>");
                 if(result.status == "success"){
                     $('#modal-view-item [name="banned_date"]').val(result.banned_date);
                     $('#modal-view-item [name="id_number"]').val(result.user.id_number);
