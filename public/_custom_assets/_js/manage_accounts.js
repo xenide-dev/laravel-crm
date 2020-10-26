@@ -418,6 +418,8 @@ jQuery(document).ready(function() {
             },
             success: function(result, status, xhr){
                 if(result.status == "success"){
+                    // clear all fields
+                    $("#modal-view-item input").val('');
                     $('#modal-view-item [name="fname"]').val(result.user.fname);
                     $('#modal-view-item [name="mname"]').val(result.user.mname);
                     $('#modal-view-item [name="lname"]').val(result.user.lname);
@@ -425,24 +427,38 @@ jQuery(document).ready(function() {
                     $('#modal-view-item [name="email"]').val(result.user.email);
                     $('#modal-view-item [name="id_number"]').val(result.user.id_number);
                     $('#modal-view-item [name="ign"]').val(result.user.ign);
+                    $('#modal-view-item [name="temporary_password"]').val(result.temp_pass);
                     $('#modal-view-item [name="phone_number"]').val(result.user.country + " " + result.user.phone_number);
                     var unions = "", clubs = "";
                     result.user.user_organization.forEach(function(item, index){
+                        if(clubs == ""){
+                            clubs = "<h5>Club/s:</h5><ul>";
+                        }
+                        if(unions == ""){
+                            unions = "<h5>Union/s:</h5><ul>"
+                        }
                         if(item.organization.type == "Club"){
-                            clubs += item.organization.id_number + ", ";
+                            clubs += `<li>(${item.organization.id_number}) ${item.organization.name}</li>`;
                         }else if(item.organization.type == "Union"){
-                            unions += item.organization.id_number + ", ";
+                            unions += `<li>(${item.organization.id_number}) ${item.organization.name}</li>`;
                         }
                     });
-                    $('#modal-view-item [name="club_id"]').val(clubs);
-                    $('#modal-view-item [name="union_id"]').val(unions);
+                    if(unions != ""){
+                        unions += "</ul>";
+                        $('.user_organization').append(unions);
+                    }
+                    if(clubs != ""){
+                        clubs += "</ul>";
+                        $('.user_organization').append(clubs);
+                    }
 
                     result.user.contact_info.forEach(function(item, index){
-                        if(item.name == "telegram"){
-                            $('#modal-view-item [name="telegram"]').val(item.value);
-                        }else if(item.name == "whatsapp"){
-                            $('#modal-view-item [name="whatsapp"]').val(item.value);
-                        }
+                        $('#modal-view-item [name="' + item.name + '"]').val(item.value);
+                        // if(item.name == "telegram"){
+                        //     $('#modal-view-item [name="telegram"]').val(item.value);
+                        // }else if(item.name == "whatsapp"){
+                        //     $('#modal-view-item [name="whatsapp"]').val(item.value);
+                        // }
                     });
                 }
             },

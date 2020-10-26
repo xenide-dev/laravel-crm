@@ -500,7 +500,8 @@ class ApiController extends Controller
 
             return response()->json([
                 'status' => "success",
-                'user' => $user
+                'user' => $user,
+                'temp_pass' => $user->temp_password
             ]);
         }else{
             // TODO LOG::alert()

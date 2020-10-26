@@ -338,12 +338,9 @@
                         </div>
                     </div>
                     <div class="separator separator-dashed my-5"></div>
-                    <div class="row user_organization">
-                        <div class="col-md-12">
-                            <h5>Organizations:</h5>
-                            <ul>
-                                <li>asds</li>
-                            </ul>
+                    <div class="row">
+                        <div class="col-md-12 user_organization">
+                            <h3>Organizations:</h3>
                         </div>
                     </div>
                     <div class="separator separator-dashed my-5"></div>
@@ -396,6 +393,11 @@
                     <div class="separator separator-dashed my-5"></div>
                     <div class="alert alert-primary">
                         This is an admin account
+                    </div>
+                    <div class="separator separator-dashed my-5"></div>
+                    <div class="form-group">
+                        <label>Temporary Password:</label>
+                        <input type="text" class="form-control" name="temporary_password" readonly/>
                     </div>
                 </div>
                 <div class="modal-footer">
