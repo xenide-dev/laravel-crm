@@ -59,6 +59,10 @@
                         <th>Country</th>
                         <th>Full Name</th>
                         <th>Organization(Union/Club)</th>
+                        <th>Email</th>
+                        <th>Phone Number</th>
+                        <th>IGN</th>
+                        <th>Other Info.</th>
                         <th>Actions</th>
                     </tr>
                 </thead>

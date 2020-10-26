@@ -225,6 +225,10 @@ class ApiController extends Controller
                 $banned_data = ($blacklist->banned_date) ? date('j M Y',strtotime($blacklist->banned_date)) : "----";
                 $nestedData['created_at'] = $banned_data;
                 $nestedData['country'] = $blacklist->country;
+                $nestedData['email'] = $blacklist->email;
+                $nestedData['phone_number'] = $blacklist->phone_number;
+                $nestedData['ign'] = $blacklist->ign;
+                $nestedData['contact_info'] = $blacklist->blacklistContactInfo()->get();
                 $nestedData['name'] = $blacklist->fname . " " . $blacklist->mname . " " . $blacklist->lname;
                 $nestedData['organizations'] = "";
                 // get the organization

@@ -9,6 +9,8 @@ var orgData = null;
 var frm_Item2 = "frmOrgItem";
 var frmOrgValidation = null;
 
+var updateRepeater = null;
+
 var ListDatatable = function() {
     var table = $('#' + datatable_name_id);
 
@@ -30,12 +32,21 @@ var ListDatatable = function() {
                 {data: 'country'},
                 {data: 'name'},
                 {data: 'organizations'},
+                {data: 'email'},
+                {data: 'phone_number'},
+                {data: 'ign'},
+                {data: 'contact_info'},
                 {data: 'options', responsivePriority: -1},
             ],
             columnDefs: [
                 {
+                    targets: 1,
+                    width: '100px'
+                },
+                {
                     targets: -1,
                     title: 'Actions',
+                    width: '150px',
                     orderable: false,
                     render: function(data, type, full, meta) {
                         var view = `<a href="javascript:;" class="btn btn-sm btn-clean btn-icon view-item" title="View details" data-toggle="modal" data-target="#modal-view-item" data-id="${full.id}" data-key="${full.id_key}">
@@ -50,6 +61,22 @@ var ListDatatable = function() {
 
 
                         return view + (full.user_type != "user" ? b_update + b_delete : '');
+                    },
+                },
+                {
+                    targets: -2,
+                    title: 'Contact Info.',
+                    width: '200px',
+                    render: function(data, type, full, meta) {
+                        var output = "";
+                        if(full.contact_info.length > 0){
+                            full.contact_info.forEach(function(item, index){
+                                var template = `<div><span class="label label-primary label-inline">${item.name}</span> ${item.value}</div>`;
+                                output += template;
+                            });
+                        }
+
+                        return output;
                     },
                 },
             ],
@@ -329,7 +356,7 @@ var ListDatatable = function() {
             },
         });
 
-        $('#update_repeat_item').repeater({
+        updateRepeater = $('#update_repeat_item').repeater({
             initEmpty: false,
             show: function() {
                 initAddField();
@@ -669,20 +696,44 @@ jQuery(document).ready(function() {
                     }
                     $('#modal-update-item [name="ign"]').val(result.user.ign);
                     var unions = "", clubs = "";
-                    var $repeater = $('#update_repeat_item').repeater();
-                    $repeater.setList([
-                        {
-                            'org.org_name': '1',
-                            'org.org_position': ['head']
-                        },
-                    ]);
+
+                    var template = `<div data-repeater-item="" class="form-group row align-items-center">
+                                        <div class="col-md-5">
+                                            <label>Name:</label>
+                                            <select class="form-control select2 org_name" name="org_name">
+                                                <option value=""></option>
+                                            </select>
+                                            <div class="d-md-none mb-2"></div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label>Position:</label>
+                                            <div class="checkbox-inline">
+                                                <label class="checkbox">
+                                                    <input name="org_position" value="head" type="checkbox"/>
+                                                    <span></span>
+                                                    Org. Head
+                                                </label>
+                                                <label class="checkbox">
+                                                    <input name="org_position" value="agent" type="checkbox"/>
+                                                    <span></span>
+                                                    Agent
+                                                </label>
+                                                <label class="checkbox">
+                                                    <input name="org_position" value="player" type="checkbox"/>
+                                                    <span></span>
+                                                    Player
+                                                </label>
+                                            </div>
+                                            <div class="d-md-none mb-2"></div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <a href="javascript:;" data-repeater-delete="" class="btn btn-sm font-weight-bolder btn-light-danger">
+                                                <i class="la la-trash-o"></i>Delete
+                                            </a>
+                                        </div>
+                                    </div>`;
+
                     result.user.user_organization.forEach(function(item, index){
-                        // $repeater.setList([
-                        //     {
-                        //         'org_name': item.organization.id,
-                        //         'org_position': ['head']
-                        //     },
-                        // ]);
                         if(clubs == ""){
                             clubs = "<h5>Club/s:</h5><ul>";
                         }
