@@ -22,7 +22,8 @@
         "laravel/passport": "^9.3",
         "laravel/tinker": "^2.0",
         "laravel/ui": "2.4",
-        "passbase/passbase-php": "*@dev"
+        "passbase/passbase-php": "*@dev",
+        "spatie/laravel-activitylog": "^3.16"
     },
     "require-dev": {
         "facade/ignition": "^2.0",
