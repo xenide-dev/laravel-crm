@@ -80,14 +80,14 @@
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-md-4">
-                                <label>Date: <span class="text-danger">*</span></label>
+                                <label>Date:</label>
                                 <div class="form-group">
                                     <input class="form-control" name="banned_date" type="date" id="example-datetime-local-input"/>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Player ID Number: <span class="text-danger">*</span></label>
+                                    <label>Player ID Number:</label>
                                     <input type="text" name="id_number" class="form-control" placeholder="Enter player ID number"/>
                                 </div>
                             </div>
@@ -269,7 +269,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Player ID Number:</label>
-                                    <input type="text" name="id_number" class="form-control" placeholder="Enter player ID number" readonly/>
+                                    <input type="text" name="id_number" class="form-control" readonly/>
                                 </div>
                             </div>
                         </div>
@@ -278,28 +278,34 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Telegram:</label>
-                                    <input type="text" name="telegram" class="form-control" placeholder="Enter telegram number" readonly/>
+                                    <input type="text" name="telegram" class="form-control" readonly/>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Whatsapp:</label>
-                                    <input type="text" name="whatsapp" class="form-control" placeholder="Enter whatsapp number" readonly/>
+                                    <input type="text" name="whatsapp" class="form-control" readonly/>
                                 </div>
                             </div>
                         </div>
                         <div class="separator separator-dashed my-5"></div>
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Email:</label>
-                                    <input type="email" name="email" class="form-control" placeholder="Enter email address" readonly/>
+                                    <input type="email" name="email" class="form-control" readonly/>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Phone:</label>
-                                    <input type="text" name="phone_number" class="form-control" placeholder="Enter phone number" readonly/>
+                                    <input type="text" name="phone_number" class="form-control" readonly/>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Country:</label>
+                                    <input type="text" name="country" class="form-control" readonly/>
                                 </div>
                             </div>
                         </div>
@@ -308,19 +314,19 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Facebook:</label>
-                                    <input type="text" name="facebook" class="form-control" placeholder="Enter facebook address / name" readonly/>
+                                    <input type="text" name="facebook" class="form-control" readonly/>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Instagram:</label>
-                                    <input type="text" name="instagram" class="form-control" placeholder="Enter instagram username" readonly/>
+                                    <input type="text" name="instagram" class="form-control" readonly/>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Twitter:</label>
-                                    <input type="text" name="twitter" class="form-control" placeholder="Enter twitter username" readonly/>
+                                    <input type="text" name="twitter" class="form-control" readonly/>
                                 </div>
                             </div>
                         </div>
@@ -328,19 +334,19 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>First Name:</label>
-                                    <input type="text" name="fname" class="form-control" placeholder="Enter first name" readonly/>
+                                    <input type="text" name="fname" class="form-control" readonly/>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Middle Name:</label>
-                                    <input type="text" name="mname" class="form-control" placeholder="Enter middle name" readonly/>
+                                    <input type="text" name="mname" class="form-control" readonly/>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Last Name:</label>
-                                    <input type="text" name="lname" class="form-control" placeholder="Enter last name" readonly/>
+                                    <input type="text" name="lname" class="form-control" readonly/>
                                 </div>
                             </div>
                         </div>

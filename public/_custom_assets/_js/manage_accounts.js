@@ -1,5 +1,9 @@
 "use strict";
 
+var frmValidation = null;
+var highest = 0;
+var orgData = null;
+
 var ListAccountDataTable = function() {
     var table = $('#list_acct_datatable');
 
@@ -117,6 +121,114 @@ var ListAccountDataTable = function() {
         });
     }
 
+    var initRepeater = function() {
+        $('#repeat_item').repeater({
+            initEmpty: false,
+            show: function() {
+                initAddField();
+                initOrgName();
+                $(this).slideDown();
+            },
+            hide: function(deleteElement) {
+                if(confirm('Are you sure you want to delete this element?')) {
+                    var repeatVal = $('#repeat_item').repeaterVal();
+                    // remove fields
+                    for(var i = 0; i <= highest + 2; i++){
+                        console.log(repeatVal);
+                        try {
+                            frmValidation.removeField('org[' + i + '][org_position][]');
+                            frmValidation.removeField('org[' + i + '][org_name]');
+                        }catch(err){
+                            // console.log(err);
+                        }
+                    }
+                    $(this).slideUp(deleteElement);
+                }
+            },
+        });
+    }
+
+    var initAddField = function() {
+        // TODO check here
+        try {
+            var repeatVal = $('#repeat_item').repeaterVal();
+            // remove fields
+            for(var i = 0; i <= highest + 2; i++){
+                console.log(repeatVal);
+                try {
+                    frmValidation.removeField('org[' + i + '][org_position][]');
+                    frmValidation.removeField('org[' + i + '][org_name]');
+                }catch(err){
+                    // console.log(err);
+                }
+            }
+            // readd again
+            if(repeatVal.org){
+                repeatVal.org.forEach(function(item, index){
+                    if(highest < index){
+                        highest = index;
+                    }
+                    frmValidation.addField('org[' + index + '][org_name]', {
+                        validators: {
+                            notEmpty: {
+                                message: "Please select an organization"
+                            }
+                        }
+                    });
+                    frmValidation.addField('org[' + index + '][org_position][]', {
+                        validators: {
+                            notEmpty: {
+                                message: "The position is required"
+                            }
+                        }
+                    });
+                });
+            }
+        } catch (err) {
+            // console.log(err);
+        }
+    }
+
+    var initOrgName = function() {
+        if(!orgData){
+            $.ajax({
+                url: "/api/basicload/organizations",
+                type: "POST",
+                dataType: "json",
+                data: {
+                    api_token: document.querySelector("meta[name='at']").getAttribute("content")
+                },
+                success: function(result, status, xhr){
+                    orgData = result;
+                    initSelect2();
+                },
+                error: function(xhr, status, error){
+                    console.log(xhr);
+                }
+            });
+        }else{
+            initSelect2();
+        }
+    }
+
+    var initSelect2 = function() {
+        var data = $.map(orgData, function (obj) {
+            var org_name = obj.name;
+            if(org_name){
+                obj.text = obj.id_number + " (" + org_name + ")";
+            }else{
+                obj.text = obj.id_number;
+            }
+            return obj;
+        });
+        // $('.select2-container').remove();
+        $('.org_name').select2({
+            placeholder: "Select Value",
+            data: data
+        });
+        $('.select2-container').css('width','100%');
+    }
+
     var initSettings = function() {
         // for data-switch
         $('[data-switch=true]').bootstrapSwitch();
@@ -135,7 +247,7 @@ var ListAccountDataTable = function() {
     }
 
     var initValidation = function () {
-        var frmValidation = FormValidation.formValidation(
+        frmValidation = FormValidation.formValidation(
             document.getElementById('frmCreateAccount'),
             {
                 fields: {
@@ -232,17 +344,6 @@ var ListAccountDataTable = function() {
         });
     }
 
-    var initTagify = function() {
-        var input = document.getElementById('club_ids');
-        var tagify1 = new Tagify(input, {
-            delimiters: ", ", // add new tags when a comma or a space character is entered
-        });
-        var input2 = document.getElementById('union_ids');
-        var tagify2 = new Tagify(input2, {
-            delimiters: ", ", // add new tags when a comma or a space character is entered
-        });
-    }
-
     return {
         //main function to initiate the module
         init: function() {
@@ -255,7 +356,9 @@ var ListAccountDataTable = function() {
             initCountry();
             initSettings();
             initValidation();
-            initTagify();
+            initRepeater();
+            initOrgName();
+            initAddField();
         }
     };
 

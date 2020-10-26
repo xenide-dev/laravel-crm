@@ -73,20 +73,20 @@ var ListDatatable = function() {
             document.getElementById(frm_Item),
             {
                 fields: {
-                    banned_date: {
-                        validators: {
-                            notEmpty: {
-                                message: 'Date is required'
-                            },
-                        }
-                    },
-                    id_number: {
-                        validators: {
-                            notEmpty: {
-                                message: 'Player ID number is required'
-                            },
-                        }
-                    },
+                    // banned_date: {
+                    //     validators: {
+                    //         notEmpty: {
+                    //             message: 'Date is required'
+                    //         },
+                    //     }
+                    // },
+                    // id_number: {
+                    //     validators: {
+                    //         notEmpty: {
+                    //             message: 'Player ID number is required'
+                    //         },
+                    //     }
+                    // },
                 },
                 plugins: {
                     trigger: new FormValidation.plugins.Trigger(),
@@ -210,39 +210,38 @@ var ListDatatable = function() {
     var initAddField = function() {
         // TODO check here
         try {
-            var repeatVal = $('#repeat_item').repeaterVal();
-            // remove fields
-            for(var i = 0; i <= highest + 2; i++){
-                console.log(repeatVal);
-                try {
-                    frmValidation.removeField('org[' + i + '][org_position][]');
-                    frmValidation.removeField('org[' + i + '][org_name]');
-                }catch(err){
-                    // console.log(err);
-                }
-            }
-            // readd again
-            if(repeatVal.org){
-                repeatVal.org.forEach(function(item, index){
-                    if(highest < index){
-                        highest = index;
-                    }
-                    frmValidation.addField('org[' + index + '][org_name]', {
-                        validators: {
-                            notEmpty: {
-                                message: "Please select an organization"
-                            }
-                        }
-                    });
-                    frmValidation.addField('org[' + index + '][org_position][]', {
-                        validators: {
-                            notEmpty: {
-                                message: "The position is required"
-                            }
-                        }
-                    });
-                });
-            }
+            // var repeatVal = $('#repeat_item').repeaterVal();
+            // // remove fields
+            // for(var i = 0; i <= highest + 2; i++){
+            //     try {
+            //         frmValidation.removeField('org[' + i + '][org_position][]');
+            //         frmValidation.removeField('org[' + i + '][org_name]');
+            //     }catch(err){
+            //         // console.log(err);
+            //     }
+            // }
+            // // readd again
+            // if(repeatVal.org){
+            //     repeatVal.org.forEach(function(item, index){
+            //         if(highest < index){
+            //             highest = index;
+            //         }
+            //         frmValidation.addField('org[' + index + '][org_name]', {
+            //             validators: {
+            //                 notEmpty: {
+            //                     message: "Please select an organization"
+            //                 }
+            //             }
+            //         });
+            //         frmValidation.addField('org[' + index + '][org_position][]', {
+            //             validators: {
+            //                 notEmpty: {
+            //                     message: "The position is required"
+            //                 }
+            //             }
+            //         });
+            //     });
+            // }
         } catch (err) {
             // console.log(err);
         }
@@ -382,6 +381,7 @@ jQuery(document).ready(function() {
                     $('#modal-view-item [name="lname"]').val(result.user.lname);
                     $('#modal-view-item [name="email"]').val(result.user.email);
                     $('#modal-view-item [name="phone_number"]').val(result.user.phone_number);
+                    $('#modal-view-item [name="country"]').val(result.user.country);
                     $('#modal-view-item #tinymce-body').html(result.user.notes);
                     // $('#modal-view-item [name="ign"]').val(result.user.ign);
                     var unions = "", clubs = "";

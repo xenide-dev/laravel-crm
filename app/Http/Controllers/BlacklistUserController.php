@@ -14,8 +14,7 @@ class BlacklistUserController extends Controller
 
     public function create(Request $request) {
         $data = $request->validate([
-            'id_number' => ['required', 'unique:blacklist_users'],
-            'banned_date' => ['required'],
+            'id_number' => ['unique:blacklist_users'],
         ]);
 
         $fname = $mname = $lname = "";
@@ -42,6 +41,9 @@ class BlacklistUserController extends Controller
         }
         if($request->input("country")){
             $data["country"] = $request->input("country");
+        }
+        if($request->input("banned_date")){
+            $data["banned_date"] = $request->input("banned_date");
         }
         $data["full_name"] = ucwords(sprintf("%s %s %s", $fname, $mname, $lname));
 
@@ -84,10 +86,12 @@ class BlacklistUserController extends Controller
         // if org exist
         if($request->input("org")){
             foreach ($request->input("org") as $org){
-                $blacklist->userOrganization()->create([
-                    "organization_id" => $org["org_name"],
-                    "organization_position" => implode("|", $org["org_position"])
-                ]);
+                if($org["org_name"]){
+                    $blacklist->userOrganization()->create([
+                        "organization_id" => $org["org_name"],
+                        "organization_position" => implode("|", $org["org_position"])
+                    ]);
+                }
             }
         }
 

@@ -74,63 +74,32 @@ class AccountController extends Controller
                 "value" => $request->input("whatsapp")
             ]);
         }
-
-        // retrieve orgs and save
-        if($request->input("club_id") != ""){
-            $club_ids = json_decode($request->input("club_id"));
-            foreach ($club_ids as $club_id){
-                // check if already existing
-                $club = Organization::where("id_number", $club_id->value)->get()->first();
-                if($club){
-                    $user->userOrganization()->create([
-                        "organization_id" => $club->id,
-                        "organization_position" => "" // empty since we don't know the position
-                    ]);
-
-                }else{
-                    // add new org to table
-                    $org = Organization::create([
-                        "id_number" => $club_id->value,
-                        "type" => "Club",
-                        "added_by_id" => auth()->user()->id
-                    ]);
-                    $org->save();
-
-                    // now assign to user
-                    $user->userOrganization()->create([
-                        "organization_id" => $org->id,
-                        "organization_position" => "" // empty since we don't know the position
-                    ]);
-                }
-            }
+        if($request->input("venmo") != ""){
+            $user->contactInfo()->create([
+                "name" => "venmo",
+                "value" => $request->input("venmo")
+            ]);
+        }
+        if($request->input("cashapp") != ""){
+            $user->contactInfo()->create([
+                "name" => "cashapp",
+                "value" => $request->input("cashapp")
+            ]);
+        }
+        if($request->input("paypal") != ""){
+            $user->contactInfo()->create([
+                "name" => "paypal",
+                "value" => $request->input("paypal")
+            ]);
         }
 
-        if($request->input("union_id") != ""){
-            $union_ids = json_decode($request->input("union_id"));
-            foreach ($union_ids as $union_id){
-                // check if already existing
-                $union = Organization::where("id_number", $union_id->value)->get()->first();
-                if($union){
-                    $user->userOrganization()->create([
-                        "organization_id" => $union->id,
-                        "organization_position" => "" // empty since we don't know the position
-                    ]);
-
-                }else{
-                    // add new org to table
-                    $org = Organization::create([
-                        "id_number" => $union_id->value,
-                        "type" => "Union",
-                        "added_by_id" => auth()->user()->id
-                    ]);
-                    $org->save();
-
-                    // now assign to user
-                    $user->userOrganization()->create([
-                        "organization_id" => $org->id,
-                        "organization_position" => "" // empty since we don't know the position
-                    ]);
-                }
+        // retrieve orgs and save
+        if($request->input("org")){
+            foreach ($request->input("org") as $org){
+                $user->userOrganization()->create([
+                    "organization_id" => $org["org_name"],
+                    "organization_position" => implode("|", $org["org_position"])
+                ]);
             }
         }
 

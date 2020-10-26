@@ -148,17 +148,67 @@
                             </div>
                         </div>
                         <div class="separator separator-dashed my-5"></div>
+                        <div id="repeat_item">
+                            <div class="form-group row">
+                                <label class="col-lg-2 col-form-label text-right">Organization:</label>
+                                <div data-repeater-list="org" class="col-lg-10">
+                                    <div data-repeater-item="" class="form-group row align-items-center">
+                                        <div class="col-md-5">
+                                            <label>Name:</label>
+                                            <select class="form-control select2 org_name" name="org_name">
+                                                <option value=""></option>
+                                            </select>
+                                            <div class="d-md-none mb-2"></div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label>Position:</label>
+                                            <div class="checkbox-inline">
+                                                <label class="checkbox">
+                                                    <input name="org_position" value="head" type="checkbox"/>
+                                                    <span></span>
+                                                    Org. Head
+                                                </label>
+                                                <label class="checkbox">
+                                                    <input name="org_position" value="agent" type="checkbox"/>
+                                                    <span></span>
+                                                    Agent
+                                                </label>
+                                                <label class="checkbox">
+                                                    <input name="org_position" value="player" type="checkbox"/>
+                                                    <span></span>
+                                                    Player
+                                                </label>
+                                            </div>
+                                            <div class="d-md-none mb-2"></div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <a href="javascript:;" data-repeater-delete="" class="btn btn-sm font-weight-bolder btn-light-danger">
+                                                <i class="la la-trash-o"></i>Delete
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-lg-2 col-form-label text-right"></label>
+                                <div class="col-lg-4">
+                                    <a href="javascript:;" data-repeater-create="" class="btn btn-sm font-weight-bolder btn-light-primary">
+                                        <i class="la la-plus"></i>Add</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="separator separator-dashed my-5"></div>
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Club ID:</label>
-                                    <input type="text" class="form-control" name="club_id" id="club_ids" placeholder="Please enter club ID" value="{{ old("club_id") }}"/>
+                                    <label>Telegram:</label>
+                                    <input type="text" class="form-control" name="telegram" placeholder="Please enter telegram number" value="{{ old("telegram") }}"/>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Union ID:</label>
-                                    <input type="text" class="form-control" name="union_id" id="union_ids" placeholder="Please enter union ID" value="{{ old("union_id") }}"/>
+                                    <label>Whatsapp:</label>
+                                    <input type="text" class="form-control" name="whatsapp" placeholder="Please enter whatsapp number" value="{{ old("whatsapp") }}"/>
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -170,16 +220,22 @@
                         </div>
                         <div class="separator separator-dashed my-5"></div>
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Telegram:</label>
-                                    <input type="text" class="form-control" name="telegram" placeholder="Please enter telegram number" value="{{ old("club_id") }}"/>
+                                    <label>Venmo:</label>
+                                    <input type="text" class="form-control" name="venmo" placeholder="Please enter a value" value="{{ old("venmo") }}"/>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Whatsapp:</label>
-                                    <input type="text" class="form-control" name="whatsapp" placeholder="Please enter whatsapp number" value="{{ old("union_id") }}"/>
+                                    <label>Cashapp:</label>
+                                    <input type="text" class="form-control" name="cashapp" placeholder="Please enter a value" value="{{ old("cashapp") }}"/>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Paypal:</label>
+                                    <input type="text" class="form-control" name="paypal" placeholder="Please enter a value" value="{{ old("paypal") }}"/>
                                 </div>
                             </div>
                         </div>
@@ -282,17 +338,26 @@
                         </div>
                     </div>
                     <div class="separator separator-dashed my-5"></div>
+                    <div class="row user_organization">
+                        <div class="col-md-12">
+                            <h5>Organizations:</h5>
+                            <ul>
+                                <li>asds</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="separator separator-dashed my-5"></div>
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label>Club ID:</label>
-                                <input type="text" class="form-control" name="club_id" readonly/>
+                                <label>Telegram:</label>
+                                <input type="text" class="form-control" name="telegram" readonly/>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label>Union ID:</label>
-                                <input type="text" class="form-control" name="union_id" readonly/>
+                                <label>Whatsapp:</label>
+                                <input type="text" class="form-control" name="whatsapp" readonly/>
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -304,16 +369,22 @@
                     </div>
                     <div class="separator separator-dashed my-5"></div>
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="form-group">
-                                <label>Telegram:</label>
-                                <input type="text" class="form-control" name="telegram" readonly/>
+                                <label>Venmo:</label>
+                                <input type="text" class="form-control" name="venmo" readonly/>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="form-group">
-                                <label>Whatsapp:</label>
-                                <input type="text" class="form-control" name="whatsapp" readonly/>
+                                <label>Cashapp:</label>
+                                <input type="text" class="form-control" name="cashapp" readonly/>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Paypal:</label>
+                                <input type="text" class="form-control" name="paypal" readonly/>
                             </div>
                         </div>
                     </div>

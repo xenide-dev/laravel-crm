@@ -222,7 +222,8 @@ class ApiController extends Controller
                 $nestedData['id'] = $blacklist->id;
                 $nestedData['id_key'] = Hash::make($blacklist->id . config("app.key"));
                 $nestedData['id_number'] = $blacklist->id_number;
-                $nestedData['created_at'] = date('j M Y',strtotime($blacklist->banned_date));
+                $banned_data = ($blacklist->banned_date) ? date('j M Y',strtotime($blacklist->banned_date)) : "----";
+                $nestedData['created_at'] = $banned_data;
                 $nestedData['country'] = $blacklist->country;
                 $nestedData['name'] = $blacklist->fname . " " . $blacklist->mname . " " . $blacklist->lname;
                 $nestedData['organizations'] = "";
