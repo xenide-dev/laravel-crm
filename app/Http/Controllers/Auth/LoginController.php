@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class LoginController extends Controller
 {
@@ -46,5 +47,8 @@ class LoginController extends Controller
         DB::table("users")
             ->where("id", $user->id)
             ->update(["last_online_at" => now()]);
+
+        // log user
+        Log::channel("slack")->info("{$user->full_name} has logged in to our system at " . date('j M Y h:i a',strtotime(now())));
     }
 }
