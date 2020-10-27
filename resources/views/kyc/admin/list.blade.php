@@ -89,7 +89,7 @@
 @endpush
 
 @push("page_scripts")
-    <script src="{{ asset("_custom_assets/_js/util/notify.js") }}"></script>
-    <script src="{{ asset("_custom_assets/_js/kyc/list.js") }}"></script>
+    <script src="{{ asset("_custom_assets/_js/util/notify.js?v=" . config("_scripts_versioning.scripts.ver")) }}"></script>
+    <script src="{{ asset("_custom_assets/_js/kyc/list.js?v=" . config("_scripts_versioning.scripts.ver")) }}"></script>
 @endpush
 

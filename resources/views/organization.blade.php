@@ -108,5 +108,5 @@
 @endpush
 
 @push("page_scripts")
-    <script src="{{ asset("_custom_assets/_js/submit_organization.js") }}"></script>
+    <script src="{{ asset("_custom_assets/_js/submit_organization.js?v=" . config("_scripts_versioning.scripts.ver")) }}"></script>
 @endpush

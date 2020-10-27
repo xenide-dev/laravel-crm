@@ -71,6 +71,9 @@ Route::get("/debug", function() {
     dd(json_decode($body));
 });
 
+Route::get("/test-notif", function() {
+   \Illuminate\Support\Facades\Log::channel("slack-error")->error("error");
+});
 
 // for apis
 //Route::group([

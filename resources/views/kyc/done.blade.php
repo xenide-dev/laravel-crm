@@ -55,9 +55,9 @@
     type="text/javascript"
     src="https://unpkg.com/@passbase/button/button.js"
 ></script>
-<script src="{{ asset("_custom_assets/_js/util/notify.js") }}"></script>
-<script src="{{ asset("_custom_assets/_js/kyc/index.js") }}"></script>
-<script src="{{ asset("_custom_assets/_js/kyc/validation.js") }}"></script>
+<script src="{{ asset("_custom_assets/_js/util/notify.js?v=" . config("_scripts_versioning.scripts.ver")) }}"></script>
+<script src="{{ asset("_custom_assets/_js/kyc/index.js?v=" . config("_scripts_versioning.scripts.ver")) }}"></script>
+<script src="{{ asset("_custom_assets/_js/kyc/validation.js?v=" . config("_scripts_versioning.scripts.ver")) }}"></script>
 <!--end::Page Scripts-->
 </body>
 <!--end::Body-->

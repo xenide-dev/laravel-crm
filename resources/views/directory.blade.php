@@ -624,7 +624,7 @@
 @endpush
 
 @push("page_scripts")
-    <script src="{{ asset("_custom_assets/_js/util/notify.js") }}"></script>
-    <script src="{{ asset("_custom_assets/_js/_country_codes.js") }}"></script>
-    <script src="{{ asset("_custom_assets/_js/submit_blacklisted.js") }}"></script>
+    <script src="{{ asset("_custom_assets/_js/util/notify.js?v=" . config("_scripts_versioning.scripts.ver")) }}"></script>
+    <script src="{{ asset("_custom_assets/_js/_country_codes.js?v=" . config("_scripts_versioning.scripts.ver")) }}"></script>
+    <script src="{{ asset("_custom_assets/_js/submit_blacklisted.js?v=" . config("_scripts_versioning.scripts.ver")) }}"></script>
 @endpush

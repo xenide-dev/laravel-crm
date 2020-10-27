@@ -259,5 +259,5 @@
 @endpush
 
 @push("page_scripts")
-    <script src="{{ asset("_custom_assets/_js/ticketlist.js") }}"></script>
+    <script src="{{ asset("_custom_assets/_js/ticketlist.js?v=" . config("_scripts_versioning.scripts.ver")) }}"></script>
 @endpush

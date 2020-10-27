@@ -37,7 +37,7 @@ return [
     'channels' => [
         'stack' => [
             'driver' => 'stack',
-            'channels' => ['single'],
+            'channels' => ['slack', 'slack-error'],
             'ignore_exceptions' => false,
         ],
 
@@ -54,12 +54,20 @@ return [
             'days' => 14,
         ],
 
+        // for slacks
         'slack' => [
             'driver' => 'slack',
             'url' => env('LOG_SLACK_WEBHOOK_URL'),
             'username' => 'Laravel Log',
             'emoji' => ':boom:',
             'level' => 'critical',
+        ],
+        'slack-error' => [
+            'driver' => 'slack',
+            'url' => env('LOG_SLACK_ERROR_WEBHOOK_URL'),
+            'username' => 'System Administrator',
+            'emoji' => ':boom:',
+            'level' => 'error',
         ],
 
         'papertrail' => [
