@@ -690,7 +690,8 @@ jQuery(document).ready(function() {
                 id_key: $this.data("key"),
             },
             success: function(result, status, xhr){
-                $("#modal-update-item input").val('');
+                // clear all fields except csrf token
+                $("#modal-update-item input:not([name='_token'])").val('');
                 $('.user_organization').html("<h3>Organizations:</h3>");
                 if(result.status == "success"){
                     $('#modal-update-item [name="banned_date"]').val(result.banned_date);

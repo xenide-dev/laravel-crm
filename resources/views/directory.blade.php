@@ -283,8 +283,7 @@
                         <i aria-hidden="true" class="ki ki-close"></i>
                     </button>
                 </div>
-                <form class="form" action="{{ route("blacklist-create") }}" id="frmViewItem" method="POST">
-                    @csrf
+                <form class="form" id="frmViewItem" method="POST">
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-md-4">
@@ -590,8 +589,7 @@
                         <i aria-hidden="true" class="ki ki-close"></i>
                     </button>
                 </div>
-                <form class="form" action="{{ route("ticket-create") }}" id="frmOrgItem" method="POST">
-                    @csrf
+                <form class="form" id="frmOrgItem" method="POST">
                     <div class="modal-body">
                         <div class="form-group">
                             <label>Organization ID:</label>

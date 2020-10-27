@@ -127,10 +127,10 @@ class BlacklistUserController extends Controller
 
     public function update(Request $request) {
         // TODO
+        $b = BlacklistUser::where("id_number", $request->input("id_number"))->get()->first();
         $data = $request->validate([
-            'id_number' => ['unique:blacklist_users'],
+            'id_number' => ['unique:blacklist_users,id_number,' . $b->id],
         ]);
-
         $fname = $mname = $lname = "";
         if($request->input("fname")){
             $data["fname"] = ucwords($request->input("fname"));
