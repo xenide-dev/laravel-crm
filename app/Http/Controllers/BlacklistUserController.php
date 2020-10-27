@@ -161,76 +161,53 @@ class BlacklistUserController extends Controller
         }
         $data["full_name"] = ucwords(sprintf("%s %s %s", $fname, $mname, $lname));
 
-        $blacklist = BlacklistUser::create($data);
-        $blacklist->added_by_id = auth()->user()->id;
-        $blacklist->save();
+        $blacklist = BlacklistUser::where("id", $b->id)->update($data);
 
         // add contact infos
         if($request->input("telegram")){
-            $blacklist->blacklistContactInfo()->create([
-                "name" => "telegram",
+            $b->blacklistContactInfo()->where("name", "telegram")->update([
                 "value" => $request->input("telegram"),
             ]);
         }
         if($request->input("facebook")){
-            $blacklist->blacklistContactInfo()->create([
-                "name" => "facebook",
+            $b->blacklistContactInfo()->where("name", "facebook")->update([
                 "value" => $request->input("facebook"),
             ]);
         }
         if($request->input("twitter")){
-            $blacklist->blacklistContactInfo()->create([
-                "name" => "twitter",
+            $b->blacklistContactInfo()->where("name", "twitter")->update([
                 "value" => $request->input("twitter"),
             ]);
         }
         if($request->input("whatsapp")){
-            $blacklist->blacklistContactInfo()->create([
-                "name" => "whatsapp",
+            $b->blacklistContactInfo()->where("name", "whatsapp")->update([
                 "value" => $request->input("whatsapp"),
             ]);
         }
         if($request->input("instagram")){
-            $blacklist->blacklistContactInfo()->create([
-                "name" => "instagram",
+            $b->blacklistContactInfo()->where("name", "instagram")->update([
                 "value" => $request->input("instagram"),
             ]);
         }
         if($request->input("venmo")){
-            $blacklist->blacklistContactInfo()->create([
-                "name" => "venmo",
+            $b->blacklistContactInfo()->where("name", "venmo")->update([
                 "value" => $request->input("venmo"),
             ]);
         }
         if($request->input("cashapp")){
-            $blacklist->blacklistContactInfo()->create([
-                "name" => "cashapp",
+            $b->blacklistContactInfo()->where("name", "cashapp")->update([
                 "value" => $request->input("cashapp"),
             ]);
         }
         if($request->input("paypal")){
-            $blacklist->blacklistContactInfo()->create([
-                "name" => "paypal",
+            $b->blacklistContactInfo()->where("name", "paypal")->update([
                 "value" => $request->input("paypal"),
             ]);
         }
 
-        // if org exist
-        if($request->input("org")){
-            foreach ($request->input("org") as $org){
-                if($org["org_name"]){
-                    $blacklist->userOrganization()->create([
-                        "organization_id" => $org["org_name"],
-                        "organization_position" => implode("|", $org["org_position"])
-                    ]);
-                }
-            }
-        }
-
-        // TODO notify all user to the newly added blacklist
 
         return redirect()->route("directory")->with([
-            "status" => "success"
+            "status-update" => "success"
         ]);
     }
 }

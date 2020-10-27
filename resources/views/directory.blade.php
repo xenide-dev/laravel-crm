@@ -24,6 +24,11 @@
             Success! The user has been added to the blacklist
         </div>
     @endif
+    @if (session('status-update'))
+        <div class="alert alert-success">
+            Success! The user's information has been updated
+        </div>
+    @endif
     <div class="card card-custom">
         <div class="card-header ribbon ribbon-top ribbon-ver">
             <div class="ribbon-target bg-dark" style="top: -2px; @can("add-directory") right: 180px; @endcan @cannot("add-directory") right: 20px; @endcan">

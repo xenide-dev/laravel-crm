@@ -92,6 +92,6 @@
 @endpush
 
 @push("page_scripts")
-    <script src="{{ asset("_custom_assets/_js/submit_ticket.js?v=" . config("_scripts_versioning.scripts.ver")) }}"></script>
+
 @endpush
 
