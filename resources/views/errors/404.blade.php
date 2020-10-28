@@ -3,7 +3,7 @@
     <!--begin::Head-->
     <head><base href="../../../">
         <meta charset="utf-8" />
-        <title>Error Page - 1 | Keenthemes</title>
+        <title>Oops! There's something wrong</title>
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <link rel="canonical" href="https://keenthemes.com/metronic" />

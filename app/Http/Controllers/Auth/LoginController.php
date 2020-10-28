@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\AGeeSeaDev\Utils\Log;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -9,7 +10,6 @@ use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 
 class LoginController extends Controller
 {
@@ -49,11 +49,13 @@ class LoginController extends Controller
             ->where("id", $user->id)
             ->update(["last_online_at" => now()]);
 
-        // log user
-        try {
-            Log::channel("slack")->info("{$user->full_name} has logged in to our system at " . date('j M Y h:i a',strtotime(now())));
-        } catch(\Exception $e){
+        Log::info("{$user->full_name} has logged in to our system at " . date('j M Y h:i a',strtotime(now())));
 
-        }
+        // log user
+//        try {
+//            Log::channel("slack")->info("{$user->full_name} has logged in to our system at " . date('j M Y h:i a',strtotime(now())));
+//        } catch(\Exception $e){
+//
+//        }
     }
 }
