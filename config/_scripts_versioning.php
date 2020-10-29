@@ -1,6 +1,6 @@
 <?php
     // change this value if you have changes to your scripts
-    $version = "1.0.0";
+    $version = "1.0.1";
 
 return [
 
