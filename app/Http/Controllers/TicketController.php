@@ -16,12 +16,17 @@ class TicketController extends Controller
     public function create(Request $request) {
         $data = $request->validate([
             'message' => ['required'],
+            'subjects' => ['required'],
         ]);
-        $fullNames = json_decode($request->input("full_names"));
-        $input_names = "";
-        foreach ($fullNames as $fullName) {
-            $input_names .= ucwords($fullName->value) . ", ";
+        $input_names = $fullNames = "";
+        if($request->input("full_names")){
+            $fullNames = json_decode($request->input("full_names"));
+            $input_names = "";
+            foreach ($fullNames as $fullName) {
+                $input_names .= ucwords($fullName->value) . ", ";
+            }
         }
+
 
         $data["status"] = "Pending";
         $data["input_names"] = $input_names;
@@ -29,15 +34,17 @@ class TicketController extends Controller
         $data["uuid_ticket"] = Str::uuid();
         $ticket = Ticket::create($data);
 
-        foreach ($fullNames as $fullName){
-            // existing
-            if(isset($fullName->id)){
-                $nestData["reported_user_id"] = $fullName->id;
-                $nestData["status"] = "Pending";
-                $ticket->ticket_item()->create($nestData);
-            }else{
-                // change ticket status to reviewed if done adding by admin
-                // manual adding by admin
+        if($fullNames != "") {
+            foreach ($fullNames as $fullName){
+                // existing
+                if(isset($fullName->id)){
+                    $nestData["reported_user_id"] = $fullName->id;
+                    $nestData["status"] = "Pending";
+                    $ticket->ticket_item()->create($nestData);
+                }else{
+                    // change ticket status to reviewed if done adding by admin
+                    // manual adding by admin
+                }
             }
         }
         return redirect()->route("tickets")->with([

@@ -299,6 +299,7 @@ class ApiController extends Controller
 
                 $nestedData['id'] = $ticket->id;
                 $nestedData['created_at'] = date('j M Y h:i a',strtotime($ticket->created_at));
+                $nestedData['subjects'] = $ticket->subjects;
                 $nestedData['input_names'] = $ticket->input_names;
                 $nestedData['status'] = "<span class='label label-warning label-inline'>$ticket->status</span>";
                 $nestedData['options'] = "&emsp;<a href='{$show}' title='SHOW' ><span class='glyphicon glyphicon-list'></span></a>

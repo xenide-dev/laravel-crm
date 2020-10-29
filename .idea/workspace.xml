@@ -25,7 +25,14 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1e925082-d8f8-4772-a0bb-7b633c448e86" name="Default Changelist" comment="Added modify privilege page" />
+    <list default="true" id="1e925082-d8f8-4772-a0bb-7b633c448e86" name="Default Changelist" comment="Added modify privilege page">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ApiController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ApiController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TicketController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TicketController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Ticket.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Ticket.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/_custom_assets/_js/submit_ticket.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/_custom_assets/_js/submit_ticket.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/tickets.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/tickets.blade.php" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -247,6 +254,13 @@
       <workItem from="1603789920407" duration="14359000" />
       <workItem from="1603877032853" duration="1125000" />
       <workItem from="1603879251879" duration="12166000" />
+      <workItem from="1603895629040" duration="186000" />
+      <workItem from="1603962515559" duration="28000" />
+      <workItem from="1603962585718" duration="13000" />
+      <workItem from="1603962617050" duration="449000" />
+      <workItem from="1603965053813" duration="310000" />
+      <workItem from="1603967056767" duration="3185000" />
+      <workItem from="1603976772632" duration="3089000" />
     </task>
     <task id="LOCAL-00001" summary="Added modify privilege page">
       <created>1602773794246</created>
@@ -314,6 +328,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="552" y="178" key="#Deployment/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602767435729" />
+    <state x="716" y="340" key="#Notifications" timestamp="1603965060641">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="716" y="340" key="#Notifications/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1603965060641" />
     <state x="414" y="175" width="1092" height="728" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1602871079823">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

@@ -34,6 +34,7 @@ var ListDatatable = function () {
             columns: [
                 {data: 'id'},
                 {data: 'created_at'},
+                {data: 'subjects'},
                 {data: 'input_names'},
                 {data: 'status'},
                 {data: 'options', responsivePriority: -1},
@@ -112,25 +113,25 @@ var ListDatatable = function () {
                 maxItems  : 5
             }
         });
-        tagifyTo.on('add', function(e){
-            var template = `<div id="node-${convertToSlug(e.detail.data.value)}">
-                                <p>For <b>${e.detail.data.value}</b>:</p>
-                                <ul>
-                                    ${e.detail.data.id ? '' : `<li>ID Number: <i>change this line</i></li>` }
-                                    <li>Organization: <i>change this line</i></li>
-                                    <li>Body message: <i>change this line</i></li>
-                                </ul>
-                           </div>`;
-            tinymce.activeEditor.setContent(tinymce.activeEditor.getContent() + template);
-        });
-        tagifyTo.on('remove', function(e){
-            try {
-                var id = "node-" + convertToSlug(e.detail.data.value);
-                tinymce.activeEditor.dom.remove(id);
-            }catch(err) {
-                console.log(err);
-            }
-        });
+        // tagifyTo.on('add', function(e){
+        //     var template = `<div id="node-${convertToSlug(e.detail.data.value)}">
+        //                         <p>For <b>${e.detail.data.value}</b>:</p>
+        //                         <ul>
+        //                             ${e.detail.data.id ? '' : `<li>ID Number: <i>change this line</i></li>` }
+        //                             <li>Organization: <i>change this line</i></li>
+        //                             <li>Body message: <i>change this line</i></li>
+        //                         </ul>
+        //                    </div>`;
+        //     tinymce.activeEditor.setContent(tinymce.activeEditor.getContent() + template);
+        // });
+        // tagifyTo.on('remove', function(e){
+        //     try {
+        //         var id = "node-" + convertToSlug(e.detail.data.value);
+        //         tinymce.activeEditor.dom.remove(id);
+        //     }catch(err) {
+        //         console.log(err);
+        //     }
+        // });
     }
     var initSubmitReport = function () {
         tinymce.init({
@@ -146,10 +147,10 @@ var ListDatatable = function () {
             document.getElementById(frm_Item),
             {
                 fields: {
-                    full_names: {
+                    subjects: {
                         validators: {
                             notEmpty: {
-                                message: 'Names is required'
+                                message: 'Subject is required'
                             },
                         }
                     },

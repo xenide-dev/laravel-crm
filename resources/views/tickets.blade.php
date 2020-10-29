@@ -52,7 +52,8 @@
                         <tr>
                             <th>Ticket ID</th>
                             <th>Date</th>
-                            <th>Names</th>
+                            <th>Subject</th>
+                            <th>Names / IDs</th>
                             <th>Status</th>
                             <th>Actions</th>
                         </tr>
@@ -76,7 +77,12 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label>Subject:</label>
-                            <input id="report_names" class="form-control tagify" name='full_names' placeholder="Add subject"/>
+                            <input class="form-control" name='subjects' placeholder="Add subject"/>
+                        </div>
+                        <div class="form-group">
+                            <label>Names / IDs:</label>
+                            <input id="report_names" class="form-control tagify" name='full_names' placeholder="Add names / ids"/>
+                            <small>Please add here the names/ids you want to report</small>
                         </div>
                         <div class="separator separator-dashed my-5"></div>
                         <div class="form-group">
