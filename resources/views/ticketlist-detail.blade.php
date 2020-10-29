@@ -9,6 +9,11 @@
 @endsection
 
 @section("content")
+    @if (session('status'))
+        <div class="alert alert-success">
+            Success! The user has been added to the reported list
+        </div>
+    @endif
     <div class="card card-custom">
         <div class="card-header">
             <div class="d-flex align-items-center my-2">
@@ -54,10 +59,10 @@
                     </div>
                     <div class="separator separator-solid my-6"></div>
                     <div class="mb-6">
-                        <p class="font-weight-bold">Reported Names:</p>
+                        <p class="font-weight-bold">Reported Names/IDs:</p>
                         @foreach($input_names as $input_name)
                             @if($input_name != "")
-                                <button type="button" class="btn btn-warning btn-sm mr-2 reported-user" data-toggle="modal" data-target="#modal-add-item" data-value="{{ $input_name }}">{{ $input_name }}</button>
+                                <button type="button" class="btn btn-warning btn-sm mr-2 reported-user" data-toggle="modal" data-target="#modal-add-item" data-value="{{ trim($input_name) }}">{{ trim($input_name) }}</button>
                             @endif
                         @endforeach
                     </div>
@@ -131,26 +136,30 @@
             </div>
         </form>
     </div>
-    <!-- Modal: Add Account -->
+    <!-- Modal: Add Reported User -->
     <div class="modal fade" id="modal-add-item" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="modal-add-item" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Create Ticket</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Add user to reported list</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <i aria-hidden="true" class="ki ki-close"></i>
                     </button>
                 </div>
-                <form class="form" action="{{ route("ticket-create") }}" id="frmCreateItem" method="POST">
+                <form class="form" action="{{ route("create_reported_user", [$ticket->uuid_ticket, $ticket->id]) }}" id="frmCreateItem" method="POST">
                     @csrf
                     <div class="modal-body">
                         <div class="form-group">
                             <label>Name:</label>
-                            <input id="full_name" class="form-control" name='full_name' readonly="readonly"/>
+                            <input id="full_name" class="form-control" name='full_name'/>
                         </div>
                         <div class="form-group">
                             <label>ID Number:</label>
                             <input id="id_number" class="form-control" name='id_number'/>
+                        </div>
+                        <div class="form-group">
+                            <label>Additional Information:</label>
+                            <textarea id="other_info" name="other_info" class="tox-target"></textarea>
                         </div>
                         <div class="separator separator-dashed my-5"></div>
                         <div class="form-group row">

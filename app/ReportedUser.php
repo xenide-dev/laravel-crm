@@ -11,7 +11,7 @@ class ReportedUser extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        "full_name", "id_number"
+        "full_name", "id_number", "other_info", "added_by_id"
     ];
 
     // mutators

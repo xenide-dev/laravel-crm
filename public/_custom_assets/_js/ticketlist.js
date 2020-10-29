@@ -46,13 +46,13 @@ var ListDatatable = function () {
             document.getElementById(frm_Item),
             {
                 fields: {
-                    id_number: {
-                        validators: {
-                            notEmpty: {
-                                message: 'Player ID number is required'
-                            },
-                        }
-                    },
+                    // id_number: {
+                    //     validators: {
+                    //         notEmpty: {
+                    //             message: 'Player ID number is required'
+                    //         },
+                    //     }
+                    // },
                 },
                 plugins: {
                     trigger: new FormValidation.plugins.Trigger(),
@@ -100,7 +100,7 @@ var ListDatatable = function () {
                             text: "This user will be added to the reported list",
                             icon: "warning",
                             showCancelButton: true,
-                            confirmButtonText: "Yes, create it now!",
+                            confirmButtonText: "Yes, add it now!",
                             cancelButtonText: "No, cancel!",
                             reverseButtons: true,
                             customClass: {
@@ -109,42 +109,7 @@ var ListDatatable = function () {
                             }
                         }).then(function(result) {
                             if (result.value) {
-                                // TODO update send to api
-                                // var object = {};
-                                // var formData = $("#frmCreateItem").serializeArray();
-                                // formData.forEach((value, key) => {
-                                //     // Reflect.has in favor of: object.hasOwnProperty(key)
-                                //     if(!Reflect.has(object, key)){
-                                //         object[key] = value;
-                                //         return;
-                                //     }
-                                //     if(!Array.isArray(object[key])){
-                                //         object[key] = [object[key]];
-                                //     }
-                                //     object[key].push(value);
-                                // });
-                                // var json = JSON.stringify(object);
-                                // $.ajax({
-                                //     url: "/api/reported_user/create",
-                                //     type: "POST",
-                                //     dataType: "json",
-                                //     data: {
-                                //         api_token: document.querySelector("meta[name='at']").getAttribute("content"),
-                                //         data: object
-                                //     },
-                                //     success: function(result, status, xhr){
-                                //         if(result.status == "success"){
-                                //
-                                //         }else{
-                                //             console.log("error creating");
-                                //         }
-                                //     },
-                                //     error: function(xhr, status, error){
-                                //         xhr.responseJSON.errors.name.forEach(function(item, index) {
-                                //             notify("Error", item, "danger");
-                                //         });
-                                //     }
-                                // });
+                                $("#" + frm_Item).submit();
                             }
                         });
                     }else{
@@ -244,6 +209,7 @@ var ListDatatable = function () {
                 {data: 'id'},
                 {data: 'created_at'},
                 {data: 'from'},
+                {data: 'subjects'},
                 {data: 'input_names'},
                 {data: 'status'},
                 {data: 'other_info'},
@@ -358,35 +324,85 @@ var ListDatatable = function () {
 
     var initAddField = function() {
         // TODO check here
-        var repeatVal = $('#repeat_item').repeaterVal();
-        // remove fields
-        for(var i = 0; i <= highest + 2; i++){
-            try {
-                frmValidation.removeField('org[' + i + '][org_position][]');
-                frmValidation.removeField('org[' + i + '][org_name]');
-            }catch(err){
-                // console.log(err);
-            }
-        }
-        // readd again
-        repeatVal.org.forEach(function(item, index){
-            if(highest < index){
-                highest = index;
-            }
-            frmValidation.addField('org[' + index + '][org_name]', {
-                validators: {
-                    notEmpty: {
-                        message: "Please select an organization"
-                    }
-                }
-            });
-            frmValidation.addField('org[' + index + '][org_position][]', {
-                validators: {
-                    notEmpty: {
-                        message: "The position is required"
-                    }
-                }
-            });
+        // var repeatVal = $('#repeat_item').repeaterVal();
+        // // remove fields
+        // for(var i = 0; i <= highest + 2; i++){
+        //     try {
+        //         frmValidation.removeField('org[' + i + '][org_position][]');
+        //         frmValidation.removeField('org[' + i + '][org_name]');
+        //     }catch(err){
+        //         // console.log(err);
+        //     }
+        // }
+        // // readd again
+        // repeatVal.org.forEach(function(item, index){
+        //     if(highest < index){
+        //         highest = index;
+        //     }
+        //     frmValidation.addField('org[' + index + '][org_name]', {
+        //         validators: {
+        //             notEmpty: {
+        //                 message: "Please select an organization"
+        //             }
+        //         }
+        //     });
+        //     frmValidation.addField('org[' + index + '][org_position][]', {
+        //         validators: {
+        //             notEmpty: {
+        //                 message: "The position is required"
+        //             }
+        //         }
+        //     });
+        // });
+    }
+
+    var initNotes = function() {
+        tinymce.init({
+            selector: '#other_info',
+            placeholder: 'Add some notes here',
+            toolbar: 'undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | outdent indent | image | preview ',
+            plugins : 'advlist autolink link lists charmap preview image',
+            image_title: true,
+            automatic_uploads: true,
+            file_picker_types: 'image',
+            file_picker_callback: function (cb, value, meta) {
+                var input = document.createElement('input');
+                input.setAttribute('type', 'file');
+                input.setAttribute('accept', 'image/*');
+
+                /*
+                  Note: In modern browsers input[type="file"] is functional without
+                  even adding it to the DOM, but that might not be the case in some older
+                  or quirky browsers like IE, so you might want to add it to the DOM
+                  just in case, and visually hide it. And do not forget do remove it
+                  once you do not need it anymore.
+                */
+
+                input.onchange = function () {
+                    var file = this.files[0];
+
+                    var reader = new FileReader();
+                    reader.onload = function () {
+                        /*
+                          Note: Now we need to register the blob in TinyMCEs image blob
+                          registry. In the next release this part hopefully won't be
+                          necessary, as we are looking to handle it internally.
+                        */
+                        var id = 'blobid' + (new Date()).getTime();
+                        var blobCache =  tinymce.activeEditor.editorUpload.blobCache;
+                        var base64 = reader.result.split(',')[1];
+                        var blobInfo = blobCache.create(id, file, base64);
+                        blobCache.add(blobInfo);
+
+                        /* call the callback and populate the Title field with the file name */
+                        cb(blobInfo.blobUri(), { title: file.name });
+                    };
+                    reader.readAsDataURL(file);
+                };
+
+                input.click();
+            },
+            content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
         });
     }
 
@@ -400,6 +416,7 @@ var ListDatatable = function () {
             initRepeater();
             initOrgName();
             initAddField();
+            initNotes();
         }
     };
 }();
@@ -410,7 +427,21 @@ jQuery(document).ready(function() {
     ListDatatable.initSet();
 
     $(document).on('click', '.reported-user', function() {
+        $("#id_number").val('');
+        $("#full_name").val('');
+
         var $this = $(this);
-        $("#full_name").val($this.data("value"));
+        if(!isNaN(parseInt($this.data("value")))){
+            $("#id_number").val($this.data("value"));
+        }else{
+            $("#full_name").val($this.data("value"));
+        }
     })
 });
+
+$(document).on('focusin', function(e) {
+    if ($(e.target).closest(".tox-tinymce-aux, .moxman-window, .tam-assetmanager-root").length) {
+        e.stopImmediatePropagation();
+    }
+});
+

@@ -26,7 +26,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1e925082-d8f8-4772-a0bb-7b633c448e86" name="Default Changelist" comment="Added modify privilege page">
-      <change beforePath="$PROJECT_DIR$/config/_scripts_versioning.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/_scripts_versioning.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ApiController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ApiController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ReportedUserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ReportedUserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/ReportedUser.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/ReportedUser.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/TicketItem.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/TicketItem.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/_custom_assets/_js/ticketlist.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/_custom_assets/_js/ticketlist.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/ticketlist-detail.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/ticketlist-detail.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/ticketlist.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/ticketlist.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -255,7 +264,7 @@
       <workItem from="1603962617050" duration="449000" />
       <workItem from="1603965053813" duration="310000" />
       <workItem from="1603967056767" duration="3185000" />
-      <workItem from="1603976772632" duration="3224000" />
+      <workItem from="1603976772632" duration="10643000" />
     </task>
     <task id="LOCAL-00001" summary="Added modify privilege page">
       <created>1602773794246</created>
@@ -335,10 +344,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="734" y="310" key="#com.intellij.fileTypes.FileTypeChooser/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1603208886537" />
-    <state x="690" y="275" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1603274563672">
+    <state x="690" y="275" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1603986417136">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="690" y="275" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1603274563672" />
+    <state x="690" y="275" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1603986417136" />
     <state x="92" y="92" width="1736" height="856" key="DiffContextDialog" timestamp="1602409132873">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -427,10 +436,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="616" y="240" key="run.anything.popup/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1603469224718" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1603880168491">
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1603983702418">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1603880168491" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1603983702418" />
     <state x="361" y="257" key="vcs.ApplyPatchDifferentiatedDialog" timestamp="1602841892572">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

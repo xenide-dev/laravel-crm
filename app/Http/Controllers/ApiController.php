@@ -336,12 +336,13 @@ class ApiController extends Controller
                 $nestedData['id'] = $ticket->id;
                 $nestedData['created_at'] = date('j M Y h:i a',strtotime($ticket->created_at));
                 $nestedData['from'] = $ticket->user->full_name;
+                $nestedData['subjects'] = $ticket->subjects;
                 $nestedData['input_names'] = $ticket->input_names;
                 $nestedData['uuid_ticket'] = $ticket->uuid_ticket;
                 $nestedData['other_info'] = "";
                 $diff = $input_names_count - $ticket->ticket_item->count();
                 if($input_names_count > $ticket->ticket_item->count()){
-                    $nestedData['other_info'] = "<span class='label label-primary label-inline'>{$diff} new name/s</span>";
+                    $nestedData['other_info'] = "<span class='label label-primary label-inline'>{$diff} new name/id(s)</span>";
                 }
                 $nestedData['status'] = "<span class='label label-warning label-inline'>$ticket->status</span>";
                 $nestedData['options'] = "&emsp;<a href='{$show}' title='SHOW' ><span class='glyphicon glyphicon-list'></span></a>
@@ -377,32 +378,6 @@ class ApiController extends Controller
         );
 
         echo json_encode($json_data);
-    }
-
-    public function create_reported_user(Request $request) {
-        dd($request);
-        $data = $request->validate([
-            'full_name' => ['required', 'string', 'max:255'],
-            'id_number' => ['required', 'unique:reported_users'],
-        ]);
-
-        $data["full_name"] = ucwords($data["full_name"]);
-        $reported_user = ReportedUser::create($data);
-        $reported_user->added_by_id = auth()->user()->id;
-        $reported_user->save();
-
-        foreach ($request->input("org") as $org){
-            $blacklist->userOrganization()->create([
-                "organization_id" => $org["org_name"],
-                "organization_position" => implode("|", $org["org_position"])
-            ]);
-        }
-
-        // TODO notify all user to the newly added blacklist
-
-        return redirect()->route("directory")->with([
-            "status" => "success"
-        ]);
     }
 
     public function kyclist(Request $request) {

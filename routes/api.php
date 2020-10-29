@@ -24,9 +24,6 @@ Route::post("/basicload/reported", "ApiController@basic_reported")->name("basic-
 Route::post("/basicload/organizations", "ApiController@basic_organizations")->name("basic-organizations");
 Route::post("/organization/create", "ApiController@create_organization")->name("create-organizations");
 
-// for reported user
-Route::post("/reported_user/create", "ApiController@create_reported_user")->name("create-reported-user");
-
 // for admin
 Route::post("/ticketlist", "ApiController@ticketlist")->name("ticketlist");
 Route::post("/kyclist", "ApiController@kyclist")->name("kyclist");

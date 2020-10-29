@@ -30,7 +30,8 @@
                             <th>Ticket ID</th>
                             <th>Date</th>
                             <th>From</th>
-                            <th>Names</th>
+                            <th>Subject</th>
+                            <th>Names / IDs</th>
                             <th>Status</th>
                             <th>Other Info</th>
                             <th>Actions</th>
